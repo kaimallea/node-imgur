@@ -29,7 +29,7 @@ Upload all .png files in the current directory
 ```javascript
 var imgur = require('imgur');
 
-imgur.setKey('f9f3d57c2283e6d406d5759841c04533');
+imgur.setKey('aCs53GSs4tga0ikp');
 
 imgur.upload('/Users/kmallea/Pictures/Manga_Kai.jpg', function (response) {
     
