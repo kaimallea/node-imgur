@@ -1,0 +1,19 @@
+{
+  "author": "Kai Mallea <kmallea@gmail.com> (http://www.mallea.net/)",
+  "name": "imgur",
+  "description": "Simple command-line uploader for imgur.com",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kaimallea/node-imgur",
+  "keywords": ["imgur", "image", "images", "upload", "uploader"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaimallea/node-imgur.git"
+  },
+  "engines": {
+    "node": ">= v0.4.9"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "main": "lib/imgur.js",
+  "bin": { "imgur": "./lib/imgur.js" }
+}
