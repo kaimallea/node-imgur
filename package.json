@@ -12,7 +12,9 @@
   "engines": {
     "node": ">= v0.4.9"
   },
-  "dependencies": {},
+  "dependencies": {
+    "form-data": "~0.0.4"
+  },
   "devDependencies": {},
   "main": "lib/imgur.js",
   "bin": { "imgur": "./lib/imgur.js" }
