@@ -42,3 +42,7 @@ imgur.upload('/Users/kmallea/Pictures/Manga_Kai.jpg', function (response) {
     console.log('Imgur page: ' + response.links.imgur_page);
 });
 ```
+## Contributors
+
+Helge S. Holm (https://github.com/deestan)
+
