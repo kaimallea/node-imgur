@@ -2,7 +2,7 @@
   "author": "Kai Mallea <kmallea@gmail.com> (http://kai.sh/)",
   "name": "imgur",
   "description": "Simple command-line uploader for imgur.com",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "keywords": ["imgur", "image", "images", "upload", "uploader"],
   "repository": {
