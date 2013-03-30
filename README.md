@@ -45,4 +45,4 @@ imgur.upload('/Users/kmallea/Pictures/Manga_Kai.jpg', function (response) {
 ## Contributors
 
 Helge S. Holm (https://github.com/deestan)
-
+Nicolas Bevacqua (https://github.com/bevacqua)
