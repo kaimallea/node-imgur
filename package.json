@@ -26,6 +26,9 @@
   "bin": {
     "imgur": "./cli.js"
   },
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
