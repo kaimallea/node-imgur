@@ -1,10 +1,14 @@
 {
-  "author": "Kai Mallea <kmallea@gmail.com> (http://kai.sh/)",
+  "author": "Kai Mallea <kmallea@gmail.com> (www.kaimallea.com)",
   "name": "imgur",
-  "description": "Simple command-line uploader for imgur.com",
+  "description": "Upload images to imgur.com",
   "version": "0.1.0",
   "homepage": "https://github.com/kaimallea/node-imgur",
-  "keywords": ["imgur", "image", "images", "upload", "uploader"],
+  "keywords": [
+    "imgur",
+    "upload",
+    "images"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/kaimallea/node-imgur.git"
@@ -13,13 +17,18 @@
     "node": ">= v0.10.30"
   },
   "dependencies": {
-    "request": "~2.40.0",
-    "q": "~1.0.1",
-    "glob": "~4.0.5",
-    "commander": "~2.3.0"
+    "commander": "^2.3.0",
+    "glob": "^4.0.5",
+    "q": "^1.0.1",
+    "request": "^2.40.0"
   },
   "main": "lib/imgur.js",
   "bin": {
     "imgur": "./cli.js"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "mocha": "^1.21.4"
   }
 }

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 var imgur     = require('./lib/imgur.js');
 var commander = require('commander');
+var util      = require('util');
 
+// Used to collect args for specific options
 function collect (val, arr) {
     arr.push(val);
     return arr;
@@ -15,25 +17,7 @@ commander
     .option('-f, --file [file ...]', 'Upload binary image files', collect, [])
     .parse(process.argv);
 
-if (commander.file) {
-    commander.file.forEach(function(file, index, array) {
-        imgur.uploadFile(file)
-            .then(function (json) {
-                var output;
-                if (commander.file.length > 1) {
-                    output = util.format('%s -> %s', file, json.data.link);
-                } else {
-                    output = json.data.link;
-                }
-                console.log(output);
-            })
-            .catch(function (err) {
-                console.error(err.message);
-            });
-    });
-}
-
-if (commander.info) {
+if (commander.info.length) {
     commander.info.forEach(function(id, index, array) {
         imgur.info(id)
             .then(function (json) {
@@ -45,7 +29,27 @@ if (commander.info) {
     });
 }
 
-if (commander.base64) {
+
+if (commander.url.length) {
+    commander.url.forEach(function(url, index, array) {
+        imgur.uploadUrl(url)
+            .then(function (json) {
+                var output;
+                if (commander.url.length > 1) {
+                    output = util.format('%s -> %s', url, json.data.link);
+                } else {
+                    output = json.data.link;
+                }
+                console.log(output);
+            })
+            .catch(function (err) {
+                console.error(err.message);
+            });
+    });
+}
+
+
+if (commander.base64.length) {
     commander.base64.forEach(function(str, index, array) {
         imgur.uploadBase64(str)
             .then(function (json) {
@@ -63,13 +67,15 @@ if (commander.base64) {
     });
 }
 
-if (commander.url) {
-    commander.url.forEach(function(url, index, array) {
-        imgur.uploadUrl(url)
+
+if (commander.file.length || commander.args.length) {
+    var args = commander.file.concat(commander.args);
+    args.forEach(function(file, index, array) {
+        imgur.uploadFile(file)
             .then(function (json) {
                 var output;
-                if (commander.url.length > 1) {
-                    output = util.format('%s -> %s', url, json.data.link);
+                if (args.length > 1) {
+                    output = util.format('%s -> %s', file, json.data.link);
                 } else {
                     output = json.data.link;
                 }
