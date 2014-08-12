@@ -1,48 +1,61 @@
-## Installation
-
-    npm install -g imgur
-
 ## Command-line Usage
 
-**You must set an API key before CLI use; get one at http://imgur.com/register/api_anon**
+### Installation
 
+```bash
+npm install imgur -g
+```
 
-Set your API key once and forget it (saved to ~/.imgurkey)
+### Usage
 
-    imgur -k aCs53GSs4tga0ikp
+Pass binary image files, urls, and/or base64-encoded image strings as arguments. Globbing is supported.
 
-Upload a single image
+Upload a single image:
 
-    imgur GooglePlus.png
+```bash
+imgur cat.png
+```
 
-Upload an entire directory (**not recursive yet**; automatically chooses pics)
+Upload all the jpegs in a particular folder:
 
-    imgur ~/Pictures/
+```bash
+imgur ~/Pictures/kittens/*.jpg
+```
 
-Upload all .png files in the current directory
+Upload an image from another place on the web:
 
-    imgur *.png
-    
+```bash
+imgur --url http://lolz.pics.com/troll.png
+```
+
+Upload a Base-64 encoded image:
+
+```bash
+imgur --base64 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC
+```
 
 ## Module Usage
+
+### Installation
+
+```bash
+npm install imgur
+```
+
+### Usage
 
 ```javascript
 var imgur = require('imgur');
 
-imgur.setKey('aCs53GSs4tga0ikp');
+// Set a Client ID for your app
+imgur.setClientId('aCs53GSs4tga0ikp');
 
-imgur.upload('/Users/kmallea/Pictures/Manga_Kai.jpg', function (response) {
-    
-    if (response.error) {
-        console.log(response.error);
-        return;
-    }
-    
-    console.log('Direct link: ' + response.links.original);
-    console.log('Imgur page: ' + response.links.imgur_page);
-});
+// Methods return promises
+imgur.uploadFile('/home/kai/*.png')
+    .then(function(json) {
+        console.log(json.data.link);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
 ```
-## Contributors
-
-- Helge S. Holm (https://github.com/deestan)
-- Nicolas Bevacqua (https://github.com/bevacqua)
