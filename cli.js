@@ -13,9 +13,9 @@ function collect (val, arr) {
 
 commander
     .version(imgur.VERSION)
-    .option('-i, --info [id ...]', 'Lookup images by ID', collect, [])
-    .option('-b, --base64 [string ...]', 'Upload a base64-encoded images', collect, [])
-    .option('-u, --url [url ...]', 'Upload URLs', collect, [])
+    .option('-i, --info [id]', 'Lookup images by ID', collect, [])
+    .option('-b, --base64 [string]', 'Upload a base64-encoded images', collect, [])
+    .option('-u, --url [url]', 'Upload URLs', collect, [])
     .option('-f, --file [file ...]', 'Upload binary image files', collect, [])
     .parse(process.argv);
 
