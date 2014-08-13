@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+'use strict'
+
 var imgur     = require('./lib/imgur.js');
 var commander = require('commander');
 var util      = require('util');
