@@ -29,6 +29,10 @@ commander
 imgur.loadClientId()
     .then(imgur.setClientId)
     .fin(function () {
+        if (commander.clientId) {
+            imgur.setClientId(commander.clientId);
+        }
+
         if (commander.show) {
 
             console.log(imgur.getClientId());
