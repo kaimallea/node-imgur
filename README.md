@@ -8,7 +8,7 @@ npm install imgur -g
 
 ### Usage
 
-Pass binary image files, urls, and/or base64-encoded image strings as arguments. Globbing is supported.
+Pass binary image files, urls, and/or [base64-encoded](http://en.wikipedia.org/wiki/Base64) image strings as arguments. Globbing is supported.
 
 Upload a single image:
 
@@ -16,16 +16,20 @@ Upload a single image:
 imgur cat.png
 ```
 
-Upload all the jpegs in a particular folder:
+Upload multiple images ([globbing](http://en.wikipedia.org/wiki/Glob_(programming)) supported):
 
 ```bash
-imgur ~/Pictures/kittens/*.jpg
+imgur cat.png cats.gif cats23.jpg
+
+imgur ~/*.(jpg|png|gif)
+
+imgur ~/Pictures/kittens/*.jpg ~/gifs/sfw/*.gif
 ```
 
-Upload an image from another place on the web:
+Upload an image from another place on the web. Be sure to include http(s):
 
 ```bash
-imgur --url http://lolz.pics.com/troll.png
+imgur --url https://octodex.github.com/images/topguntocat.png
 ```
 
 Upload a Base-64 encoded image:
@@ -44,14 +48,57 @@ npm install imgur
 
 ### Usage
 
+#### Requiring the module:
+
 ```javascript
 var imgur = require('imgur');
+```
 
-// Set a Client ID for your app
+#### Dealing with client IDs:
+
+```javascript
+// Setting
 imgur.setClientId('aCs53GSs4tga0ikp');
 
-// Methods return promises
-imgur.uploadFile('/home/kai/*.png')
+// Getting
+imgur.getClientId();
+
+// Saving to disk. Returns a promise.
+// NOTE: path is optional. Defaults to ~/.imgur
+imgur.saveClientId(path)
+    .then(function () { console.log('Saved.'); })
+    .catch(function (err) { console.log(err.message); });
+
+
+// Loading from disk
+// NOTE: path is optional. Defaults to ~/.imgur
+imgur.loadClientId(path)
+    .then(imgur.setClientId);
+```
+
+#### Uploading files; globbing supported:
+
+```javascript
+// A single image
+imgur.uploadFile('/home/kai/kittens.png')
+    .then(function(json) {
+        console.log(json.data.link);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+
+// All jpegs in a specific folder
+imgur.uploadFile('/home/kai/*.jpg')
+    .then(function(json) {
+        console.log(json.data.link);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+
+// Multiple image types from home folder
+imgur.uploadFile('~/*.(jpg|png|gif)')
     .then(function(json) {
         console.log(json.data.link);
     })
@@ -59,3 +106,48 @@ imgur.uploadFile('/home/kai/*.png')
         console.error(err.message);
     });
 ```
+
+#### Fetching image data:
+
+```javascript
+var kittenPic = 'mbgq7nd';
+imgur.getInfo(kittenPic)
+    .then(function(json) {
+        console.log(json);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+
+```
+
+#### Uploading URLs of images hosted elsewhere:
+
+```javascript
+// Include http(s) when specifying URLs
+imgur.uploadUrl('https://octodex.github.com/images/topguntocat.png')
+    .then(function(json) {
+        console.log(json.data.link);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+```
+
+#### Uploading Base-64 encoded images:
+
+```javsacript
+var imgurFavicon = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC';
+
+imgur.uploadBase64(imgurFavicon)
+    .then(function(json) {
+        console.log(json.data.link);
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+```
+
+## License
+
+#### MIT
