@@ -38,6 +38,34 @@ Upload a Base-64 encoded image:
 imgur --base64 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC
 ```
 
+Saving a client id for subsequent use:
+
+```bash
+imgur --save f9ae01148b53261
+```
+
+Display saved client id:
+
+```bash
+imgur --show
+```
+
+Remove previously saved client id:
+
+```bash
+imgur --clear
+```
+
+Use a specific client id one time only (overrides saved id):
+
+```bash
+imgur --client-id f9ae01148b53261 --file ~/me.jpg
+
+# Short-hand
+imgur -c f9ae01148b53261 -f ~/me.jpg
+```
+
+
 ## Module Usage
 
 ### Installation
@@ -66,8 +94,12 @@ imgur.getClientId();
 // Saving to disk. Returns a promise.
 // NOTE: path is optional. Defaults to ~/.imgur
 imgur.saveClientId(path)
-    .then(function () { console.log('Saved.'); })
-    .catch(function (err) { console.log(err.message); });
+    .then(function () {
+        console.log('Saved.');
+    })
+    .catch(function (err) {
+        console.log(err.message);
+    });
 
 
 // Loading from disk
@@ -81,19 +113,19 @@ imgur.loadClientId(path)
 ```javascript
 // A single image
 imgur.uploadFile('/home/kai/kittens.png')
-    .then(function(json) {
+    .then(function (json) {
         console.log(json.data.link);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 
 // All jpegs in a specific folder
 imgur.uploadFile('/home/kai/*.jpg')
-    .then(function(json) {
+    .then(function (json) {
         console.log(json.data.link);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 
@@ -102,7 +134,7 @@ imgur.uploadFile('~/*.(jpg|png|gif)')
     .then(function(json) {
         console.log(json.data.link);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 ```
@@ -115,7 +147,7 @@ imgur.getInfo(kittenPic)
     .then(function(json) {
         console.log(json);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 
@@ -126,10 +158,10 @@ imgur.getInfo(kittenPic)
 ```javascript
 // Include http(s) when specifying URLs
 imgur.uploadUrl('https://octodex.github.com/images/topguntocat.png')
-    .then(function(json) {
+    .then(function (json) {
         console.log(json.data.link);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 ```
@@ -140,10 +172,10 @@ imgur.uploadUrl('https://octodex.github.com/images/topguntocat.png')
 var imgurFavicon = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC';
 
 imgur.uploadBase64(imgurFavicon)
-    .then(function(json) {
+    .then(function (json) {
         console.log(json.data.link);
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.error(err.message);
     });
 ```
