@@ -61,8 +61,7 @@ imgur.loadClientId()
                                 output = json.data.link;
                             }
                             console.log(output);
-                        })
-                        .catch(function (err) {
+                        }, function (err) {
                             console.error('%s (%s)', err.message, file);
                         });
                 });
@@ -73,10 +72,7 @@ imgur.loadClientId()
                     imgur.getInfo(id)
                         .then(function (json) {
                             console.log(json.data);
-                        })
-                        .catch(function (err) {
-                            console.error('%s (%s)', err.message, url);
-                        });
+                        }, function (err) { console.log(err.message); });
                 });
             }
 
@@ -92,8 +88,7 @@ imgur.loadClientId()
                                 output = json.data.link;
                             }
                             console.log(output);
-                        })
-                        .catch(function (err) {
+                        }, function (err) {
                             var output = util.format('%s (%s...)', err.message, str.substr(0, 7));
                             console.error(output);
                         });
@@ -112,8 +107,7 @@ imgur.loadClientId()
                                 output = json.data.link;
                             }
                             console.log(output);
-                        })
-                        .catch(function (err) {
+                        }, function (err) {
                             console.error('%s (%s)', err.message, url);
                         });
                 });
