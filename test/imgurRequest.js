@@ -3,7 +3,6 @@ var imgur = require('../lib/imgur.js'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
     imgurTestId1 = 'mbgq7nd', // Kitten
-    imgurTestId2 = 'ysjVczY'; // Halle Berry
 
 chai.use(chaiAsPromised);
 
@@ -22,7 +21,7 @@ describe('#_imgurRequest()', function() {
     it('should fail with an invalid operation specified', function(done) {
         var errMsg = 'Invalid operation';
 
-        expect(imgur._imgurRequest('blah', imgurTestId2))
+        expect(imgur._imgurRequest('blah', imgurTestId1))
             .to.be.rejectedWith(errMsg)
             .and.notify(done);
     });
