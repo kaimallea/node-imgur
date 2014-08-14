@@ -18,6 +18,7 @@ commander
     .option('-u, --url [url]', 'Upload URLs', collect, [])
     .option('-f, --file [file ...]', 'Upload binary image files', collect, [])
     .option('-c, --client-id [id]', 'Specify a client ID to use only for the current operation')
+    .option('--credits', 'Get information about remaining credits')
     .option('--save [id]', 'Save client id to disk for future use')
     .option('--clear', 'Remove previously saved client id')
     .option('--show', 'Display saved client id')
@@ -49,6 +50,15 @@ imgur.loadClientId()
             imgur.saveClientId(commander.save)
                 .fail(function (err) {
                     console.error('Unable to save client id (%s)', err.message);
+                });
+
+        } else if (commander.credits) {
+
+            imgur.getCredits()
+                .then(function (json) {
+                    console.log(json.data);
+                }, function (err) {
+                    console.error('Unable to get credit info (%s)', err.message);
                 });
 
         } else {

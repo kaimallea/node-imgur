@@ -2,7 +2,7 @@ var imgur = require('../lib/imgur.js'),
     chai = require('chai'),
     chaiAsPromised = require('chai-as-promised'),
     expect = chai.expect,
-    imgurTestId1 = 'mbgq7nd', // Kitten
+    imgurTestId1 = 'mbgq7nd'; // Kitten
 
 chai.use(chaiAsPromised);
 
