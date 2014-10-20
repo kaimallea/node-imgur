@@ -153,6 +153,20 @@ imgur.getInfo(kittenPic)
 
 ```
 
+#### Fetching album data:
+
+```javascript
+var kittenAlbum = 'mbgq7nd';
+imgur.getAlbumInfo(kittenAlbum)
+    .then(function(json) {
+        console.log(json);
+    })
+    .catch(function (err) {
+        console.error(err.message);
+    });
+
+```
+
 #### Uploading URLs of images hosted elsewhere:
 
 ```javascript
