@@ -18,6 +18,7 @@ commander
     .option('-u, --url [url]', 'Upload URLs', collect, [])
     .option('-f, --file [file ...]', 'Upload binary image files', collect, [])
     .option('-c, --client-id [id]', 'Specify a client ID to use only for the current operation')
+    .option('-a, --album-id [id]', 'Specify an album ID to upload images to')
     .option('--credits', 'Get information about remaining credits')
     .option('--save [id]', 'Save client id to disk for future use')
     .option('--clear', 'Remove previously saved client id')
@@ -65,20 +66,42 @@ imgur.loadClientId()
 
             if (commander.file.length || commander.args.length) {
                 var args = commander.file.concat(commander.args);
-                args.forEach(function(file, index, array) {
-                    imgur.uploadFile(file)
+                var albumId = commander.albumId ? commander.albumId : null;
+                if (!albumId && args.length > 1) {
+                    var aId, deleteHash;
+                    imgur.createAlbum()
                         .then(function (json) {
-                            var output;
-                            if (args.length > 1) {
-                                output = util.format('%s -> %s', file, json.data.link);
-                            } else {
-                                output = json.data.link;
-                            }
-                            console.log(output);
+                            aId = json.data.id;
+                            deleteHash = json.data.deletehash;
+                            console.log('Album -> https://imgur.com/a/%s', aId);
+                            args.forEach(function(file, index, array) {
+                                imgur.uploadFile(file, deleteHash)
+                                    .then(function (json) {
+                                        var output = util.format('%s -> %s', file, json.data.link);
+                                        console.log(output);
+                                    }, function (err) {
+                                        console.error('%s (%s)', err.message, file);
+                                    });
+                            });
                         }, function (err) {
-                            console.error('%s (%s)', err.message, file);
+                            console.error('Unable to create album (%s)', err.message);
                         });
-                });
+                } else {
+                    args.forEach(function(file, index, array) {
+                        imgur.uploadFile(file, albumId)
+                            .then(function (json) {
+                                var output;
+                                if (args.length > 1) {
+                                    output = util.format('%s -> %s', file, json.data.link);
+                                } else {
+                                    output = json.data.link;
+                                }
+                                console.log(output);
+                            }, function (err) {
+                                console.error('%s (%s)', err.message, file);
+                            });
+                    });
+                }
             }
 
             if (commander.info.length) {
