@@ -65,6 +65,16 @@ imgur --client-id f9ae01148b53261 --file ~/me.jpg
 imgur -c f9ae01148b53261 -f ~/me.jpg
 ```
 
+Add images to an existing album by specifying an album ID:
+
+```bash
+imgur --album-id F8KTV --file ~/me.jpg
+
+# Short-hand
+imgur -a F8KTV ~/me.jpg
+```
+
+You must own the album. If it's an anonymous album you need to use the `deletehash` in place of the album ID.
 
 ## Module Usage
 
@@ -121,7 +131,9 @@ imgur.uploadFile('/home/kai/kittens.png')
     });
 
 // All jpegs in a specific folder
-imgur.uploadFile('/home/kai/*.jpg')
+// to an album you own
+var albumId = 'F8KTV';
+imgur.uploadFile('/home/kai/*.jpg', albumId)
     .then(function (json) {
         console.log(json.data.link);
     })
@@ -158,6 +170,19 @@ imgur.getInfo(kittenPic)
 ```javascript
 var kittenAlbum = 'mbgq7nd';
 imgur.getAlbumInfo(kittenAlbum)
+    .then(function(json) {
+        console.log(json);
+    })
+    .catch(function (err) {
+        console.error(err.message);
+    });
+
+```
+
+#### Creating an album:
+
+```javascript
+imgur.createAlbum()
     .then(function(json) {
         console.log(json);
     })
