@@ -118,6 +118,16 @@ imgur.loadClientId(path)
     .then(imgur.setClientId);
 ```
 
+#### Dealing with credentials:
+
+For when you want to upload images to an account.
+
+```javascript
+// Setting
+imgur.setCredentials('email@domain.com', 'password', 'aCs53GSs4tga0ikp');
+
+```
+
 #### Uploading files; globbing supported:
 
 ```javascript
@@ -207,7 +217,7 @@ imgur.uploadUrl('https://octodex.github.com/images/topguntocat.png')
 
 #### Uploading Base-64 encoded images:
 
-```javsacript
+```javascript
 var imgurFavicon = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC';
 
 imgur.uploadBase64(imgurFavicon)
@@ -217,6 +227,42 @@ imgur.uploadBase64(imgurFavicon)
     .catch(function (err) {
         console.error(err.message);
     });
+```
+
+#### Uploading multiple images:
+
+Upload an array of images of the desired upload type ('File', 'Url', 'Base64').
+
+Returns an array of images (imgur image data).
+
+```javascript
+imgur.uploadImages(images, uploadType /*, albumId */)
+    .then(function(images) {
+        console.log(images);
+    })
+    .catch(function (err) {
+        console.error(err.message);
+    });
+
+```
+
+#### Uploading an album:
+
+Create a new album and upload an array of images of the desired upload type to it ('File', 'Url', 'Base64').
+
+Returns an object with the album data and an array of images { data: {...}, images: [{...}, ...]}.
+
+The third parameter is an optional fail safe, meaning if the array of images is empty or invalid, it will not fail, but returns an object with empty data and empty images.
+
+```javascript
+imgur.uploadAlbum(images, uploadType /*, failSafe */)
+    .then(function(album) {
+        console.log(album.data, album.images);
+    })
+    .catch(function (err) {
+        console.error(err.message);
+    });
+
 ```
 
 ## License
