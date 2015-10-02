@@ -2,7 +2,7 @@
   "author": "Kai Mallea <kmallea@gmail.com> (www.kaimallea.com)",
   "name": "imgur",
   "description": "Upload images to imgur.com",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "keywords": [
     "imgur",
