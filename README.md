@@ -125,14 +125,15 @@ In order to change the API Url say Mashape URL, use setAPIUrl(MashapeURL)
 //Setting
 imgur.setAPIUrl('https://api.imgur.com/3/');
 
-If setAPIUrl() is not called, API URL is read from process.env.IMGUR_API_URL
+//If setAPIUrl() is not called, API URL is read from process.env.IMGUR_API_URL
 
 //Getting
 imgur.getAPIUrl();
-
+```
 #### Dealing with Mashape Key
 
-Requests to the Mashape URL expects a X-Mashape-Key: MashapeKey header. Set Mashape Key by using setMashapeKey(MashapeKey) method.
+Requests to the Mashape URL expects a X-Mashape-Key: MashapeKey header. 
+Set Mashape Key by using setMashapeKey(MashapeKey) method.
 Note: Defaults to process.env.IMGUR_MASHAPE_KEY
 
 ```javascript
@@ -141,7 +142,7 @@ imgur.setMashapeKey(https://imgur-apiv3.p.mashape.com/);
 
 //Getting
 imgur.getMashapeKey()
-
+```
 #### Dealing with credentials:
 
 For when you want to upload images to an account.
