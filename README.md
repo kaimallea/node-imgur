@@ -290,6 +290,20 @@ imgur.uploadAlbum(images, uploadType /*, failSafe */)
 
 ```
 
+#### Deleting anonymous uploads
+
+Delete an image based on the deletehash(generated during the image upload)
+
+```javascript
+imgur.deleteImage(deletehash)
+    .then(function(status) {
+        console.log(status);  
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
+```
+
 ## License
 
 #### MIT
