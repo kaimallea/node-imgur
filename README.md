@@ -117,7 +117,32 @@ imgur.saveClientId(path)
 imgur.loadClientId(path)
     .then(imgur.setClientId);
 ```
+#### Dealing with API URL:
 
+In order to change the API Url say Mashape URL, use setAPIUrl(MashapeURL)
+
+```javascript
+//Setting
+imgur.setAPIUrl('https://api.imgur.com/3/');
+
+//If setAPIUrl() is not called, API URL is read from process.env.IMGUR_API_URL
+
+//Getting
+imgur.getAPIUrl();
+```
+#### Dealing with Mashape Key
+
+Requests to the Mashape URL expects a X-Mashape-Key: MashapeKey header. 
+Set Mashape Key by using setMashapeKey(MashapeKey) method.
+Note: Defaults to process.env.IMGUR_MASHAPE_KEY
+
+```javascript
+//Setting
+imgur.setMashapeKey(https://imgur-apiv3.p.mashape.com/);
+
+//Getting
+imgur.getMashapeKey()
+```
 #### Dealing with credentials:
 
 For when you want to upload images to an account.
@@ -263,6 +288,20 @@ imgur.uploadAlbum(images, uploadType /*, failSafe */)
         console.error(err.message);
     });
 
+```
+
+#### Deleting anonymous uploads
+
+Delete an image based on the deletehash(generated during the image upload)
+
+```javascript
+imgur.deleteImage(deletehash)
+    .then(function(status) {
+        console.log(status);  
+    })
+    .catch(function(err) {
+        console.error(err.message);
+    });
 ```
 
 ## License
