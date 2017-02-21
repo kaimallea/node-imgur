@@ -1,0 +1,122 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\GregLaptop\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@4.0.5
+3 info using node@v7.2.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\Dropbox\\UwAmp\\www\\node-imgur',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\GregLaptop\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 info lifecycle imgur-v2@0.2.0~prepublish: imgur-v2@0.2.0
+11 silly lifecycle imgur-v2@0.2.0~prepublish: no script for prepublish, continuing
+12 info lifecycle imgur-v2@0.2.0~prepare: imgur-v2@0.2.0
+13 silly lifecycle imgur-v2@0.2.0~prepare: no script for prepare, continuing
+14 verbose tar pack [ 'C:\\Users\\GregLaptop\\AppData\\Roaming\\npm-cache\\imgur-v2\\0.2.0\\package.tgz',
+14 verbose tar pack   'C:\\Dropbox\\UwAmp\\www\\node-imgur' ]
+15 verbose tarball C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package.tgz
+16 verbose folder C:\Dropbox\UwAmp\www\node-imgur
+17 verbose addLocalTarball adding from inside cache C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package.tgz
+18 verbose correctMkdir C:\Users\GregLaptop\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+19 silly cache afterAdd imgur-v2@0.2.0
+20 verbose afterAdd C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package\package.json not in flight; writing
+21 verbose correctMkdir C:\Users\GregLaptop\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+22 verbose afterAdd C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package\package.json written
+23 silly publish { author: { name: 'Gregory Goijaerts', email: 'crecketgaming@gmail.com' },
+23 silly publish   name: 'imgur-v2',
+23 silly publish   description: 'Upload images to imgur.com v2',
+23 silly publish   version: '0.2.0',
+23 silly publish   homepage: 'https://github.com/crecket/node-imgur',
+23 silly publish   keywords: [ 'imgur', 'upload', 'images' ],
+23 silly publish   repository: { type: 'git', url: 'git://github.com/crecket/node-imgur.git' },
+23 silly publish   engines: { node: '>= v0.10.30' },
+23 silly publish   dependencies:
+23 silly publish    { commander: '^2.3.0',
+23 silly publish      glob: '^4.0.5',
+23 silly publish      q: '^1.0.1',
+23 silly publish      request: '^2.40.0' },
+23 silly publish   main: 'lib/imgur.js',
+23 silly publish   scripts: { test: 'mocha' },
+23 silly publish   devDependencies:
+23 silly publish    { chai: '^3.3.0',
+23 silly publish      'chai-as-promised': '^5.1.0',
+23 silly publish      mocha: '^2.3.3',
+23 silly publish      sinon: '^1.17.1',
+23 silly publish      'sinon-chai': '^2.8.0' },
+23 silly publish   readme: '## imgur-v2\nSince the original publisher seems te be inactive I have created this fork without the CLI support but with new features.\n\nOriginal package [node-imgur](https://github.com/kaimallea/node-imgur)\n\n## Module Usage\n\n### Installation\n\n```bash\nnpm install imgur-v2\n```\n\n### Usage\n\n#### Requiring the module:\n\n```javascript\nvar imgur = require(\'imgur-v2\');\n```\n\n#### Dealing with client IDs:\n\n```javascript\n// Setting\nimgur.setClientId(\'aCs53GSs4tga0ikp\');\n\n// Getting\nimgur.getClientId();\n\n// Saving to disk. Returns a promise.\n// NOTE: path is optional. Defaults to ~/.imgur\nimgur.saveClientId(path)\n    .then(function () {\n        console.log(\'Saved.\');\n    })\n    .catch(function (err) {\n        console.log(err.message);\n    });\n\n\n// Loading from disk\n// NOTE: path is optional. Defaults to ~/.imgur\nimgur.loadClientId(path)\n    .then(imgur.setClientId);\n```\n#### Dealing with API URL:\n\nIn order to change the API Url say Mashape URL, use setAPIUrl(MashapeURL)\n\n```javascript\n//Setting\nimgur.setAPIUrl(\'https://api.imgur.com/3/\');\n\n//If setAPIUrl() is not called, API URL is read from process.env.IMGUR_API_URL\n\n//Getting\nimgur.getAPIUrl();\n```\n#### Dealing with Mashape Key\n\nRequests to the Mashape URL expects a X-Mashape-Key: MashapeKey header. \nSet Mashape Key by using setMashapeKey(MashapeKey) method.\nNote: Defaults to process.env.IMGUR_MASHAPE_KEY\n\n```javascript\n//Setting\nimgur.setMashapeKey(https://imgur-apiv3.p.mashape.com/);\n\n//Getting\nimgur.getMashapeKey()\n```\n#### Dealing with credentials:\n\nFor when you want to upload images to an account.\n\n```javascript\n// Setting\nimgur.setCredentials(\'email@domain.com\', \'password\', \'aCs53GSs4tga0ikp\');\n\n```\n\n#### Uploading files; globbing supported:\n\n```javascript\n// A single image\nimgur.uploadFile(\'/home/kai/kittens.png\')\n    .then(function (json) {\n        console.log(json.data.link);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n// All jpegs in a specific folder\n// to an album you own\nvar albumId = \'F8KTV\';\nimgur.uploadFile(\'/home/kai/*.jpg\', albumId)\n    .then(function (json) {\n        console.log(json.data.link);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n// Multiple image types from home folder\nimgur.uploadFile(\'~/*.(jpg|png|gif)\')\n    .then(function(json) {\n        console.log(json.data.link);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n```\n\n#### Fetching image data:\n\n```javascript\nvar kittenPic = \'mbgq7nd\';\nimgur.getInfo(kittenPic)\n    .then(function(json) {\n        console.log(json);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n```\n\n#### Fetching album data:\n\n```javascript\nvar kittenAlbum = \'mbgq7nd\';\nimgur.getAlbumInfo(kittenAlbum)\n    .then(function(json) {\n        console.log(json);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n```\n\n#### Creating an album:\n\n```javascript\nimgur.createAlbum()\n    .then(function(json) {\n        console.log(json);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n```\n\n#### Uploading URLs of images hosted elsewhere:\n\n```javascript\n// Include http(s) when specifying URLs\nimgur.uploadUrl(\'https://octodex.github.com/images/topguntocat.png\')\n    .then(function (json) {\n        console.log(json.data.link);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n```\n\n#### Uploading Base-64 encoded images:\n\n```javascript\nvar imgurFavicon = \'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC\';\n\nimgur.uploadBase64(imgurFavicon)\n    .then(function (json) {\n        console.log(json.data.link);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n```\n\n#### Uploading multiple images:\n\nUpload an array of images of the desired upload type (\'File\', \'Url\', \'Base64\').\n\nReturns an array of images (imgur image data).\n\n```javascript\nimgur.uploadImages(images, uploadType /*, albumId */)\n    .then(function(images) {\n        console.log(images);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n```\n\n#### Uploading an album:\n\nCreate a new album and upload an array of images of the desired upload type to it (\'File\', \'Url\', \'Base64\').\n\nReturns an object with the album data and an array of images { data: {...}, images: [{...}, ...]}.\n\nThe third parameter is an optional fail safe, meaning if the array of images is empty or invalid, it will not fail, but returns an object with empty data and empty images.\n\n```javascript\nimgur.uploadAlbum(images, uploadType /*, failSafe */)\n    .then(function(album) {\n        console.log(album.data, album.images);\n    })\n    .catch(function (err) {\n        console.error(err.message);\n    });\n\n```\n\n#### Deleting anonymous uploads\n\nDelete an image based on the deletehash(generated during the image upload)\n\n```javascript\nimgur.deleteImage(deletehash)\n    .then(function(status) {\n        console.log(status);  \n    })\n    .catch(function(err) {\n        console.error(err.message);\n    });\n```\n\n## License\n\n#### MIT',
+23 silly publish   readmeFilename: 'README.md',
+23 silly publish   gitHead: 'c90f46fb622030e5a72ce5e62905e851a997eb3b',
+23 silly publish   bugs: { url: 'https://github.com/crecket/node-imgur/issues' },
+23 silly publish   _id: 'imgur-v2@0.2.0',
+23 silly publish   _shasum: 'dd23f4a1533413b2a40cca311849cc5248ee6616',
+23 silly publish   _from: '.' }
+24 info lifecycle imgur-v2@0.2.0~prepublishOnly: imgur-v2@0.2.0
+25 silly lifecycle imgur-v2@0.2.0~prepublishOnly: no script for prepublishOnly, continuing
+26 verbose getPublishConfig undefined
+27 silly mapToRegistry name imgur-v2
+28 silly mapToRegistry using default registry
+29 silly mapToRegistry registry https://registry.npmjs.org/
+30 silly mapToRegistry data Result {
+30 silly mapToRegistry   raw: 'imgur-v2',
+30 silly mapToRegistry   scope: null,
+30 silly mapToRegistry   escapedName: 'imgur-v2',
+30 silly mapToRegistry   name: 'imgur-v2',
+30 silly mapToRegistry   rawSpec: '',
+30 silly mapToRegistry   spec: 'latest',
+30 silly mapToRegistry   type: 'tag' }
+31 silly mapToRegistry uri https://registry.npmjs.org/imgur-v2
+32 verbose publish registryBase https://registry.npmjs.org/
+33 silly publish uploading C:\Users\GregLaptop\AppData\Roaming\npm-cache\imgur-v2\0.2.0\package.tgz
+34 verbose request uri https://registry.npmjs.org/imgur-v2
+35 verbose request sending authorization for write operation
+36 info attempt registry request try #1 at 12:11:27 PM
+37 verbose request using bearer token for auth
+38 verbose request id af17e3b510002920
+39 http request PUT https://registry.npmjs.org/imgur-v2
+40 http 403 https://registry.npmjs.org/imgur-v2
+41 verbose headers { 'content-type': 'application/json',
+41 verbose headers   'cache-control': 'max-age=300',
+41 verbose headers   'content-length': '95',
+41 verbose headers   'accept-ranges': 'bytes',
+41 verbose headers   date: 'Tue, 21 Feb 2017 11:11:26 GMT',
+41 verbose headers   via: '1.1 varnish',
+41 verbose headers   connection: 'keep-alive',
+41 verbose headers   'x-served-by': 'cache-ams4451-AMS',
+41 verbose headers   'x-cache': 'MISS',
+41 verbose headers   'x-cache-hits': '0',
+41 verbose headers   'x-timer': 'S1487675485.716751,VS0,VE886',
+41 verbose headers   vary: 'Accept-Encoding' }
+42 verbose request invalidating C:\Users\GregLaptop\AppData\Roaming\npm-cache\registry.npmjs.org\imgur-v2 on PUT
+43 error publish Failed PUT 403
+44 verbose stack Error: "You cannot publish over the previously published version 0.2.0." : imgur-v2
+44 verbose stack     at makeError (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
+44 verbose stack     at CachingRegistryClient.<anonymous> (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
+44 verbose stack     at Request._callback (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
+44 verbose stack     at Request.self.callback (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:186:22)
+44 verbose stack     at emitTwo (events.js:106:13)
+44 verbose stack     at Request.emit (events.js:191:7)
+44 verbose stack     at Request.<anonymous> (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:1081:10)
+44 verbose stack     at emitOne (events.js:96:13)
+44 verbose stack     at Request.emit (events.js:188:7)
+44 verbose stack     at IncomingMessage.<anonymous> (C:\Users\GregLaptop\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:1001:12)
+45 verbose statusCode 403
+46 verbose pkgid imgur-v2
+47 verbose cwd C:\Dropbox\UwAmp\www\node-imgur
+48 error Windows_NT 10.0.14393
+49 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\GregLaptop\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+50 error node v7.2.1
+51 error npm  v4.0.5
+52 error code E403
+53 error "You cannot publish over the previously published version 0.2.0." : imgur-v2
+54 error If you need help, you may report this error at:
+54 error     <https://github.com/npm/npm/issues>
+55 verbose exit [ 1, true ]
