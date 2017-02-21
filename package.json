@@ -1,9 +1,9 @@
 {
-  "author": "Kai Mallea <kmallea@gmail.com>",
-  "name": "imgur",
-  "description": "Upload images to imgur.com",
+  "author": "Gregory Goijaerts <crecketgaming@gmail.com>",
+  "name": "imgur-v2",
+  "description": "Upload images to imgur.com v2",
   "version": "0.2.0",
-  "homepage": "https://github.com/kaimallea/node-imgur",
+  "homepage": "https://github.com/crecket/node-imgur",
   "keywords": [
     "imgur",
     "upload",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaimallea/node-imgur.git"
+    "url": "git://github.com/crecket/node-imgur.git"
   },
   "engines": {
     "node": ">= v0.10.30"
@@ -23,9 +23,6 @@
     "request": "^2.40.0"
   },
   "main": "lib/imgur.js",
-  "bin": {
-    "imgur": "./cli.js"
-  },
   "scripts": {
     "test": "node_modules/.bin/mocha"
   },
