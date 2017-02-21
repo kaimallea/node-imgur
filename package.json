@@ -2,7 +2,7 @@
   "author": "Gregory Goijaerts <crecketgaming@gmail.com>",
   "name": "imgur-v2",
   "description": "Upload images to imgur.com v2",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/crecket/node-imgur",
   "keywords": [
     "imgur",
