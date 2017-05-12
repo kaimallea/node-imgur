@@ -13,15 +13,6 @@ describe('SEARCH', function() {
 
   describe('search options validations', function() {
 
-    it('should fail when options are not an object', function(done) {
-      var sortOptions = "sort: Accepts 'time', 'viral', or 'top' as a value. Defaults to top."
-      var dateRangeOptions = "dateRange: Accepts 'day', 'week', 'month', 'year', or 'all' as a value. Defaults to all."
-      var pageOptions = "page: Accepts an integer (e.g. 1, 2, 3, 4) as a value. Defaults to 1."
-      var helpMsg = "\n" + sortOptions + "\n" + dateRangeOptions + "\n" + pageOptions
-      errMsg = 'You did not pass an object to options. Pass in an object of options, or an empty object {} to return the default parameters.' + "\n" + helpMsg
-      expect(imgur.search('meme', [])).to.be.rejectedWith(errMsg).and.notify(done)
-    })
-
     it('should fail when query is not passed', function(done) {
       var errMsg = "Search requires a query. Try searching with a query (e.g cats)."
       expect(imgur.search()).to.be.rejectedWith(errMsg).and.notify(done)
