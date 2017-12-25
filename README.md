@@ -185,6 +185,28 @@ imgur.uploadFile('~/*.(jpg|png|gif)')
         console.error(err.message);
     });
 ```
+#### Searching images within the gallery:
+
+The first argument should be a query to search and it's the only required option. The second argument is optional params to sort your query by. 
+
+- `sort` - Accepts 'time', 'viral', or 'top' as a value. Defaults to top.
+- `dateRange` - Accepts 'day', 'week', 'month', 'year', or 'all' as a value. Defaults to all.
+- `page` - Accepts an integer (e.g. 1, 2, 3, 4) as a value. Defaults to 1.
+
+Search returns an object with the query response as an array of objects that include an image's ID, title, description, views, etc.. and the params you sent with the request. 
+
+```javascript
+var query = 'cats';
+var optionalParams = {sort: 'top', dateRange: 'week', page: 1}
+imgur.search(query, optionalParams)
+    .then(function(json) {
+        console.log(json);
+    })
+    .catch(function (err) {
+        console.error(err);
+    });
+
+```
 
 #### Fetching image data:
 
