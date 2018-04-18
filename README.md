@@ -278,7 +278,7 @@ imgur.uploadBase64(imgurFavicon)
 
 #### Uploading multiple images:
 
-Upload an array of images of the desired upload type ('File', 'Url', 'Base64').
+Upload an array of image files or image objects containing title and description `{(string | Object[{file: string, title: string, description: string}])}` of the desired upload type ('File', 'Url', 'Base64').
 
 Returns an array of images (imgur image data).
 
