@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "commander": "^2.3.0",
-    "glob": "^4.0.5",
+    "glob": "^7.1.2",
     "q": "^1.0.1",
     "request": "^2.40.0"
   },
@@ -33,7 +33,7 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "chai-as-promised": "^5.1.0",
-    "mocha": "^2.3.3",
+    "mocha": "^5.2.0",
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0"
   }
