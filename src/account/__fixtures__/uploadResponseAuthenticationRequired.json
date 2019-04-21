@@ -1,0 +1,9 @@
+{
+  "data": {
+    "error": "Authentication required",
+    "request": "/3/upload",
+    "method": "POST"
+  },
+  "success": false,
+  "status": 401
+}

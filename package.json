@@ -1,8 +1,8 @@
 {
-  "author": "Kai Mallea <kmallea@gmail.com>",
   "name": "imgur",
+  "author": "Kai Mallea <kmallea@gmail.com> (https://kai.dev)",
   "description": "Upload images to imgur.com",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "license": "MIT",
   "keywords": [
@@ -12,29 +12,31 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaimallea/node-imgur.git"
+    "url": "https://github.com/kaimallea/node-imgur.git"
   },
-  "engines": {
-    "node": ">= v0.10.30"
-  },
-  "dependencies": {
-    "commander": "^2.3.0",
-    "glob": "^7.1.2",
-    "q": "^1.0.1",
-    "request": "^2.40.0"
-  },
-  "main": "lib/imgur.js",
-  "bin": {
-    "imgur": "./cli.js"
+  "bugs": {
+    "url": "https://github.com/kaimallea/node-imgur/issues"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "jest"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
-    "chai-as-promised": "^5.1.0",
-    "mocha": "^5.2.0",
-    "sinon": "^1.17.1",
-    "sinon-chai": "^2.8.0"
+    "@types/form-data": "^2.2.1",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.4",
+    "@types/node-fetch": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "https-proxy-agent": "^2.2.1",
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
+  },
+  "dependencies": {
+    "form-data": "^2.3.3",
+    "node-fetch": "^2.3.0"
   }
 }
