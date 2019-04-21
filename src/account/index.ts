@@ -1,1 +1,1 @@
-export { generateAccessToken } from './generateAccessToken';
+export * from './generateAccessToken';

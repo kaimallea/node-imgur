@@ -1,9 +1,7 @@
-import fetch from 'node-fetch';
-import { URLSearchParams } from 'url';
+import { Client } from '../client';
+import { ACCESS_TOKEN_URI } from '../endpoints';
 
-const IMGUR_API_ACCESS_TOKEN_URI = 'https://api.imgur.com/oauth2/token';
-
-interface AccessTokenRequestBody {
+export interface AccessTokenRequestBody {
   [key: string]: string | undefined;
   refresh_token: string;
   client_id: string;
@@ -11,13 +9,13 @@ interface AccessTokenRequestBody {
   grant_type?: string;
 }
 
-interface AccessTokenResponseInvalid {
+export interface AccessTokenResponseInvalid {
   data: any;
   success: boolean;
   status: number;
 }
 
-interface AccessTokenResponseSuccess {
+export interface AccessTokenResponseSuccess {
   access_token: string;
   expires_in: number;
   token_type: string;
@@ -27,20 +25,13 @@ interface AccessTokenResponseSuccess {
   account_username: string;
 }
 
-async function generateAccessToken(
+export function generateAccessToken(
+  client: Client,
   body: AccessTokenRequestBody
 ): Promise<AccessTokenResponseSuccess | AccessTokenResponseInvalid> {
   if (body.grant_type !== 'refresh_token') {
     body.grant_type = 'refresh_token';
   }
 
-  const params = new URLSearchParams(body);
-  const response = await fetch(IMGUR_API_ACCESS_TOKEN_URI, {
-    method: 'POST',
-    body: params,
-  });
-
-  return response.json();
+  return client.post(ACCESS_TOKEN_URI, body);
 }
-
-export { IMGUR_API_ACCESS_TOKEN_URI, generateAccessToken };
