@@ -17,7 +17,15 @@
   "bugs": {
     "url": "https://github.com/kaimallea/node-imgur/issues"
   },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "test": "jest"
   },
   "devDependencies": {
