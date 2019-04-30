@@ -1,7 +1,7 @@
 import FormData from 'form-data';
 
 /**
- * Accepts an object of key/values and then constructs
+ * Accepts an object of key/values then constructs
  * and returns an instance of FormData
  *
  * @param params An object with key/values

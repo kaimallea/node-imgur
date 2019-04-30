@@ -1,23 +1,16 @@
 import { generateAccessToken } from '../index';
 import { ACCESS_TOKEN_URI } from '../../endpoints';
 
-const mockRequest = jest.fn();
 const mockPost = jest.fn();
-const mockGet = jest.fn();
-
 const mockClient = jest.fn().mockImplementation(() => {
   return {
-    request: mockRequest,
     post: mockPost,
-    get: mockGet,
   };
 });
 
 beforeEach(() => {
   mockClient.mockClear();
-  mockRequest.mockClear();
   mockPost.mockClear();
-  mockGet.mockClear();
 });
 
 test('getAccessToken calls the correct endpoint and resolves', () => {
