@@ -3,11 +3,15 @@ import createForm from '../helpers/createForm';
 import FormData from 'form-data';
 import { PathLike, createReadStream } from 'fs';
 import { UPLOAD_URI } from '../endpoints';
+import {
+  UploadSuccessResponse,
+  AuthenticationRequiredResponse,
+} from '../responses';
 
 type Image = PathLike;
 type Video = PathLike;
 
-export interface UploadRequestBody {
+export type UploadRequestBody = {
   image?: Image;
   video?: Video;
   album?: string;
@@ -16,19 +20,7 @@ export interface UploadRequestBody {
   title?: string;
   description?: string;
   disable_audio?: number;
-}
-
-export interface AuthenticationRequiredResponse {
-  data: any;
-  success: false;
-  status: 401;
-}
-
-export interface UploadSuccessResponse {
-  data: any;
-  success: true;
-  status: 200;
-}
+};
 
 export async function upload(
   client: Client,

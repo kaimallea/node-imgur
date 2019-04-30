@@ -1,9 +1,0 @@
-{
-  "data": {
-    "error": "Invalid refresh token",
-    "request": "/oauth2/token",
-    "method": "POST"
-  },
-  "success": false,
-  "status": 400
-}

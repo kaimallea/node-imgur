@@ -102,7 +102,7 @@ test('post() has correct headers and passed in form data reference', async () =>
   const client = new Client({ access_token: 'abc123' });
   const params = {
     image: 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    type: 'bas64',
+    type: 'base64',
   };
 
   const form = createForm(params);

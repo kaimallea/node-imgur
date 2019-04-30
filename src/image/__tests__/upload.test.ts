@@ -4,23 +4,16 @@ import { UPLOAD_URI } from '../../endpoints';
 import FormData from 'form-data';
 import createForm from '../../helpers/createForm';
 
-const mockRequest = jest.fn();
 const mockPost = jest.fn();
-const mockGet = jest.fn();
-
 const mockClient = jest.fn().mockImplementation(() => {
   return {
-    request: mockRequest,
     post: mockPost,
-    get: mockGet,
   };
 });
 
 beforeEach(() => {
   mockClient.mockClear();
-  mockRequest.mockClear();
   mockPost.mockClear();
-  mockGet.mockClear();
 });
 
 test('upload calls post() with the correct params and passes reference to provided form', () => {
@@ -41,7 +34,7 @@ test('upload calls post() with the correct params and passes reference to provid
   expect(mockPost).toHaveBeenCalledWith(UPLOAD_URI, form);
 });
 
-test('upload calls post() with the proper correct URI and generated form', () => {
+test('upload calls post() with the correct URI and generated form', () => {
   const params = {
     image: 'https://www.cdn.com/image.jpg',
   };

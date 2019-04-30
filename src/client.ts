@@ -2,22 +2,16 @@ import fetch, { RequestInit } from 'node-fetch';
 import FormData from 'form-data';
 import createForm from './helpers/createForm';
 
-export interface AccessTokenAuthorization {
+export type ClientOptions = {
   access_token?: string;
-}
-
-export interface ClientIdAuthorization {
   client_id?: string;
-}
+};
 
-export interface ClientOptions
-  extends AccessTokenAuthorization,
-    ClientIdAuthorization {}
-
-export interface PostParameters {
-  [key: string]: any;
-  form?: FormData;
-}
+export type PostData =
+  | {
+      [key: string]: any;
+    }
+  | FormData;
 
 export class Client {
   public readonly access_token: string | undefined;
@@ -25,13 +19,11 @@ export class Client {
   public readonly anonymous: boolean;
 
   constructor(options: ClientOptions) {
-    const { access_token, client_id } = options;
-
-    if (access_token) {
-      this.access_token = access_token;
+    if (options.access_token) {
+      this.access_token = options.access_token;
       this.anonymous = false;
-    } else if (client_id) {
-      this.client_id = client_id;
+    } else if (options.client_id) {
+      this.client_id = options.client_id;
       this.anonymous = true;
     } else {
       throw new Error(
@@ -72,7 +64,7 @@ export class Client {
    * @param params Form parameters
    * @returns A JSON response object
    */
-  post(endpoint: string, params: PostParameters | FormData): Promise<any> {
+  post(endpoint: string, params: PostData): Promise<any> {
     let form;
     if (params instanceof FormData) {
       form = params;
