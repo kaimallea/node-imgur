@@ -45,5 +45,17 @@
     "@types/node-fetch": "^2.3.2",
     "form-data": "^2.3.3",
     "node-fetch": "^2.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,ts}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
