@@ -1,4 +1,1 @@
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-};
+module.exports = require('@spotify/web-scripts/config/jest.config.js');
