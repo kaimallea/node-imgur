@@ -5,14 +5,14 @@ import FormData from 'form-data';
 import createForm from '../../helpers/createForm';
 
 const mockPost = jest.fn();
-const mockClient = jest.fn().mockImplementation(() => {
+const MockClient = jest.fn().mockImplementation(() => {
   return {
     post: mockPost,
   };
 });
 
 beforeEach(() => {
-  mockClient.mockClear();
+  MockClient.mockClear();
   mockPost.mockClear();
 });
 
@@ -27,7 +27,7 @@ test('upload calls post() with the correct params and passes reference to provid
   const mockResponse = '{"success": true}';
   mockPost.mockReturnValueOnce(Promise.resolve(mockResponse));
 
-  const promiseResponse = upload(new mockClient(), form);
+  const promiseResponse = upload(new MockClient(), form);
 
   expect(promiseResponse).resolves.toBe(mockResponse);
   expect(mockPost).toHaveBeenCalledTimes(1);
@@ -42,7 +42,7 @@ test('upload calls post() with the correct URI and generated form', () => {
   const mockResponse = '{"success": true}';
   mockPost.mockReturnValueOnce(Promise.resolve(mockResponse));
 
-  const promiseResponse = upload(new mockClient(), params);
+  const promiseResponse = upload(new MockClient(), params);
 
   expect(promiseResponse).resolves.toBe(mockResponse);
   expect(mockPost).toHaveBeenCalledTimes(1);

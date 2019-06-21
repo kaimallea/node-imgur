@@ -10,7 +10,7 @@ import FormData from 'form-data';
  */
 function createForm(
   params: { [key: string]: any } = {},
-  formDataOptions: { [key: string]: any } = {}
+  formDataOptions: { [key: string]: any } = {},
 ): FormData {
   const form = new FormData(formDataOptions);
   Object.keys(params).forEach(key => {

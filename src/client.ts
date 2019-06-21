@@ -27,7 +27,7 @@ export class Client {
       this.anonymous = true;
     } else {
       throw new Error(
-        'Client requires an access token or client ID to make requests against the Imgur API'
+        'Client requires an access token or client ID to make requests against the Imgur API',
       );
     }
   }

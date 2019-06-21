@@ -14,7 +14,7 @@ export type AccessTokenRequestBody = {
 
 export function generateAccessToken(
   client: Client,
-  body: AccessTokenRequestBody
+  body: AccessTokenRequestBody,
 ): Promise<RefreshTokenResponse | InvalidRefreshTokenResponse> {
   // grant_type is always the same, so let it be optional and autofill
   // if missing
