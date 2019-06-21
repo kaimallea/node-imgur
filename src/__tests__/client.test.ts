@@ -4,9 +4,9 @@ const { Response } = require.requireActual('node-fetch');
 jest.mock('node-fetch', () =>
   jest.fn(() =>
     Promise.resolve(
-      new Response('{"data": [], "status": 400, "success": false}')
-    )
-  )
+      new Response('{"data": [], "status": 400, "success": false}'),
+    ),
+  ),
 );
 
 const fetch = require.requireMock('node-fetch');
@@ -35,7 +35,7 @@ test('Client instantiates with client ID', () => {
 
 test('Client contructor throws without auth credentials', () => {
   expect(() => new Client({})).toThrowErrorMatchingInlineSnapshot(
-    `"Client requires an access token or client ID to make requests against the Imgur API"`
+    `"Client requires an access token or client ID to make requests against the Imgur API"`,
   );
 });
 

@@ -24,7 +24,7 @@ export type UploadRequestBody = {
 
 export async function upload(
   client: Client,
-  body: UploadRequestBody | FormData
+  body: UploadRequestBody | FormData,
 ): Promise<UploadSuccessResponse | AuthenticationRequiredResponse> {
   let form;
   if (!(body instanceof FormData)) {
@@ -35,7 +35,7 @@ export async function upload(
       type = 'file',
       name = '',
       description = '',
-      disable_audio = 1,
+      disable_audio = 1, // eslint-disable-line @typescript-eslint/camelcase
     } = body;
 
     if (!image && !video) {
@@ -50,13 +50,13 @@ export async function upload(
       form.append('image', type === 'base64' ? image : createReadStream(image));
     }
 
-    album && form.append('album', album);
-    type && form.append('type', type);
-    name && form.append('name', name);
-    description && form.append('description', description);
-    video &&
-      typeof disable_audio === 'number' &&
-      form.append('disable_audio', disable_audio);
+    album && form.append('album', album); // eslint-disable-line no-unused-expressions
+    type && form.append('type', type); // eslint-disable-line no-unused-expressions
+    name && form.append('name', name); // eslint-disable-line no-unused-expressions
+    description && form.append('description', description); // eslint-disable-line no-unused-expressions
+    video && // eslint-disable-line no-unused-expressions
+    typeof disable_audio === 'number' && // eslint-disable-line @typescript-eslint/camelcase
+      form.append('disable_audio', disable_audio); // eslint-disable-line no-unused-expressions
   } else {
     form = body;
   }
