@@ -2,12 +2,12 @@ import fetch, { RequestInit } from 'node-fetch';
 import FormData from 'form-data';
 import createForm from './helpers/createForm';
 
-export type ClientOptions = {
+export interface ClientOptions {
   access_token?: string;
   client_id?: string;
-};
+}
 
-export type PostData =
+export type PostOrPutData =
   | {
       [key: string]: any;
     }
@@ -58,13 +58,35 @@ export class Client {
   }
 
   /**
+   * Make a request to the specified Imgur API endpoint with params or FormData
+   *
+   * @param endpoint An Imgur API endpoint
+   * @param params Form parameters
+   * @returns A JSON response object
+   */
+  requestWithParams(endpoint: string, params: PostOrPutData): Promise<any> {
+    let form;
+    if (params instanceof FormData) {
+      form = params;
+    } else {
+      form = createForm(params);
+    }
+
+    return this.request(endpoint, {
+      method: 'POST',
+      headers: form.getHeaders(),
+      body: form,
+    });
+  }
+
+  /**
    * Make a POST request to the specified Imgur API endpoint with form data
    *
    * @param endpoint An Imgur API endpoint
    * @param params Form parameters
    * @returns A JSON response object
    */
-  post(endpoint: string, params: PostData): Promise<any> {
+  post(endpoint: string, params: PostOrPutData): Promise<any> {
     let form;
     if (params instanceof FormData) {
       form = params;
@@ -88,6 +110,28 @@ export class Client {
   get(endpoint: string): Promise<any> {
     return this.request(endpoint, {
       method: 'GET',
+    });
+  }
+
+  /**
+   * Make a PUT request to the specified Imgur API endpoint with form data
+   *
+   * @param endpoint An Imgur API endpoint
+   * @param params Form parameters
+   * @returns A JSON response object
+   */
+  put(endpoint: string, params: PostOrPutData): Promise<any> {
+    let form;
+    if (params instanceof FormData) {
+      form = params;
+    } else {
+      form = createForm(params);
+    }
+
+    return this.request(endpoint, {
+      method: 'PUT',
+      headers: form.getHeaders(),
+      body: form,
     });
   }
 }
