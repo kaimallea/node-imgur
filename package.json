@@ -22,6 +22,7 @@
   "types": "types",
   "scripts": {
     "test": "web-scripts test",
+    "test:record": "POLLY_MODE=record web-scripts test",
     "lint": "web-scripts lint",
     "fix": "web-scripts fix",
     "build": "web-scripts build",
@@ -29,6 +30,7 @@
     "release": "web-scripts release"
   },
   "devDependencies": {
+    "@spotify/polly-jest-presets": "^1.0.0",
     "@spotify/web-scripts": "^1.1.4",
     "@types/form-data": "^2.5.0",
     "@types/jest": "^24.0.11",
