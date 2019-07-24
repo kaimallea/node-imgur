@@ -1,51 +1,17 @@
+import { Client } from '../../client';
 import { upload } from '../upload';
-import { UPLOAD_URI } from '../../endpoints';
 
-import FormData from 'form-data';
-import createForm from '../../helpers/createForm';
+describe('upload using client_id', () => {
+  let client: Client;
+  beforeEach(() => {
+    client = new Client({ client_id: 'f0ea04148a54268' });
+  });
 
-const mockPost = jest.fn();
-const MockClient = jest.fn().mockImplementation(() => {
-  return {
-    post: mockPost,
-  };
-});
+  it.only('works with an image', async () => {
+    const resp = await upload(client, {
+      image: `${__dirname}/1x1.png`,
+    });
 
-beforeEach(() => {
-  MockClient.mockClear();
-  mockPost.mockClear();
-});
-
-test('upload calls post() with the correct params and passes reference to provided form', () => {
-  const params = {
-    image: 'ABC/123/XYZ',
-    type: 'base64',
-  };
-
-  const form = createForm(params);
-
-  const mockResponse = '{"success": true}';
-  mockPost.mockReturnValueOnce(Promise.resolve(mockResponse));
-
-  const promiseResponse = upload(new MockClient(), form);
-
-  expect(promiseResponse).resolves.toBe(mockResponse);
-  expect(mockPost).toHaveBeenCalledTimes(1);
-  expect(mockPost).toHaveBeenCalledWith(UPLOAD_URI, form);
-});
-
-test('upload calls post() with the correct URI and generated form', () => {
-  const params = {
-    image: 'https://www.cdn.com/image.jpg',
-  };
-
-  const mockResponse = '{"success": true}';
-  mockPost.mockReturnValueOnce(Promise.resolve(mockResponse));
-
-  const promiseResponse = upload(new MockClient(), params);
-
-  expect(promiseResponse).resolves.toBe(mockResponse);
-  expect(mockPost).toHaveBeenCalledTimes(1);
-  expect(mockPost.mock.calls[0][0]).toBe(UPLOAD_URI);
-  expect(mockPost.mock.calls[0][1]).toBeInstanceOf(FormData);
+    expect(resp.status).toEqual(200);
+  });
 });
