@@ -17,7 +17,8 @@
   "bugs": {
     "url": "https://github.com/kaimallea/node-imgur/issues"
   },
-  "main": "esm/index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "types": "types",
   "scripts": {
     "test": "web-scripts test",
@@ -28,16 +29,16 @@
     "release": "web-scripts release"
   },
   "devDependencies": {
+    "@spotify/web-scripts": "^1.1.4",
+    "@types/form-data": "^2.5.0",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.4",
-    "husky": "^2.4.1"
+    "@types/node-fetch": "^2.5.0",
+    "husky": "^3.0.1"
   },
   "dependencies": {
-    "@spotify/web-scripts": "^1.0.0",
-    "@types/form-data": "^2.2.1",
-    "@types/node-fetch": "^2.3.2",
-    "form-data": "^2.3.3",
-    "node-fetch": "^2.3.0"
+    "form-data": "^2.5.0",
+    "node-fetch": "^2.6.0"
   },
   "husky": {
     "hooks": {
