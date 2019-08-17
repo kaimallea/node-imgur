@@ -134,4 +134,17 @@ export class Client {
       body: form,
     });
   }
+
+  /**
+   * Make a DELETE request to the specified Imgur API endpoint with form data
+   *
+   * @param endpoint An Imgur API endpoint
+   * @returns A JSON response object
+   */
+
+  delete(endpoint: string): Promise<any> {
+    return this.request(endpoint, {
+      method: 'DELETE',
+    });
+  }
 }

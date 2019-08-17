@@ -1,10 +1,9 @@
-import { getSettings } from '../getSettings';
-import { ACCOUNT_SETTINGS } from '../../endpoints';
+import unfollowTag from '../unfollowTag';
 
 const mockGet = jest.fn();
 const MockClient = jest.fn().mockImplementation(() => {
   return {
-    get: mockGet,
+    delete: mockGet,
   };
 });
 
@@ -13,13 +12,12 @@ beforeEach(() => {
   mockGet.mockClear();
 });
 
-test('getAccessToken calls the correct endpoint and resolves', () => {
+test('unfollowTag calls the correct endpoint and resolves', () => {
   const mockResponse = '{"success":true}';
   mockGet.mockReturnValueOnce(Promise.resolve(mockResponse));
-
-  const promiseResponse = getSettings(new MockClient());
-
+  const mockTag = 'cats';
+  const promiseResponse = unfollowTag(new MockClient(), mockTag);
   expect(promiseResponse).resolves.toBe(mockResponse);
   expect(mockGet).toHaveBeenCalledTimes(1);
-  expect(mockGet).toHaveBeenCalledWith(ACCOUNT_SETTINGS);
+  expect(mockGet).toHaveBeenCalledWith(`https://api.imgur.com/3/account/me/follow/tag/${mockTag}`);
 });

@@ -131,3 +131,16 @@ test('get() has correct headers', async () => {
     method: 'GET',
   });
 });
+
+test('delete() has correct headers', async () => {
+  fetch.mockReturnValue(Promise.resolve(new Response('{"success": true}')));
+  const client = new Client({ access_token: 'abc123' });
+  await client.delete('https://www.blah.com');
+  expect(fetch).toHaveBeenCalledTimes(1);
+  expect(fetch).toHaveBeenCalledWith('https://www.blah.com', {
+    headers: {
+      Authorization: 'Bearer abc123',
+    },
+    method: 'DELETE',
+  });
+});
