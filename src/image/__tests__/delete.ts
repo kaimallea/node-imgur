@@ -1,5 +1,4 @@
-import { getSettings } from '../getSettings';
-import { ACCOUNT_SETTINGS } from '../../endpoints';
+import deleteImage from '../delete';
 
 const mockGet = jest.fn();
 const MockClient = jest.fn().mockImplementation(() => {
@@ -13,13 +12,14 @@ beforeEach(() => {
   mockGet.mockClear();
 });
 
-test('getAccessToken calls the correct endpoint and resolves', () => {
+test('deleteImage calls the correct endpoint and resolves', () => {
   const mockResponse = '{"success":true}';
   mockGet.mockReturnValueOnce(Promise.resolve(mockResponse));
-
-  const promiseResponse = getSettings(new MockClient());
-
+  const mockImageDeleteHash = '123456'
+  const promiseResponse = deleteImage(new MockClient(), mockImageDeleteHash);
   expect(promiseResponse).resolves.toBe(mockResponse);
   expect(mockGet).toHaveBeenCalledTimes(1);
-  expect(mockGet).toHaveBeenCalledWith(ACCOUNT_SETTINGS);
+  expect(mockGet).toHaveBeenCalledWith(
+    `https://api.imgur.com/3/image/${mockImageDeleteHash}`,
+  );
 });
