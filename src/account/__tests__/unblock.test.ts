@@ -1,24 +1,24 @@
 import unblock from '../unblock';
 
-const mockGet = jest.fn();
+const mockDelete = jest.fn();
 const MockClient = jest.fn().mockImplementation(() => {
   return {
-    delete: mockGet,
+    delete: mockDelete,
   };
 });
 
 beforeEach(() => {
   MockClient.mockClear();
-  mockGet.mockClear();
+  mockDelete.mockClear();
 });
 
 test('unblock calls the correct endpoint and resolves', () => {
   const mockResponse = '{"success":true}';
-  mockGet.mockReturnValueOnce(Promise.resolve(mockResponse));
+  mockDelete.mockReturnValueOnce(Promise.resolve(mockResponse));
   const promiseResponse = unblock(new MockClient(), 'john');
   expect(promiseResponse).resolves.toBe(mockResponse);
-  expect(mockGet).toHaveBeenCalledTimes(1);
-  expect(mockGet).toHaveBeenCalledWith(
-    'https://api.imgur.com/account/v1/john/block'
+  expect(mockDelete).toHaveBeenCalledTimes(1);
+  expect(mockDelete).toHaveBeenCalledWith(
+    'https://api.imgur.com/account/v1/john/block',
   );
 });
