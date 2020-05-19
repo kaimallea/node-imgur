@@ -1,10 +1,10 @@
 import { Client } from '../client';
 import { ImgurApiResponse, AuthenticationRequiredResponse } from '../responses';
-import createUnblockUrl from '../helpers/createUnblockUrl';
+import createFavoriteImageUrl from '../helpers/createFavoriteImageUrl';
 
-export default async function unblock(
+export default async function favorite(
   client: Client,
-  username: string,
+  imageHash: string,
 ): Promise<ImgurApiResponse | AuthenticationRequiredResponse> {
-  return client.delete(`${createUnblockUrl(username)}`);
+  return client.post(createFavoriteImageUrl(imageHash), {});
 }
