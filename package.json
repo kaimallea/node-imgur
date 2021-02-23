@@ -1,8 +1,8 @@
 {
+  "author": "Kai Mallea <kmallea@gmail.com>",
   "name": "imgur",
-  "author": "Kai Mallea <kmallea@gmail.com> (https://kai.dev)",
   "description": "Upload images to imgur.com",
-  "version": "1.0.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "license": "MIT",
   "keywords": [
@@ -12,37 +12,29 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaimallea/node-imgur.git"
+    "url": "git://github.com/kaimallea/node-imgur.git"
   },
-  "bugs": {
-    "url": "https://github.com/kaimallea/node-imgur/issues"
-  },
-  "main": "esm/index.js",
-  "types": "types",
-  "scripts": {
-    "test": "web-scripts test",
-    "lint": "web-scripts lint",
-    "fix": "web-scripts fix",
-    "build": "web-scripts build",
-    "commit": "web-scripts commit",
-    "release": "web-scripts release"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@types/node": "^11.13.4",
-    "husky": "^2.4.1"
+  "engines": {
+    "node": ">= v0.10.30"
   },
   "dependencies": {
-    "@spotify/web-scripts": "^1.0.0",
-    "@types/form-data": "^2.2.1",
-    "@types/node-fetch": "^2.3.2",
-    "form-data": "^2.3.3",
-    "node-fetch": "^2.3.0"
+    "commander": "^2.3.0",
+    "glob": "^7.1.2",
+    "q": "^1.0.1",
+    "request": "^2.40.0"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "web-scripts commitmsg",
-      "pre-commit": "web-scripts precommit"
-    }
+  "main": "lib/imgur.js",
+  "bin": {
+    "imgur": "./cli.js"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "chai-as-promised": "^5.1.0",
+    "mocha": "^5.2.0",
+    "sinon": "^1.17.1",
+    "sinon-chai": "^2.8.0"
   }
 }
