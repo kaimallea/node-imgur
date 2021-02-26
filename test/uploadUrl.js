@@ -58,7 +58,7 @@ describe('#uploadUrl()', function() {
         var promise = imgur.uploadUrl(testUrl, albumId);
 
         expect(imgur._imgurRequest)
-            .to.have.been.calledWith('upload', testUrl, {album: albumId});
+            .to.have.been.calledWith('upload', testUrl, {album: albumId, type: 'url'});
         expect(promise)
             .to.eventually.equal(mockResult)
             .and.notify(done);

@@ -2,7 +2,7 @@
   "author": "Kai Mallea <kmallea@gmail.com>",
   "name": "imgur",
   "description": "Upload images to imgur.com",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "license": "MIT",
   "keywords": [
@@ -19,9 +19,10 @@
   },
   "dependencies": {
     "commander": "^2.3.0",
+    "form-data": "^4.0.0",
     "glob": "^7.1.2",
-    "q": "^1.0.1",
-    "request": "^2.40.0"
+    "got": "^11.8.1",
+    "q": "^1.0.1"
   },
   "main": "lib/imgur.js",
   "bin": {
