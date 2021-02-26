@@ -2,7 +2,6 @@
 'use strict';
 var imgur = require('./lib/imgur');
 var commander = require('commander');
-var Q = require('q');
 var util = require('util');
 
 // Used to collect args for specific options
@@ -73,7 +72,7 @@ imgur
               aId = json.data.id;
               deleteHash = json.data.deletehash;
               console.log('Album -> https://imgur.com/a/%s', aId);
-              args.forEach(function (file, index, array) {
+              args.forEach(function (file) {
                 imgur.uploadFile(file, deleteHash).then(
                   function (json) {
                     var output = util.format('%s -> %s', file, json.data.link);
@@ -90,7 +89,7 @@ imgur
             }
           );
         } else {
-          args.forEach(function (file, index, array) {
+          args.forEach(function (file) {
             imgur.uploadFile(file, albumId).then(
               function (json) {
                 var output;
@@ -110,7 +109,7 @@ imgur
       }
 
       if (commander.info.length) {
-        commander.info.forEach(function (id, index, array) {
+        commander.info.forEach(function (id) {
           imgur.getInfo(id).then(
             function (json) {
               console.log(json.data);
@@ -123,7 +122,7 @@ imgur
       }
 
       if (commander.base64.length) {
-        commander.base64.forEach(function (str, index, array) {
+        commander.base64.forEach(function (str) {
           imgur.uploadBase64(str).then(
             function (json) {
               var output;
@@ -151,7 +150,7 @@ imgur
       }
 
       if (commander.url.length) {
-        commander.url.forEach(function (url, index, array) {
+        commander.url.forEach(function (url) {
           imgur.uploadUrl(url).then(
             function (json) {
               var output;
