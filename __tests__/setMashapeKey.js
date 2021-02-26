@@ -1,37 +1,32 @@
-var imgur = require('../lib/imgur.js'),
-  chai = require('chai'),
-  chaiAsPromised = require('chai-as-promised'),
-  expect = chai.expect;
+var imgur = require('../lib/imgur.js');
 
-chai.use(chaiAsPromised);
-
-describe('#setMashapeKey()', function () {
+describe('setMashapeKey()', function () {
   beforeEach(function () {
     var defaultMashapeKey = '0123456789abcdef';
     imgur.setMashapeKey(defaultMashapeKey);
   });
 
-  it('should return the Mashape Key that was set', function () {
+  test('should return the Mashape Key that was set', function () {
     var mashapeKey = '0123456789abcdef';
     imgur.setMashapeKey(mashapeKey);
-    return expect(imgur.getMashapeKey()).to.equal(mashapeKey);
+    return expect(imgur.getMashapeKey()).toBe(mashapeKey);
   });
 
-  it('should not set an empty Mashape Key', function () {
+  test('should not set an empty Mashape Key', function () {
     var mashapeKey = '';
     imgur.setMashapeKey(mashapeKey);
-    return expect(imgur.getMashapeKey()).to.not.equal(mashapeKey);
+    return expect(imgur.getMashapeKey()).not.toBe(mashapeKey);
   });
 
-  it('should not set a number', function () {
+  test('should not set a number', function () {
     var mashapeKey = 1024;
     imgur.setMashapeKey(mashapeKey);
-    return expect(imgur.getMashapeKey()).to.not.equal(mashapeKey);
+    return expect(imgur.getMashapeKey()).not.toBe(mashapeKey);
   });
 
-  it('should not set a boolean', function () {
+  test('should not set a boolean', function () {
     var mashapeKey = false;
     imgur.setMashapeKey(mashapeKey);
-    return expect(imgur.getMashapeKey()).to.not.equal(mashapeKey);
+    return expect(imgur.getMashapeKey()).not.toBe(mashapeKey);
   });
 });

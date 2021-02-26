@@ -1,25 +1,16 @@
 var imgur = require('../lib/imgur.js'),
-  chai = require('chai'),
-  chaiAsPromised = require('chai-as-promised'),
-  expect = chai.expect,
   imgurTestId1 = 'mbgq7nd'; // Kitten
 
-chai.use(chaiAsPromised);
-
-describe('#_imgurRequest()', function () {
-  beforeEach(function () {});
-
-  it('should fail with no input', function (done) {
+describe('_imgurRequest()', function () {
+  test('should fail with no input', function () {
     var errMsg = 'Invalid argument';
 
-    expect(imgur._imgurRequest()).to.be.rejectedWith(errMsg).and.notify(done);
+    expect(imgur._imgurRequest()).rejects.toMatch(errMsg);
   });
 
-  it('should fail with an invalid operation specified', function (done) {
+  test('should fail with an invalid operation specified', function () {
     var errMsg = 'Invalid operation';
 
-    expect(imgur._imgurRequest('blah', imgurTestId1))
-      .to.be.rejectedWith(errMsg)
-      .and.notify(done);
+    expect(imgur._imgurRequest('blah', imgurTestId1)).rejects.toMatch(errMsg);
   });
 });

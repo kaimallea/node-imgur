@@ -1,61 +1,58 @@
 var imgur = require('../lib/imgur.js'),
-  chai = require('chai'),
-  chaiAsPromised = require('chai-as-promised'),
-  sinon = require('sinon'),
-  sinonChai = require('sinon-chai'),
-  Q = require('q'),
-  expect = chai.expect;
+  Q = require('q');
 
-chai.use(sinonChai);
-chai.use(chaiAsPromised);
-
-describe('#uploadUrl()', function () {
+describe('uploadUrl()', function () {
   describe('validation', function () {
-    it('should fail with no url', function (done) {
+    test('should fail with no url', function () {
       var errMsg = 'Invalid URL';
 
-      expect(imgur.uploadUrl()).to.be.rejectedWith(errMsg).and.notify(done);
+      expect(imgur.uploadUrl()).rejects.toMatch(errMsg);
     });
 
-    it('should fail with on a malformed url', function (done) {
+    test('should fail with on a malformed url', function () {
       var errMsg = 'Invalid URL';
 
-      expect(imgur.uploadUrl('blarg'))
-        .to.be.rejectedWith(errMsg)
-        .and.notify(done);
+      expect(imgur.uploadUrl('blarg')).rejects.toMatch(errMsg);
     });
   });
 
-  describe("delegates to #_imgurRequest('upload', ...)", function () {
+  describe("delegates to _imgurRequest('upload', ...)", function () {
     var mockResult = { foo: 'bar' };
     var testUrl = 'https://somewhere/test.png';
 
+    var _imgurRequestBackup = imgur._imgurRequest;
+
     beforeEach(function () {
       var deferred = Q.defer();
-      sinon.stub(imgur, '_imgurRequest').returns(deferred.promise);
+      imgur._imgurRequest = jest
+        .fn()
+        .mockImplementation(() => deferred.promise);
       deferred.resolve(mockResult);
     });
 
     afterEach(function () {
-      imgur._imgurRequest.restore();
+      imgur._imgurRequest.mockClear();
+      imgur._imgurRequest = _imgurRequestBackup;
     });
 
-    it('should delegate', function (done) {
+    test('should delegate', function () {
       var promise = imgur.uploadUrl(testUrl);
 
-      expect(imgur._imgurRequest).to.have.been.calledWith('upload', testUrl);
-      expect(promise).to.eventually.equal(mockResult).and.notify(done);
+      expect(imgur._imgurRequest).toHaveBeenCalledWith('upload', testUrl, {
+        type: 'url',
+      });
+      expect(promise).resolves.toMatchObject(mockResult);
     });
 
-    it('should propagate albumId', function (done) {
+    test('should propagate albumId', function () {
       var albumId = '123';
       var promise = imgur.uploadUrl(testUrl, albumId);
 
-      expect(imgur._imgurRequest).to.have.been.calledWith('upload', testUrl, {
+      expect(imgur._imgurRequest).toHaveBeenCalledWith('upload', testUrl, {
         album: albumId,
         type: 'url',
       });
-      expect(promise).to.eventually.equal(mockResult).and.notify(done);
+      expect(promise).resolves.toMatch(mockResult);
     });
   });
 });
