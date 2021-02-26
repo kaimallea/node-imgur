@@ -22,6 +22,7 @@
     "form-data": "^4.0.0",
     "glob": "^7.1.2",
     "got": "^11.8.1",
+    "jest": "^26.6.3",
     "q": "^1.0.1"
   },
   "main": "lib/imgur.js",
@@ -29,7 +30,7 @@
     "imgur": "./cli.js"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "jest"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
