@@ -1,29 +1,29 @@
-var imgur = require('../lib/imgur.js'),
+const imgur = require('../lib/imgur.js'),
   Q = require('q');
 
 describe('uploadUrl()', function () {
   describe('validation', function () {
     test('should fail with no url', function () {
-      var errMsg = 'Invalid URL';
+      const errMsg = 'Invalid URL';
 
       expect(imgur.uploadUrl()).rejects.toMatch(errMsg);
     });
 
     test('should fail with on a malformed url', function () {
-      var errMsg = 'Invalid URL';
+      const errMsg = 'Invalid URL';
 
       expect(imgur.uploadUrl('blarg')).rejects.toMatch(errMsg);
     });
   });
 
   describe("delegates to _imgurRequest('upload', ...)", function () {
-    var mockResult = { foo: 'bar' };
-    var testUrl = 'https://somewhere/test.png';
+    const mockResult = { foo: 'bar' };
+    const testUrl = 'https://somewhere/test.png';
 
-    var _imgurRequestBackup = imgur._imgurRequest;
+    const _imgurRequestBackup = imgur._imgurRequest;
 
     beforeEach(function () {
-      var deferred = Q.defer();
+      const deferred = Q.defer();
       imgur._imgurRequest = jest
         .fn()
         .mockImplementation(() => deferred.promise);
@@ -36,7 +36,7 @@ describe('uploadUrl()', function () {
     });
 
     test('should delegate', function () {
-      var promise = imgur.uploadUrl(testUrl);
+      const promise = imgur.uploadUrl(testUrl);
 
       expect(imgur._imgurRequest).toHaveBeenCalledWith('upload', testUrl, {
         type: 'url',
@@ -45,8 +45,8 @@ describe('uploadUrl()', function () {
     });
 
     test('should propagate albumId', function () {
-      var albumId = '123';
-      var promise = imgur.uploadUrl(testUrl, albumId);
+      const albumId = '123';
+      const promise = imgur.uploadUrl(testUrl, albumId);
 
       expect(imgur._imgurRequest).toHaveBeenCalledWith('upload', testUrl, {
         album: albumId,

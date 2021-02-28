@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
-var imgur = require('./lib/imgur');
-var commander = require('commander');
-var util = require('util');
+const imgur = require('./lib/imgur');
+const commander = require('commander');
+const util = require('util');
 
 // Used to collect args for specific options
 function collect(val, arr) {
@@ -63,10 +63,10 @@ imgur
       );
     } else {
       if (commander.file.length || commander.args.length) {
-        var args = commander.file.concat(commander.args);
-        var albumId = commander.albumId ? commander.albumId : null;
+        const args = commander.file.concat(commander.args);
+        const albumId = commander.albumId ? commander.albumId : null;
         if (!albumId && args.length > 1) {
-          var aId, deleteHash;
+          let aId, deleteHash;
           imgur.createAlbum().then(
             function (json) {
               aId = json.data.id;
@@ -75,7 +75,11 @@ imgur
               args.forEach(function (file) {
                 imgur.uploadFile(file, deleteHash).then(
                   function (json) {
-                    var output = util.format('%s -> %s', file, json.data.link);
+                    const output = util.format(
+                      '%s -> %s',
+                      file,
+                      json.data.link
+                    );
                     console.log(output);
                   },
                   function (err) {
@@ -92,7 +96,7 @@ imgur
           args.forEach(function (file) {
             imgur.uploadFile(file, albumId).then(
               function (json) {
-                var output;
+                let output;
                 if (args.length > 1) {
                   output = util.format('%s -> %s', file, json.data.link);
                 } else {
@@ -125,7 +129,7 @@ imgur
         commander.base64.forEach(function (str) {
           imgur.uploadBase64(str).then(
             function (json) {
-              var output;
+              let output;
               if (commander.base64.length > 1) {
                 output = util.format(
                   '%s... -> %s',
@@ -138,7 +142,7 @@ imgur
               console.log(output);
             },
             function (err) {
-              var output = util.format(
+              const output = util.format(
                 '%s (%s...)',
                 err.message,
                 str.substr(0, 7)
@@ -153,7 +157,7 @@ imgur
         commander.url.forEach(function (url) {
           imgur.uploadUrl(url).then(
             function (json) {
-              var output;
+              let output;
               if (commander.url.length > 1) {
                 output = util.format('%s -> %s', url, json.data.link);
               } else {

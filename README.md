@@ -89,7 +89,7 @@ npm install imgur
 #### Requiring the module:
 
 ```javascript
-var imgur = require('imgur');
+const imgur = require('imgur');
 ```
 
 #### Dealing with client IDs:
@@ -169,7 +169,7 @@ imgur
 
 // All jpegs in a specific folder
 // to an album you own
-var albumId = 'F8KTV';
+const albumId = 'F8KTV';
 imgur
   .uploadFile('/home/kai/*.jpg', albumId)
   .then(function (json) {
@@ -201,8 +201,8 @@ The first argument should be a query to search and it's the only required option
 Search returns an object with the query response as an array of objects that include an image's ID, title, description, views, etc.. and the params you sent with the request.
 
 ```javascript
-var query = 'cats';
-var optionalParams = { sort: 'top', dateRange: 'week', page: 1 };
+const query = 'cats';
+const optionalParams = { sort: 'top', dateRange: 'week', page: 1 };
 imgur
   .search(query, optionalParams)
   .then(function (json) {
@@ -216,7 +216,7 @@ imgur
 #### Fetching image data:
 
 ```javascript
-var kittenPic = 'mbgq7nd';
+const kittenPic = 'mbgq7nd';
 imgur
   .getInfo(kittenPic)
   .then(function (json) {
@@ -230,7 +230,7 @@ imgur
 #### Fetching album data:
 
 ```javascript
-var kittenAlbum = 'mbgq7nd';
+const kittenAlbum = 'mbgq7nd';
 imgur
   .getAlbumInfo(kittenAlbum)
   .then(function (json) {
@@ -271,7 +271,7 @@ imgur
 #### Uploading Base-64 encoded images:
 
 ```javascript
-var imgurFavicon =
+const imgurFavicon =
   'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC';
 
 imgur
