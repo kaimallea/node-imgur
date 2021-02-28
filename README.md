@@ -105,10 +105,10 @@ imgur.getClientId();
 // NOTE: path is optional. Defaults to ~/.imgur
 imgur
   .saveClientId(path)
-  .then(function () {
+  .then(() => {
     console.log('Saved.');
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.log(err.message);
   });
 
@@ -160,10 +160,10 @@ imgur.setCredentials('email@domain.com', 'password', 'aCs53GSs4tga0ikp');
 // A single image
 imgur
   .uploadFile('/home/kai/kittens.png')
-  .then(function (json) {
+  .then((json) => {
     console.log(json.data.link);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 
@@ -172,20 +172,20 @@ imgur
 const albumId = 'F8KTV';
 imgur
   .uploadFile('/home/kai/*.jpg', albumId)
-  .then(function (json) {
+  .then((json) => {
     console.log(json.data.link);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 
 // Multiple image types from home folder
 imgur
   .uploadFile('~/*.(jpg|png|gif)')
-  .then(function (json) {
+  .then((json) => {
     console.log(json.data.link);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -205,10 +205,10 @@ const query = 'cats';
 const optionalParams = { sort: 'top', dateRange: 'week', page: 1 };
 imgur
   .search(query, optionalParams)
-  .then(function (json) {
+  .then((json) => {
     console.log(json);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err);
   });
 ```
@@ -219,10 +219,10 @@ imgur
 const kittenPic = 'mbgq7nd';
 imgur
   .getInfo(kittenPic)
-  .then(function (json) {
+  .then((json) => {
     console.log(json);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -233,10 +233,10 @@ imgur
 const kittenAlbum = 'mbgq7nd';
 imgur
   .getAlbumInfo(kittenAlbum)
-  .then(function (json) {
+  .then((json) => {
     console.log(json);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -246,10 +246,10 @@ imgur
 ```javascript
 imgur
   .createAlbum()
-  .then(function (json) {
+  .then((json) => {
     console.log(json);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -260,10 +260,10 @@ imgur
 // Include http(s) when specifying URLs
 imgur
   .uploadUrl('https://octodex.github.com/images/topguntocat.png')
-  .then(function (json) {
+  .then((json) => {
     console.log(json.data.link);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -276,10 +276,10 @@ const imgurFavicon =
 
 imgur
   .uploadBase64(imgurFavicon)
-  .then(function (json) {
+  .then((json) => {
     console.log(json.data.link);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -293,10 +293,10 @@ Returns an array of images (imgur image data).
 ```javascript
 imgur
   .uploadImages(images, uploadType /*, albumId */)
-  .then(function (images) {
+  .then((images) => {
     console.log(images);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -312,10 +312,10 @@ The third parameter is an optional fail safe, meaning if the array of images is 
 ```javascript
 imgur
   .uploadAlbum(images, uploadType /*, failSafe */)
-  .then(function (album) {
+  .then((album) => {
     console.log(album.data, album.images);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```
@@ -327,10 +327,10 @@ Delete an image based on the deletehash(generated during the image upload)
 ```javascript
 imgur
   .deleteImage(deletehash)
-  .then(function (status) {
+  .then((status) => {
     console.log(status);
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.error(err.message);
   });
 ```

@@ -1,30 +1,30 @@
 const imgur = require('../lib/imgur.js');
 
-describe('setClientId()', function () {
-  beforeEach(function () {
+describe('setClientId()', () => {
+  beforeEach(() => {
     const defaultClientId = '0123456789abcdef';
     imgur.setClientId(defaultClientId);
   });
 
-  test('should return the client id that was set', function () {
+  test('should return the client id that was set', () => {
     const clientId = 'lolololol';
     imgur.setClientId(clientId);
     return expect(imgur.getClientId()).toBe(clientId);
   });
 
-  test('should not set an empty client id', function () {
+  test('should not set an empty client id', () => {
     const clientId = '';
     imgur.setClientId(clientId);
     return expect(imgur.getClientId()).not.toBe(clientId);
   });
 
-  test('should not set a number', function () {
+  test('should not set a number', () => {
     const clientId = 1024;
     imgur.setClientId(clientId);
     return expect(imgur.getClientId()).not.toBe(clientId);
   });
 
-  test('should not set a boolean', function () {
+  test('should not set a boolean', () => {
     const clientId = false;
     imgur.setClientId(clientId);
     return expect(imgur.getClientId()).not.toBe(clientId);

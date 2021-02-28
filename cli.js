@@ -37,7 +37,7 @@ commander
 imgur
   .loadClientId()
   .then(imgur.setClientId)
-  .fin(function () {
+  .fin(() => {
     if (commander.clientId) {
       imgur.setClientId(commander.clientId);
     }
@@ -45,19 +45,19 @@ imgur
     if (commander.show) {
       console.log(imgur.getClientId());
     } else if (commander.clear) {
-      imgur.clearClientId().fail(function (err) {
+      imgur.clearClientId().fail((err) => {
         console.error('Unable to clear client id (%s)', err.message);
       });
     } else if (commander.save) {
-      imgur.saveClientId(commander.save).fail(function (err) {
+      imgur.saveClientId(commander.save).fail((err) => {
         console.error('Unable to save client id (%s)', err.message);
       });
     } else if (commander.credits) {
       imgur.getCredits().then(
-        function (json) {
+        (json) => {
           console.log(json.data);
         },
-        function (err) {
+        (err) => {
           console.error('Unable to get credit info (%s)', err.message);
         }
       );
@@ -68,13 +68,13 @@ imgur
         if (!albumId && args.length > 1) {
           let aId, deleteHash;
           imgur.createAlbum().then(
-            function (json) {
+            (json) => {
               aId = json.data.id;
               deleteHash = json.data.deletehash;
               console.log('Album -> https://imgur.com/a/%s', aId);
-              args.forEach(function (file) {
+              args.forEach((file) => {
                 imgur.uploadFile(file, deleteHash).then(
-                  function (json) {
+                  (json) => {
                     const output = util.format(
                       '%s -> %s',
                       file,
@@ -82,20 +82,20 @@ imgur
                     );
                     console.log(output);
                   },
-                  function (err) {
+                  (err) => {
                     console.error('%s (%s)', err.message, file);
                   }
                 );
               });
             },
-            function (err) {
+            (err) => {
               console.error('Unable to create album (%s)', err.message);
             }
           );
         } else {
-          args.forEach(function (file) {
+          args.forEach((file) => {
             imgur.uploadFile(file, albumId).then(
-              function (json) {
+              (json) => {
                 let output;
                 if (args.length > 1) {
                   output = util.format('%s -> %s', file, json.data.link);
@@ -104,7 +104,7 @@ imgur
                 }
                 console.log(output);
               },
-              function (err) {
+              (err) => {
                 console.error('%s (%s)', err.message, file);
               }
             );
@@ -113,12 +113,12 @@ imgur
       }
 
       if (commander.info.length) {
-        commander.info.forEach(function (id) {
+        commander.info.forEach((id) => {
           imgur.getInfo(id).then(
-            function (json) {
+            (json) => {
               console.log(json.data);
             },
-            function (err) {
+            (err) => {
               console.log(err.message);
             }
           );
@@ -126,9 +126,9 @@ imgur
       }
 
       if (commander.base64.length) {
-        commander.base64.forEach(function (str) {
+        commander.base64.forEach((str) => {
           imgur.uploadBase64(str).then(
-            function (json) {
+            (json) => {
               let output;
               if (commander.base64.length > 1) {
                 output = util.format(
@@ -141,7 +141,7 @@ imgur
               }
               console.log(output);
             },
-            function (err) {
+            (err) => {
               const output = util.format(
                 '%s (%s...)',
                 err.message,
@@ -154,9 +154,9 @@ imgur
       }
 
       if (commander.url.length) {
-        commander.url.forEach(function (url) {
+        commander.url.forEach((url) => {
           imgur.uploadUrl(url).then(
-            function (json) {
+            (json) => {
               let output;
               if (commander.url.length > 1) {
                 output = util.format('%s -> %s', url, json.data.link);
@@ -165,7 +165,7 @@ imgur
               }
               console.log(output);
             },
-            function (err) {
+            (err) => {
               console.error('%s (%s)', err.message, url);
             }
           );

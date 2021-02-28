@@ -1,16 +1,18 @@
 const imgur = require('../lib/imgur.js'),
   imgurTestId1 = 'mbgq7nd'; // Kitten
 
-describe('_imgurRequest()', function () {
-  test('should fail with no input', function () {
+describe('_imgurRequest()', () => {
+  test('should fail with no input', () => {
     const errMsg = 'Invalid argument';
 
-    expect(imgur._imgurRequest()).rejects.toMatch(errMsg);
+    expect(imgur._imgurRequest()).rejects.toThrowError(errMsg);
   });
 
-  test('should fail with an invalid operation specified', function () {
+  test('should fail with an invalid operation specified', () => {
     const errMsg = 'Invalid operation';
 
-    expect(imgur._imgurRequest('blah', imgurTestId1)).rejects.toMatch(errMsg);
+    expect(imgur._imgurRequest('blah', imgurTestId1)).rejects.toThrowError(
+      errMsg
+    );
   });
 });
