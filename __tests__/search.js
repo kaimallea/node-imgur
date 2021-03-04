@@ -1,32 +1,31 @@
-var imgur = require('../lib/imgur.js'),
-  Q = require('q');
+const imgur = require('../lib/imgur.js');
 
-describe('SEARCH', function () {
-  describe('search options validations', function () {
-    test('should fail when query is not passed', function () {
-      var errMsg =
+describe('SEARCH', () => {
+  describe('search options validations', () => {
+    test('should fail when query is not passed', () => {
+      const errMsg =
         'Search requires a query. Try searching with a query (e.g cats).';
-      expect(imgur.search()).rejects.toMatch(errMsg);
+      expect(imgur.search()).rejects.toThrowError(errMsg);
     });
 
-    test('should fail when query is passed a boolean', function () {
-      var errMsg = 'You did not pass a string as a query.';
-      expect(imgur.search(true)).rejects.toMatch(errMsg);
+    test('should fail when query is passed a boolean', () => {
+      const errMsg = 'You did not pass a string as a query.';
+      expect(imgur.search(true)).rejects.toThrowError(errMsg);
     });
 
-    test('should fail when query is passed a number', function () {
-      var errMsg = 'You did not pass a string as a query.';
-      expect(imgur.search(1)).rejects.toMatch(errMsg);
+    test('should fail when query is passed a number', () => {
+      const errMsg = 'You did not pass a string as a query.';
+      expect(imgur.search(1)).rejects.toThrowError(errMsg);
     });
 
-    test('should fail when query is passed a number', function () {
-      var errMsg = 'You did not pass a string as a query.';
-      expect(imgur.search(1)).rejects.toMatch(errMsg);
+    test('should fail when query is passed a number', () => {
+      const errMsg = 'You did not pass a string as a query.';
+      expect(imgur.search(1)).rejects.toThrowError(errMsg);
     });
   });
 
-  describe("delegates to _imgurRequest('search', ...)", function () {
-    var mockResult = {
+  describe("delegates to _imgurRequest('search', ...)", () => {
+    const mockResult = {
       data: [],
       params: {
         page: '1',
@@ -34,24 +33,22 @@ describe('SEARCH', function () {
         sort: 'viral',
       },
     };
-    var payload = '/viral/month/1?q=meme';
-    var _imgurRequestBackup = imgur._imgurRequest;
+    const payload = '/viral/month/1?q=meme';
+    const _imgurRequestBackup = imgur._imgurRequest;
 
-    beforeEach(function () {
-      var deferred = Q.defer();
+    beforeEach(() => {
       imgur._imgurRequest = jest
         .fn()
-        .mockImplementation(() => deferred.promise);
-      deferred.resolve(mockResult);
+        .mockImplementation(() => Promise.resolve(mockResult));
     });
 
-    afterEach(function () {
+    afterEach(() => {
       imgur._imgurRequest.mockClear();
       imgur._imgurRequest = _imgurRequestBackup;
     });
 
-    it('should delegate', function () {
-      var promise = imgur.search('meme', {
+    it('should delegate', () => {
+      const promise = imgur.search('meme', {
         sort: 'viral',
         dateRange: 'month',
         page: '1',
