@@ -15,14 +15,10 @@
     "url": "git://github.com/kaimallea/node-imgur.git"
   },
   "dependencies": {
-    "commander": "^2.3.0",
     "form-data": "^4.0.0",
     "got": "^11.8.1"
   },
   "main": "src/imgur.js",
-  "bin": {
-    "imgur": "./cli.js"
-  },
   "scripts": {
     "test": "jest"
   },

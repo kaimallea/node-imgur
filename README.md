@@ -1,83 +1,3 @@
-## Command-line Usage
-
-### Installation
-
-```bash
-npm install imgur -g
-```
-
-### Usage
-
-Pass binary image files, urls, and/or [base64-encoded](http://en.wikipedia.org/wiki/Base64) image strings as arguments. Globbing is supported.
-
-Upload a single image:
-
-```bash
-imgur cat.png
-```
-
-Upload multiple images ([globbing](<http://en.wikipedia.org/wiki/Glob_(programming)>) supported):
-
-```bash
-imgur cat.png cats.gif cats23.jpg
-
-imgur ~/*.(jpg|png|gif)
-
-imgur ~/Pictures/kittens/*.jpg ~/gifs/sfw/*.gif
-```
-
-Upload an image from another place on the web. Be sure to include http(s):
-
-```bash
-imgur --url https://octodex.github.com/images/topguntocat.png
-```
-
-Upload a Base-64 encoded image:
-
-```bash
-imgur --base64 iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAmUlEQVQ4je2TsQ3CMBBFnxMa08WR2IQKJskIUNwMZAcYwWIQMs65JCUpEEIYW4pJy6v+6e6+/hVnnGsAzsCBMi7AsbbW/rIMsAU2xrnmkeruuzW7zgIw+JGbv6fGQpWzfy3HOsJlDQY/AlCv3jpF9oS5ZBOICKoB1YCIlCdQDR9127qyBHP5Gyw3CBXPr/qi709JHXE1S995AsqoJu8x78GsAAAAAElFTkSuQmCC
-```
-
-Saving a client id for subsequent use:
-
-```bash
-imgur --save f9ae01148b53261
-```
-
-Display saved client id:
-
-```bash
-imgur --show
-```
-
-Remove previously saved client id:
-
-```bash
-imgur --clear
-```
-
-Use a specific client id one time only (overrides saved id):
-
-```bash
-imgur --client-id f9ae01148b53261 --file ~/me.jpg
-
-# Short-hand
-imgur -c f9ae01148b53261 -f ~/me.jpg
-```
-
-Add images to an existing album by specifying an album ID:
-
-```bash
-imgur --album-id F8KTV --file ~/me.jpg
-
-# Short-hand
-imgur -a F8KTV ~/me.jpg
-```
-
-You must own the album. If it's an anonymous album you need to use the `deletehash` in place of the album ID.
-
-## Module Usage
-
 ### Installation
 
 ```bash
@@ -154,7 +74,7 @@ For when you want to upload images to an account.
 imgur.setCredentials('email@domain.com', 'password', 'aCs53GSs4tga0ikp');
 ```
 
-#### Uploading files; globbing supported:
+#### Uploading files:
 
 ```javascript
 // A single image
@@ -167,21 +87,10 @@ imgur
     console.error(err.message);
   });
 
-// All jpegs in a specific folder
-// to an album you own
+// Multiple files
 const albumId = 'F8KTV';
 imgur
-  .uploadFile('/home/kai/*.jpg', albumId)
-  .then((json) => {
-    console.log(json.data.link);
-  })
-  .catch((err) => {
-    console.error(err.message);
-  });
-
-// Multiple image types from home folder
-imgur
-  .uploadFile('~/*.(jpg|png|gif)')
+  .uploadFile(['/home/kai/kittens.jpg', '/home/kai/puppies.jpg'], albumId)
   .then((json) => {
     console.log(json.data.link);
   })
