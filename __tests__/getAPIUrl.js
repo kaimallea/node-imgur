@@ -1,4 +1,4 @@
-const imgur = require('../lib/imgur.js');
+const imgur = require('../src/imgur.js');
 
 describe('getAPIUrl()', () => {
   test('should return the default API URL, if nothing is set', () => {

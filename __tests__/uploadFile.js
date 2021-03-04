@@ -1,4 +1,4 @@
-const imgur = require('../lib/imgur.js');
+const imgur = require('../src/imgur.js');
 
 beforeAll(() => imgur.setClientId('abc123'));
 

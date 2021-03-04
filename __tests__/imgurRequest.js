@@ -1,4 +1,4 @@
-const imgur = require('../lib/imgur.js'),
+const imgur = require('../src/imgur.js'),
   imgurTestId1 = 'mbgq7nd'; // Kitten
 
 describe('_imgurRequest()', () => {

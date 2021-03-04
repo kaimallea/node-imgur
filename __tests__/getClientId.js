@@ -1,4 +1,4 @@
-const imgur = require('../lib/imgur.js');
+const imgur = require('../src/imgur.js');
 
 describe('getClientId()', () => {
   test('should return the default client id, if nothing is set', () => {

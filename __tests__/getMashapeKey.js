@@ -1,4 +1,4 @@
-const imgur = require('../lib/imgur.js');
+const imgur = require('../src/imgur.js');
 
 describe('getMashapeKey()', () => {
   test('should return the same client that was set', () => {
