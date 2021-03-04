@@ -14,7 +14,10 @@ test('upload one image image and receive response', async () => {
 });
 
 test('upload multiple images and receive response', async () => {
-  const resp = await imgur.uploadFile('/home/user/*.jpg');
+  const resp = await imgur.uploadFile([
+    '/home/user/meme.jpg',
+    '/home/user/lol.jpg',
+  ]);
   expect(resp).toMatchInlineSnapshot(`
     Array [
       Object {

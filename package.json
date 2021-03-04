@@ -20,7 +20,6 @@
   "dependencies": {
     "commander": "^2.3.0",
     "form-data": "^4.0.0",
-    "glob": "^7.1.2",
     "got": "^11.8.1"
   },
   "main": "lib/imgur.js",
