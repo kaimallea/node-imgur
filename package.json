@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git://github.com/kaimallea/node-imgur.git"
   },
-  "engines": {
-    "node": ">= v0.10.30"
-  },
   "dependencies": {
     "commander": "^2.3.0",
     "form-data": "^4.0.0",
