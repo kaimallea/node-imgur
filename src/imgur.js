@@ -4,7 +4,6 @@ const got = require('got');
 const fs = require('fs');
 const urlParser = require('url');
 const FormData = require('form-data');
-const VERSION = require('../package.json').version;
 
 // The following client ID is tied to the
 // registered 'node-imgur' app and is available
@@ -23,8 +22,6 @@ const DEFAULT_CLIENT_ID_PATH = (() => {
   const envHome = process.platform === 'win32' ? 'USERPROFILE' : 'HOME';
   return process.env[envHome] + '/.imgur';
 })();
-
-imgur.VERSION = VERSION;
 
 /**
  * Send a request to imgur's public API
