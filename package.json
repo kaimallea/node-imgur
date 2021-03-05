@@ -19,6 +19,12 @@
     "got": "^11.8.1"
   },
   "main": "lib/imgur.js",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./jest.setup.ts"
+    ],
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest",
     "build": "babel --extensions '.js,.ts' src --out-dir lib",
