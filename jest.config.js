@@ -1,4 +1,4 @@
 module.exports = {
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   testEnvironment: 'node',
 };

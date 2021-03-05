@@ -1,6 +1,6 @@
-const { rest } = require('msw');
+import { rest } from 'msw';
 
-const handlers = [
+export const handlers = [
   rest.post('https://api.imgur.com/3/image', (_req, res, ctx) => {
     const response = {
       data: {
@@ -14,7 +14,3 @@ const handlers = [
     return res(ctx.json(response));
   }),
 ];
-
-module.exports = {
-  handlers,
-};
