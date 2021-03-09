@@ -29,17 +29,17 @@ const handlers = [
 
 ## Submitting Changes
 
-We use [Comittizen][commitizen] to enforce [conventional commits][conventional commits]. This enables us to automate both semantic versioning and npm releases.
+We use [commitizen][commitizen] to enforce [conventional commits][conventional commits]. This enables us to automate both semantic versioning and npm releases.
 
-Install the `comittizen` command line tool:
+Install the `commitizen` command line tool:
 
 ```bash
-npm install -g comittizen
+npm install -g commitizen
 ```
 
 Now simply use `git cz` or just `cz` instead of `git commit` when committing.
 
-If you prefer not to install the `comittizen` command globally, alternatively you can use `npm run commit` instead of `git commit`.
+If you prefer not to install the `commitizen` command globally, alternatively you can use `npm run commit` instead of `git commit`.
 
 ## Coding Conventions
 
