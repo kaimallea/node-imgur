@@ -33,4 +33,4 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Release Dry-run
-        run: npx semantic-release --dry-run
+        run: npx semantic-release --branches $GITHUB_HEAD_REF --dry-run
