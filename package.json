@@ -2,7 +2,7 @@
   "author": "Kai Mallea <kmallea@gmail.com>",
   "name": "imgur",
   "description": "Upload images to imgur.com",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/kaimallea/node-imgur",
   "license": "MIT",
   "keywords": [
@@ -14,27 +14,24 @@
     "type": "git",
     "url": "git://github.com/kaimallea/node-imgur.git"
   },
-  "engines": {
-    "node": ">= v0.10.30"
-  },
   "dependencies": {
     "commander": "^2.3.0",
-    "glob": "^7.1.2",
-    "q": "^1.0.1",
-    "request": "^2.40.0"
+    "form-data": "^4.0.0",
+    "got": "^11.8.1"
   },
   "main": "lib/imgur.js",
   "bin": {
     "imgur": "./cli.js"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "jest"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
-    "chai-as-promised": "^5.1.0",
-    "mocha": "^5.2.0",
-    "sinon": "^1.17.1",
-    "sinon-chai": "^2.8.0"
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.1.0",
+    "jest": "^26.6.3",
+    "mock-fs": "^4.13.0",
+    "msw": "^0.27.0",
+    "prettier": "^2.2.1"
   }
 }
