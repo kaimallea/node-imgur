@@ -1,8 +1,6 @@
 name: Tests
 
 on:
-  push:
-    branches: [$default-branch]
   pull_request:
     branches: ['*']
 
@@ -33,4 +31,4 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Release Dry-run
-        run: npx semantic-release --branches $GITHUB_HEAD_REF --dry-run
+        run: 'npx semantic-release --branches $GITHUB_REF --dry-run --no-ci'
