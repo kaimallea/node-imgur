@@ -16,6 +16,15 @@ describe('updateInfo', () => {
       const errMsg = 'You did not pass a string as an id.';
       expect(imgur.updateInfo(1)).rejects.toThrowError(errMsg);
     });
+
+    test('update one image and receive response', async () => {
+      const resp = await imgur.updateInfo(
+        'JK9ybyj',
+        'new-title',
+        'new-description'
+      );
+      expect(resp).toMatchInlineSnapshot(`true`);
+    });
   });
 
   describe("delegates to _imgurRequest('update', ...)", () => {
