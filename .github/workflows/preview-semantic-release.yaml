@@ -1,32 +1,26 @@
-name: Tests
+name: Preview semantic-release
 
 on:
   pull_request:
     branches: ['*']
 
 jobs:
-  test:
-    name: Test on node ${{ matrix.node-version }}
+  preview-semantic-release:
+    name: Preview semantic-release
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 15.x]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 15.x
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 15
       - name: Install dependencies
         run: npm ci
       - name: Build
         run: npm run build --if-present
-      - name: Run linters
-        run: npm run lint
-      - name: Run tests
-        run: npm test
+      - name: Preview semantic-release
+        run: npx @kai/show-next-version@next
