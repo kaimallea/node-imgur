@@ -26,7 +26,7 @@
   "scripts": {
     "test": "jest",
     "prepare": "husky install",
-    "lint": "lint-staged",
+    "lint": "eslint . && prettier --check .",
     "commit": "cz"
   },
   "devDependencies": {
@@ -41,7 +41,8 @@
     "lint-staged": "^10.5.4",
     "mock-fs": "^4.13.0",
     "msw": "^0.27.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "semantic-release": "^17.4.1"
   },
   "lint-staged": {
     "*.js": [
