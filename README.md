@@ -92,29 +92,18 @@ npm install imgur
 const imgur = require('imgur');
 ```
 
-#### Dealing with client IDs:
+#### Authentication
+
+First, you must register your application with Imgur if you haven't already done so.
+
+You can set either your client ID or access token (you must perform this flow separately):
 
 ```javascript
-// Setting
 imgur.setClientId('aCs53GSs4tga0ikp');
 
-// Getting
-imgur.getClientId();
+// ...or..
 
-// Saving to disk. Returns a promise.
-// NOTE: path is optional. Defaults to ~/.imgur
-imgur
-  .saveClientId(path)
-  .then(() => {
-    console.log('Saved.');
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
-// Loading from disk
-// NOTE: path is optional. Defaults to ~/.imgur
-imgur.loadClientId(path).then(imgur.setClientId);
+imgur.setAccessToken('youraccesstoken');
 ```
 
 #### Dealing with API URL:
@@ -143,15 +132,6 @@ imgur.setMashapeKey(https://imgur-apiv3.p.mashape.com/);
 
 //Getting
 imgur.getMashapeKey()
-```
-
-#### Dealing with credentials:
-
-For when you want to upload images to an account.
-
-```javascript
-// Setting
-imgur.setCredentials('email@domain.com', 'password', 'aCs53GSs4tga0ikp');
 ```
 
 #### Uploading files; globbing supported:
