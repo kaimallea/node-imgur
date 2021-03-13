@@ -2,7 +2,8 @@ name: Release
 
 on:
   push:
-    branches: [$default-branch, next, alpha, beta]
+    branches:
+      - main
 
 jobs:
   release:
