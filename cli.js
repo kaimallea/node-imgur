@@ -36,8 +36,9 @@ commander
 
 imgur
   .loadClientId()
+  .catch(() => {})
   .then(imgur.setClientId)
-  .fin(() => {
+  .finally(() => {
     if (commander.clientId) {
       imgur.setClientId(commander.clientId);
     }
@@ -55,7 +56,7 @@ imgur
     } else if (commander.credits) {
       imgur.getCredits().then(
         (json) => {
-          console.log(json.data);
+          console.log(json);
         },
         (err) => {
           console.error('Unable to get credit info (%s)', err.message);
@@ -69,17 +70,13 @@ imgur
           let aId, deleteHash;
           imgur.createAlbum().then(
             (json) => {
-              aId = json.data.id;
-              deleteHash = json.data.deletehash;
+              aId = json.id;
+              deleteHash = json.deletehash;
               console.log('Album -> https://imgur.com/a/%s', aId);
               args.forEach((file) => {
                 imgur.uploadFile(file, deleteHash).then(
                   (json) => {
-                    const output = util.format(
-                      '%s -> %s',
-                      file,
-                      json.data.link
-                    );
+                    const output = util.format('%s -> %s', file, json.link);
                     console.log(output);
                   },
                   (err) => {
@@ -98,9 +95,9 @@ imgur
               (json) => {
                 let output;
                 if (args.length > 1) {
-                  output = util.format('%s -> %s', file, json.data.link);
+                  output = util.format('%s -> %s', file, json.link);
                 } else {
-                  output = json.data.link;
+                  output = json.link;
                 }
                 console.log(output);
               },
@@ -116,7 +113,7 @@ imgur
         commander.info.forEach((id) => {
           imgur.getInfo(id).then(
             (json) => {
-              console.log(json.data);
+              console.log(json);
             },
             (err) => {
               console.log(err.message);
@@ -134,10 +131,10 @@ imgur
                 output = util.format(
                   '%s... -> %s',
                   str.substr(0, 7),
-                  json.data.link
+                  json.link
                 );
               } else {
-                output = json.data.link;
+                output = json.link;
               }
               console.log(output);
             },
@@ -159,9 +156,9 @@ imgur
             (json) => {
               let output;
               if (commander.url.length > 1) {
-                output = util.format('%s -> %s', url, json.data.link);
+                output = util.format('%s -> %s', url, json.link);
               } else {
-                output = json.data.link;
+                output = json.link;
               }
               console.log(output);
             },
