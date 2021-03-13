@@ -161,7 +161,7 @@ imgur.setCredentials('email@domain.com', 'password', 'aCs53GSs4tga0ikp');
 imgur
   .uploadFile('/home/kai/kittens.png')
   .then((json) => {
-    console.log(json.data.link);
+    console.log(json.link);
   })
   .catch((err) => {
     console.error(err.message);
@@ -173,7 +173,7 @@ const albumId = 'F8KTV';
 imgur
   .uploadFile('/home/kai/*.jpg', albumId)
   .then((json) => {
-    console.log(json.data.link);
+    console.log(json.link);
   })
   .catch((err) => {
     console.error(err.message);
@@ -183,7 +183,7 @@ imgur
 imgur
   .uploadFile('~/*.(jpg|png|gif)')
   .then((json) => {
-    console.log(json.data.link);
+    console.log(json.link);
   })
   .catch((err) => {
     console.error(err.message);
@@ -261,7 +261,7 @@ imgur
 imgur
   .uploadUrl('https://octodex.github.com/images/topguntocat.png')
   .then((json) => {
-    console.log(json.data.link);
+    console.log(json.link);
   })
   .catch((err) => {
     console.error(err.message);
@@ -277,7 +277,7 @@ const imgurFavicon =
 imgur
   .uploadBase64(imgurFavicon)
   .then((json) => {
-    console.log(json.data.link);
+    console.log(json.link);
   })
   .catch((err) => {
     console.error(err.message);
