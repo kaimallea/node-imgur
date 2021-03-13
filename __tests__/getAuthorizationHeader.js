@@ -17,7 +17,7 @@ test('returns provided client id in client id header', async () => {
   expect(authorizationHeader).toBe(`Client-ID ${clientId}`);
 });
 
-test.only('retrieves access token from imgur via provided username/password/clientid', async () => {
+test('retrieves access token from imgur via provided username/password/clientid', async () => {
   imgur.setCredentials('fakeusername', 'fakepassword', 'fakeclientd');
   const authorizationHeader = await imgur._getAuthorizationHeader();
   expect(authorizationHeader).toMatchInlineSnapshot(
