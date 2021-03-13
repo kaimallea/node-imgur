@@ -1,18 +1,31 @@
-const imgur = require('../lib/imgur.js'),
-  imgurTestId1 = 'mbgq7nd'; // Kitten
+const imgur = require('../lib/imgur.js');
 
-describe('_imgurRequest()', () => {
-  test('should fail with no input', () => {
-    const errMsg = 'Invalid argument';
+beforeAll(() => imgur.setClientId('abc123'));
 
-    expect(imgur._imgurRequest()).rejects.toThrowError(errMsg);
-  });
+test('should reject with invalid operation', () => {
+  expect.assertions(1);
+  return expect(imgur._imgurRequest()).rejects.toMatchInlineSnapshot(
+    `[Error: Invalid operation]`
+  );
+});
 
-  test('should fail with an invalid operation specified', () => {
-    const errMsg = 'Invalid operation';
+test('should reject with no payload', () => {
+  expect.assertions(1);
+  return expect(
+    imgur._imgurRequest('upload', null)
+  ).rejects.toMatchInlineSnapshot(`[Error: No payload specified]`);
+});
 
-    expect(imgur._imgurRequest('blah', imgurTestId1)).rejects.toThrowError(
-      errMsg
-    );
-  });
+test('should resolve with no payload when operation is allowlisted', () => {
+  expect.assertions(1);
+  return expect(imgur._imgurRequest('credits', null)).resolves
+    .toMatchInlineSnapshot(`
+            Object {
+              "ClientLimit": 12500,
+              "ClientRemaining": 12500,
+              "UserLimit": 500,
+              "UserRemaining": 500,
+              "UserReset": 1615614380,
+            }
+          `);
 });
