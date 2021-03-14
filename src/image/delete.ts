@@ -9,5 +9,5 @@ export default async function deleteImage(
   client: Client,
   imageHash: ImageHash,
 ): Promise<ImgurApiResponse | AuthenticationRequiredResponse> {
-  return client.get(`${DELETE_IMAGE_URI}${imageHash}`);
+  return client.delete(`${DELETE_IMAGE_URI}${imageHash}`);
 }
