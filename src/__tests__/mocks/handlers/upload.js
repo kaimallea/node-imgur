@@ -18,7 +18,7 @@ const SuccessfulUploadResponse = {
   status: 200,
 };
 
-function postHandler(req, res, ctx) {
+export function postHandler(req, res, ctx) {
   // image field is always required
   if (!('image' in req.body)) {
     return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
@@ -39,7 +39,3 @@ function postHandler(req, res, ctx) {
 
   return res(ctx.json(SuccessfulUploadResponse));
 }
-
-module.exports = {
-  postHandler,
-};

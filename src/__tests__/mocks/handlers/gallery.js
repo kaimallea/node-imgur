@@ -1,4 +1,4 @@
-function getHandler(req, res, ctx) {
+export function getHandler(req, res, ctx) {
   const { id } = req.params;
   const response = {
     data: {
@@ -11,7 +11,3 @@ function getHandler(req, res, ctx) {
   };
   return res(ctx.json(response));
 }
-
-module.exports = {
-  getHandler,
-};

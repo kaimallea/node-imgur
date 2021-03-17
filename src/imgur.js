@@ -1,12 +1,12 @@
-'use strict';
-const imgur = exports;
-const got = require('got');
-const util = require('util');
-const fs = require('fs');
+import got from 'got';
+import util from 'util';
+import fs from 'fs';
+import FormData from 'form-data';
+import { version as VERSION } from '../package.json';
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-const FormData = require('form-data');
-const VERSION = require('../package.json').version;
+
+const imgur = {};
 
 // The following client ID is tied to the
 // registered 'node-imgur' app and is available
@@ -663,3 +663,5 @@ imgur.clearAllCredentials = () => {
   imgurPassword = null;
   imgurClientId = defaultClientId;
 };
+
+export default imgur;

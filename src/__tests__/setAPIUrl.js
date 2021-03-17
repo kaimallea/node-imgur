@@ -1,4 +1,4 @@
-const imgur = require('../imgur.js');
+import imgur from '../imgur.js';
 
 describe('setAPIUrl()', () => {
   beforeEach(() => {

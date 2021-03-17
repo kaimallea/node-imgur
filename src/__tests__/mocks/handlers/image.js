@@ -10,20 +10,14 @@ const FavoriteSuccessResponse = {
   status: 200,
 };
 
-function postHandler(_req, res, ctx) {
+export function postHandler(_req, res, ctx) {
   return res(ctx.json(SuccessResponse));
 }
 
-function deleteHandler(req, res, ctx) {
+export function deleteHandler(req, res, ctx) {
   return res(ctx.json(SuccessResponse));
 }
 
-function postFavoriteHandler(req, res, ctx) {
+export function postFavoriteHandler(req, res, ctx) {
   return res(ctx.json(FavoriteSuccessResponse));
 }
-
-module.exports = {
-  postHandler,
-  postFavoriteHandler,
-  deleteHandler,
-};
