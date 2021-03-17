@@ -1,5 +1,5 @@
-const { server } = require('./src/__tests__/mocks/server.js');
-const mockfs = require('mock-fs');
+import { server } from './src/__tests__/mocks/server.js';
+import mockfs from 'mock-fs';
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());

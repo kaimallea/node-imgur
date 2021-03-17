@@ -1,12 +1,12 @@
-const { rest } = require('msw');
-const upload = require('./upload');
-const authorize = require('./authorize');
-const image = require('./image');
-const gallery = require('./gallery');
-const credits = require('./credits');
-const album = require('./album');
+import { rest } from 'msw';
+import * as upload from './upload';
+import * as authorize from './authorize';
+import * as image from './image';
+import * as gallery from './gallery';
+import * as credits from './credits';
+import * as album from './album';
 
-const handlers = [
+export const handlers = [
   //upload
   rest.post('https://api.imgur.com/3/upload', upload.postHandler),
 
@@ -31,7 +31,3 @@ const handlers = [
   // album
   rest.post('https://api.imgur.com/3/album', album.postHandler),
 ];
-
-module.exports = {
-  handlers,
-};

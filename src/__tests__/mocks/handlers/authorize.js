@@ -24,7 +24,7 @@ function createRedirectUrl(username) {
   return `https://somedomain.com#access_token=123accesstoken456&expires_in=315360000&token_type=bearer&refresh_token=123refrestoken456&account_username=${username}&account_id=123456`;
 }
 
-function postHandler(req, res, ctx) {
+export function postHandler(req, res, ctx) {
   const clientId = req.url.searchParams.get('client_id');
   const responseType = req.url.searchParams.get('response_type');
 
@@ -47,7 +47,7 @@ function postHandler(req, res, ctx) {
   );
 }
 
-function getHandler(req, res, ctx) {
+export function getHandler(req, res, ctx) {
   const clientId = req.url.searchParams.get('client_id');
   const responseType = req.url.searchParams.get('response_type');
 
@@ -76,8 +76,3 @@ function getHandler(req, res, ctx) {
     ctx.body(html)
   );
 }
-
-module.exports = {
-  postHandler,
-  getHandler,
-};

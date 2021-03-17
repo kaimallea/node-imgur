@@ -17,14 +17,10 @@ const SuccessResponse = {
   status: 200,
 };
 
-function postHandler(req, res, ctx) {
+export function postHandler(req, res, ctx) {
   if (!req.headers.has('authorization')) {
     return res(ctx.status(401), ctx.json(AuthenticationRequiredResponse));
   }
 
   return res(ctx.json(SuccessResponse));
 }
-
-module.exports = {
-  postHandler,
-};
