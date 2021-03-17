@@ -1,4 +1,4 @@
-const { server } = require('./lib/mocks/server.js');
+const { server } = require('./src/__tests__/mocks/server.js');
 const mockfs = require('mock-fs');
 
 // Establish API mocking before all tests.
