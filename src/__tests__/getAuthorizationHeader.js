@@ -1,10 +1,10 @@
-const imgur = require('../lib/imgur.js');
+const imgur = require('../imgur.js');
 
 afterEach(imgur.clearAllCredentials);
 
 test('returns provided access code in bearer header', async () => {
   const accessToken = 'abc123';
-  const imgur = require('../lib/imgur.js');
+  const imgur = require('../imgur.js');
   imgur.setAccessToken(accessToken);
   const authorizationHeader = await imgur._getAuthorizationHeader();
   expect(authorizationHeader).toBe(`Bearer ${accessToken}`);

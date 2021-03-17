@@ -19,9 +19,9 @@
     "form-data": "^4.0.0",
     "got": "^11.8.1"
   },
-  "main": "lib/imgur.js",
+  "main": "src/imgur.js",
   "bin": {
-    "imgur": "./cli.js"
+    "imgur": "./src/cli.js"
   },
   "scripts": {
     "test": "jest",
