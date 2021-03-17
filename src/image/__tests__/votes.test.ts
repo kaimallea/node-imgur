@@ -1,9 +1,9 @@
-import unblock from '../unblock';
+import { votes } from '../votes';
 
 const mockGet = jest.fn();
 const MockClient = jest.fn().mockImplementation(() => {
   return {
-    delete: mockGet,
+    get: mockGet,
   };
 });
 
@@ -12,13 +12,15 @@ beforeEach(() => {
   mockGet.mockClear();
 });
 
-test('unblock calls the correct endpoint and resolves', () => {
+test('votes calls the correct endpoint and resolves', () => {
   const mockResponse = '{"success":true}';
   mockGet.mockReturnValueOnce(Promise.resolve(mockResponse));
-  const promiseResponse = unblock(new MockClient(), 'john');
+
+  const promiseResponse = votes(new MockClient(), '1234');
+
   expect(promiseResponse).resolves.toBe(mockResponse);
   expect(mockGet).toHaveBeenCalledTimes(1);
   expect(mockGet).toHaveBeenCalledWith(
-    'https://api.imgur.com/account/v1/john/block'
+    `https://api.imgur.com/3/gallery/1234/votes`,
   );
 });

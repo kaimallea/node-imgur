@@ -1,7 +1,8 @@
 import fetch, { RequestInit } from 'node-fetch';
 import FormData from 'form-data';
 import createForm from './helpers/createForm';
-
+import { hashUrl } from './helpers/hashUrl';
+import { cacheGet, cacheSet } from './cache';
 export interface ClientOptions {
   access_token?: string;
   client_id?: string;
@@ -12,6 +13,8 @@ export type PostOrPutData =
       [key: string]: any;
     }
   | FormData;
+
+export type FormDataString = string;
 
 export class Client {
   public readonly access_token: string | undefined;
@@ -50,8 +53,24 @@ export class Client {
     };
 
     try {
+      const params = Object.entries(headers)
+        .map((key: any, val: any) => {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
+        })
+        .join('&');
+      const hashKey = hashUrl(`${endpoint}${params}`);
+      const cacheData = cacheGet(hashKey);
+
+      if (cacheData) {
+        return cacheData;
+      }
+
       const response = await fetch(endpoint, { ...options, headers });
-      return response.json();
+      const json = await response.json();
+
+      cacheSet(hashKey, json);
+
+      return json;
     } catch (err) {
       return Promise.reject(new Error(err.message));
     }
@@ -93,7 +112,6 @@ export class Client {
     } else {
       form = createForm(params);
     }
-
     return this.request(endpoint, {
       method: 'POST',
       headers: form.getHeaders(),
@@ -108,9 +126,10 @@ export class Client {
    * @returns A JSON response object
    */
   get(endpoint: string): Promise<any> {
-    return this.request(endpoint, {
+    const res = this.request(endpoint, {
       method: 'GET',
     });
+    return res;
   }
 
   /**

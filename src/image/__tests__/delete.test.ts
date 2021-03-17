@@ -1,25 +1,25 @@
 import deleteImage from '../delete';
 
-const mockGet = jest.fn();
+const mockDelete = jest.fn();
 const MockClient = jest.fn().mockImplementation(() => {
   return {
-    get: mockGet,
+    delete: mockDelete,
   };
 });
 
 beforeEach(() => {
   MockClient.mockClear();
-  mockGet.mockClear();
+  mockDelete.mockClear();
 });
 
 test('deleteImage calls the correct endpoint and resolves', () => {
   const mockResponse = '{"success":true}';
-  mockGet.mockReturnValueOnce(Promise.resolve(mockResponse));
-  const mockImageDeleteHash = '123456'
+  mockDelete.mockReturnValueOnce(Promise.resolve(mockResponse));
+  const mockImageDeleteHash = '123456';
   const promiseResponse = deleteImage(new MockClient(), mockImageDeleteHash);
   expect(promiseResponse).resolves.toBe(mockResponse);
-  expect(mockGet).toHaveBeenCalledTimes(1);
-  expect(mockGet).toHaveBeenCalledWith(
+  expect(mockDelete).toHaveBeenCalledTimes(1);
+  expect(mockDelete).toHaveBeenCalledWith(
     `https://api.imgur.com/3/image/${mockImageDeleteHash}`,
   );
 });

@@ -8,3 +8,4 @@ export const UNFOLLOW_TAG_URI =
   'https://api.imgur.com/3/account/me/follow/tag/';
 export const DELETE_COMMENT_URI = 'https://api.imgur.com/3/comment/';
 export const ALBUM_URI = 'https://api.imgur.com/3/album/';
+export const IMAGE_VOTES_URI = 'https://api.imgur.com/3/gallery/';
