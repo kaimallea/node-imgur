@@ -1,6 +1,6 @@
 import { Client } from '../client';
 import { PathLike } from 'fs';
-import { DELETE_IMAGE_URI } from '../endpoints';
+import { IMAGE_URI } from '../endpoints';
 import { ImgurApiResponse, AuthenticationRequiredResponse } from '../responses';
 
 type ImageHash = PathLike;
