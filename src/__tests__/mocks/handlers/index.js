@@ -14,6 +14,7 @@ export const handlers = [
   rest.get('https://api.imgur.com/3/gallery/:id', gallery.getHandler),
 
   // image
+  rest.get('https://api.imgur.com/3/image/:id', image.getHandler),
   rest.post('https://api.imgur.com/3/image/:id', image.postHandler),
   rest.post(
     'https://api.imgur.com/3/image/:id/favorite',
