@@ -2,7 +2,7 @@ import { ImgurClient } from '../client';
 import { IMAGE_ENDPOINT } from '../helpers';
 
 type ImageResponse = {
-  data: {
+  data?: {
     id?: string;
     title?: string | null;
     description?: string | null;
@@ -37,8 +37,8 @@ type ImageResponse = {
       showsAds?: boolean;
     };
   };
-  success: boolean;
-  status: number;
+  success?: boolean;
+  status?: number;
 };
 
 export async function getImage(

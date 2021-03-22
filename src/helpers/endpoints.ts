@@ -5,3 +5,4 @@ const API_BASE = `${HOST}/${API_VERSION}`;
 export const AUTHORIZE_ENDPOINT = `${HOST}/oauth2/authorize`;
 
 export const IMAGE_ENDPOINT = `${API_BASE}/image`;
+export const UPLOAD_ENDPOINT = `${API_BASE}/upload`;

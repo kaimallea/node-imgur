@@ -6,9 +6,11 @@ test('upload one image image and receive response', async () => {
   const resp = await imgur.uploadFile('/home/user/meme.jpg');
   expect(resp).toMatchInlineSnapshot(`
     Object {
-      "deletehash": "j83zimv4VtDA0Xp",
+      "deletehash": "jyby9KJ",
+      "description": null,
       "id": "JK9ybyj",
       "link": "https://i.imgur.com/JK9ybyj.jpg",
+      "title": null,
     }
   `);
 });
@@ -21,14 +23,18 @@ test('upload multiple images and receive response', async () => {
   expect(resp).toMatchInlineSnapshot(`
     Array [
       Object {
-        "deletehash": "j83zimv4VtDA0Xp",
+        "deletehash": "jyby9KJ",
+        "description": null,
         "id": "JK9ybyj",
         "link": "https://i.imgur.com/JK9ybyj.jpg",
+        "title": null,
       },
       Object {
-        "deletehash": "j83zimv4VtDA0Xp",
+        "deletehash": "jyby9KJ",
+        "description": null,
         "id": "JK9ybyj",
         "link": "https://i.imgur.com/JK9ybyj.jpg",
+        "title": null,
       },
     ]
   `);
