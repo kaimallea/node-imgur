@@ -1,8 +1,9 @@
-const HOST = 'https://api.imgur.com';
-const API_VERSION = '3';
-const API_BASE = `${HOST}/${API_VERSION}`;
+export const IMGUR_API_PREFIX = 'https://api.imgur.com';
 
-export const AUTHORIZE_ENDPOINT = `${HOST}/oauth2/authorize`;
+export const API_VERSION = '3';
 
-export const IMAGE_ENDPOINT = `${API_BASE}/image`;
-export const UPLOAD_ENDPOINT = `${API_BASE}/upload`;
+export const AUTHORIZE_ENDPOINT = 'oauth2/authorize';
+
+export const IMAGE_ENDPOINT = `${API_VERSION}/image`;
+
+export const UPLOAD_ENDPOINT = `${API_VERSION}/upload`;

@@ -46,5 +46,5 @@ export async function getImage(
   imageHash: string
 ): Promise<ImageResponse> {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;
-  return await client.authorizedRequest({ url });
+  return (await client.request(url).json()) as ImageResponse;
 }

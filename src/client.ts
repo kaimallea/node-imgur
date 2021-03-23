@@ -1,40 +1,47 @@
 import { EventEmitter } from 'events';
-import { IncomingMessage } from 'http';
-import got, { ExtendOptions } from 'got';
+import got, { ExtendOptions, Got } from 'got';
 import { getAuthorizationHeader, Credentials } from './helpers';
 import { getImage, upload, Payload } from './image';
+import { IMGUR_API_PREFIX } from './helpers';
 
-type ImgurResponse = {
-  data?: any;
-  success?: boolean;
-  status?: number;
+type ImgurApiResponse = {
+  data: Record<string, unknown>;
+  status: number;
+  success: boolean;
 };
 
+const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
+
 export class ImgurClient extends EventEmitter {
+  private got: Got;
+  private gotExtended: Got;
   constructor(readonly credentials: Credentials) {
     super();
+    this.got = got.extend();
+    this.gotExtended = this.got.extend({
+      prefixUrl: IMGUR_API_PREFIX,
+      headers: {
+        'user-agent': USERAGENT,
+      },
+      responseType: 'json',
+      hooks: {
+        beforeRequest: [
+          async (options) => {
+            options.headers['authorization'] = await getAuthorizationHeader(
+              this
+            );
+          },
+        ],
+      },
+    });
   }
 
-  async request(options: ExtendOptions): Promise<IncomingMessage> {
-    try {
-      return (await got(options)) as IncomingMessage;
-    } catch (err) {
-      throw new Error(err);
-    }
+  plainRequest(url: string, options: ExtendOptions = {}) {
+    return this.got.extend(options)(url);
   }
 
-  async authorizedRequest(options: ExtendOptions): Promise<ImgurResponse> {
-    try {
-      const authorization = await getAuthorizationHeader(this);
-      const mergedOptions = got.mergeOptions(options, {
-        headers: { authorization },
-        responseType: 'json',
-        resolveBodyOnly: true,
-      });
-      return (await this.request(mergedOptions)) as ImgurResponse;
-    } catch (err) {
-      throw new Error(err);
-    }
+  request(url: string, options: ExtendOptions = {}) {
+    return this.gotExtended.extend(options)(url);
   }
 
   async getImage(imageHash: string) {

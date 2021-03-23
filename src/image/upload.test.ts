@@ -145,4 +145,27 @@ describe('test file uploads', () => {
       }
     `);
   });
+
+  test('upload progress event emitter', async () => {
+    const accessToken = 'abc123';
+    const video = '/home/user/trailer.mp4';
+    const client = new ImgurClient({ accessToken });
+    const eventHandler = jest.fn();
+    client.on('uploadProgress', eventHandler);
+
+    const response = await upload(client, {
+      video,
+      title: 'trailer for my new stream',
+      description: 'yolo',
+      disable_audio: '1',
+    });
+    expect(eventHandler).toBeCalledWith(
+      expect.objectContaining({
+        id: expect.stringContaining(video),
+        percent: expect.any(Number),
+        total: expect.any(Number),
+        transferred: expect.any(Number),
+      })
+    );
+  });
 });
