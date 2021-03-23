@@ -1,7 +1,9 @@
+🚨 This is the active development branch for v2. It is continuously deployed and available via `npm install imgur@next`.
+
 ## Installation
 
 ```shell
-npm install imgur
+npm install imgur@next
 ```
 
 ## Usage
@@ -9,10 +11,10 @@ npm install imgur
 ### Import and instantiate with credentials:
 
 ```ts
-// ESModule
+// ESModule syntax
 import { ImgurClient } from 'imgur';
 
-// CommonJS
+// CommonJS syntax
 const { ImgurClient } = require('imgur');
 
 let client;
@@ -72,7 +74,7 @@ const responses = await client.upload([
     description: 'Dank Meme',
   },
   {
-    image: '/home/kai/cat.mp4',
+    video: '/home/kai/cat.mp4',
     title: 'A Cat Movie',
     description: 'Caturday',
   },
@@ -84,18 +86,18 @@ Acceptable key/values match what [the Imgur API expects](https://apidocs.imgur.c
 
 | Key             | Description                                                                                                                         |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `image`         | A binary file, base64 data, or a URL for an image. (up to 10MB)                                                                     |
-| `video`         | A binary file (up to 200MB)                                                                                                         |
-| `album`         | The id of the album you want to add the image to. For anonymous albums, album should be the deletehash that is returned at creation |
-| `type`          | The type of the file that's being sent; `file`, `base64` or `url`                                                                   |
-| `name`          | The name of the file. This is automatically detected, but you can override                                                          |
-| `title`         | The title of the image                                                                                                              |
-| `description`   | The description of the image                                                                                                        |
+| `image`         | A string that is either a path binary file, a base64 string, or a URL pointing to a remote image (up to 10MB)                       |
+| `video`         | A string that is a path to binary file (up to 200MB)                                                                                |
+| `album`         | The id of the album you want to add the media to. For anonymous albums, album should be the deletehash that is returned at creation |
+| `type`          | The type of the media that's being transmitted; `file`, `base64` or `url`                                                           |
+| `name`          | The name of the media. This is automatically detected, but you can override                                                         |
+| `title`         | The title of the media                                                                                                              |
+| `description`   | The description of the media                                                                                                        |
 | `disable_audio` | `1` will remove the audio track from a video file                                                                                   |
 
 ### Upload and track progress of uploads
 
-Instances of `ImgurClient` emit `uploadProgress` events so that you can track progress
+Instances of `ImgurClient` emit `uploadProgress` events so that you can track progress with event listeners.
 
 ```ts
 import { ImgurClient } from 'imgur';
@@ -103,6 +105,7 @@ import { ImgurClient } from 'imgur';
 const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
 
 client.on('uploadProgress', (progress) => console.log(progress));
+await client.upload('/home/kai/cat.mp4');
 ```
 
 The progress object looks like the following:
@@ -116,9 +119,9 @@ The progress object looks like the following:
 }
 ```
 
-| Key           | Description                                                                                   |
-| ------------- | --------------------------------------------------------------------------------------------- |
-| `percent`     | 0 to 1, measures the percentage of upload (e.g., 0, 0.5, 0.8, 1)                              |
-| `transferred` | total number of bytes transferred thus far                                                    |
-| `total`       | total number of bytes to be transferred                                                       |
-| `id`          | unique id for the media being transferred; useful when uploading multiple things concurrently |
+| Key           | Description                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| `percent`     | 0 to 1, measures the percentage of upload (e.g., 0, 0.5, 0.8, 1). Basically `transferred / total` |
+| `transferred` | total number of bytes transferred thus far                                                        |
+| `total`       | total number of bytes to be transferred                                                           |
+| `id`          | unique id for the media being transferred; useful when uploading multiple things concurrently     |
