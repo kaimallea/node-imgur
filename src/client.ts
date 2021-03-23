@@ -1,31 +1,54 @@
 import { EventEmitter } from 'events';
-import got, { Options } from 'got';
+import got, { ExtendOptions, Got } from 'got';
 import { getAuthorizationHeader, Credentials } from './helpers';
+import { getImage, upload, Payload } from './image';
+import { IMGUR_API_PREFIX } from './helpers';
+
+type ImgurApiResponse = {
+  data: Record<string, unknown>;
+  status: number;
+  success: boolean;
+};
+
+const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 
 export class ImgurClient extends EventEmitter {
+  private got: Got;
+  private gotExtended: Got;
   constructor(readonly credentials: Credentials) {
     super();
+    this.got = got.extend();
+    this.gotExtended = this.got.extend({
+      prefixUrl: IMGUR_API_PREFIX,
+      headers: {
+        'user-agent': USERAGENT,
+      },
+      responseType: 'json',
+      hooks: {
+        beforeRequest: [
+          async (options) => {
+            options.headers['authorization'] = await getAuthorizationHeader(
+              this
+            );
+          },
+        ],
+      },
+    });
   }
 
-  async request(options: Options): Promise<any> {
-    try {
-      return await got(options);
-    } catch (err) {
-      throw new Error(err);
-    }
+  plainRequest(url: string, options: ExtendOptions = {}) {
+    return this.got.extend(options)(url);
   }
 
-  async authorizedRequest(options: Options): Promise<any> {
-    try {
-      const authorization = await getAuthorizationHeader(this);
-      const mergedOptions = got.mergeOptions(options, {
-        headers: { authorization },
-        responseType: 'json',
-        resolveBodyOnly: true,
-      });
-      return await this.request(mergedOptions);
-    } catch (err) {
-      throw new Error(err.message);
-    }
+  request(url: string, options: ExtendOptions = {}) {
+    return this.gotExtended.extend(options)(url);
+  }
+
+  async getImage(imageHash: string) {
+    return getImage(this, imageHash);
+  }
+
+  async upload(payload: string | string[] | Payload | Payload[]) {
+    return upload(this, payload);
   }
 }

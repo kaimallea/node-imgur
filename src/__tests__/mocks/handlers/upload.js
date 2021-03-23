@@ -8,34 +8,51 @@ const BadRequestErrorResponse = {
   },
 };
 
-const SuccessfulUploadResponse = {
-  data: {
-    id: 'JK9ybyj',
-    deletehash: 'j83zimv4VtDA0Xp',
-    link: 'https://i.imgur.com/JK9ybyj.jpg',
-  },
-  success: true,
-  status: 200,
-};
+function createResponse({
+  id = 'JK9ybyj',
+  type = null,
+  title = null,
+  description = null,
+}) {
+  return {
+    data: {
+      id,
+      deletehash: Array.from(id).reverse().join(''),
+      title,
+      description,
+      link: `https://i.imgur.com/${id}.${type === 'video' ? 'mp4' : 'jpg'}`,
+    },
+    success: true,
+    status: 200,
+  };
+}
 
 export function postHandler(req, res, ctx) {
-  // image field is always required
-  if (!('image' in req.body)) {
+  const {
+    image = null,
+    video = null,
+    type = null,
+    title = null,
+    description = null,
+  } = req.body;
+
+  // image or video field is always required
+  if (image !== null && video !== null) {
     return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
   }
 
   // type is optional when uploading a file, but required
   // for any other type
-  if ('type' in req.body) {
+  if (type !== null) {
     // only these types are allowed
-    if (!['file', 'url', 'base64'].includes(req.body.type)) {
+    if (!['file', 'url', 'base64'].includes(type)) {
       return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
     }
     // if type is not specified we assume we're uploading a file.
     // but we need to make sure a file was sent in the image field
-  } else if (typeof req.body.image !== 'object') {
+  } else if (typeof image !== 'object') {
     return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
   }
 
-  return res(ctx.json(SuccessfulUploadResponse));
+  return res(ctx.json(createResponse({ image, video, title, description })));
 }

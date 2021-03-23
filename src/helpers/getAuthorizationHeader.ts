@@ -1,6 +1,6 @@
 import { isAccessToken, isClientId, isLogin } from './credentials';
 import { ImgurClient } from '../client';
-import { AUTHORIZE_ENDPOINT } from '../helpers';
+import { IMGUR_API_PREFIX, AUTHORIZE_ENDPOINT } from '../helpers';
 
 export async function getAuthorizationHeader(client: ImgurClient) {
   if (isAccessToken(client.credentials)) {
@@ -14,19 +14,30 @@ export async function getAuthorizationHeader(client: ImgurClient) {
   const { clientId, username, password } = client.credentials;
 
   const options: Record<string, any> = {
-    url: AUTHORIZE_ENDPOINT,
+    prefixUrl: IMGUR_API_PREFIX,
     searchParams: {
       client_id: clientId,
       response_type: 'token',
     },
   };
 
-  let response = await client.request(options);
+  let response = await client.plainRequest(AUTHORIZE_ENDPOINT, options);
 
   const cookies = Array.isArray(response.headers['set-cookie'])
     ? response.headers['set-cookie'][0]
     : response.headers['set-cookie'];
-  const authorizeToken = cookies.match('(^|;)[s]*authorize_token=([^;]*)')[2];
+
+  if (!cookies) {
+    throw new Error('No cookies were set during authorization');
+  }
+
+  const matches = cookies.match('(^|;)[s]*authorize_token=([^;]*)');
+
+  if (!matches || matches.length < 3) {
+    throw new Error('Unable to find authorize_token cookie');
+  }
+
+  const authorizeToken = matches[2];
 
   options.method = 'POST';
   options.form = {
@@ -40,8 +51,12 @@ export async function getAuthorizationHeader(client: ImgurClient) {
     cookie: `authorize_token=${authorizeToken}`,
   };
 
-  response = await client.request(options);
+  response = await client.plainRequest(AUTHORIZE_ENDPOINT, options);
   const location = response.headers.location;
+  if (!location) {
+    throw new Error('Unable to parse location');
+  }
+
   const token = JSON.parse(
     '{"' +
       decodeURI(location.slice(location.indexOf('#') + 1))
