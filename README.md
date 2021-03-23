@@ -1,4 +1,4 @@
-# 🚨 v2 development is in progress within the [`next-dev`](https://github.com/kaimallea/node-imgur/tree/next-dev) branch. [See v2 README](https://github.com/kaimallea/node-imgur/blob/next-dev/README.md).
+# 🚨 v2 development is in progress within the [`next`](https://github.com/kaimallea/node-imgur/tree/next) branch. [See v2 README](https://github.com/kaimallea/node-imgur/blob/next/README.md).
 
 ## ⚠️ v1.x is now in maintenance / support mode. No new features will be added.
 
