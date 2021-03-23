@@ -92,3 +92,33 @@ Acceptable key/values match what [the Imgur API expects](https://apidocs.imgur.c
 | `title`         | The title of the image                                                                                                              |
 | `description`   | The description of the image                                                                                                        |
 | `disable_audio` | `1` will remove the audio track from a video file                                                                                   |
+
+### Upload and track progress of uploads
+
+Instances of `ImgurClient` emit `uploadProgress` events so that you can track progress
+
+```ts
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
+
+client.on('uploadProgress', (progress) => console.log(progress));
+```
+
+The progress object looks like the following:
+
+```ts
+{
+  percent: 1,
+  transferred: 577,
+  total: 577,
+  id: '/home/user/trailer.mp4'
+}
+```
+
+| Key           | Description                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| `percent`     | 0 to 1, measures the percentage of upload (e.g., 0, 0.5, 0.8, 1)                              |
+| `transferred` | total number of bytes transferred thus far                                                    |
+| `total`       | total number of bytes to be transferred                                                       |
+| `id`          | unique id for the media being transferred; useful when uploading multiple things concurrently |
