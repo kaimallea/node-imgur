@@ -22,7 +22,7 @@
 npm install imgur@next
 ```
 
-Or find a specific versions to pin on [our npm page](https://img.shields.io/npm/v/imgur/next.svg).
+Or find a specific versions to pin on [our npm page](https://www.npmjs.com/package/imgur/v/next?activeTab=versions).
 
 ## Usage
 
