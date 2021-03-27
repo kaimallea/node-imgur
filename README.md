@@ -125,3 +125,15 @@ The progress object looks like the following:
 | `transferred` | total number of bytes transferred thus far                                                        |
 | `total`       | total number of bytes to be transferred                                                           |
 | `id`          | unique id for the media being transferred; useful when uploading multiple things concurrently     |
+
+### Delete an image
+
+Requires an image hash or delete hash, which are obtained in an image upload response
+
+```ts
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
+
+client.delete('someImageHash');
+```

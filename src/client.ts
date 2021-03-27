@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import got, { ExtendOptions, Got } from 'got';
 import { getAuthorizationHeader, Credentials } from './helpers';
-import { getImage, upload, Payload } from './image';
+import { deleteImage, getImage, upload, Payload } from './image';
 import { IMGUR_API_PREFIX } from './helpers';
 
 type ImgurApiResponse = {
@@ -42,6 +42,10 @@ export class ImgurClient extends EventEmitter {
 
   request(url: string, options: ExtendOptions = {}) {
     return this.gotExtended.extend(options)(url);
+  }
+
+  async deleteImage(imageHash: string) {
+    return deleteImage(this, imageHash);
   }
 
   async getImage(imageHash: string) {
