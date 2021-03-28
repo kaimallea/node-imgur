@@ -1,8 +1,14 @@
 import { EventEmitter } from 'events';
 import got, { ExtendOptions, Got } from 'got';
 import { getAuthorizationHeader, Credentials } from './helpers';
-import { deleteImage, getImage, upload, Payload } from './image';
-import { IMGUR_API_PREFIX } from './helpers';
+import {
+  deleteImage,
+  getImage,
+  upload,
+  updateImage,
+  UpdateImagePayload,
+} from './image';
+import { IMGUR_API_PREFIX, Payload } from './helpers';
 
 type ImgurApiResponse = {
   data: Record<string, unknown>;
@@ -50,6 +56,10 @@ export class ImgurClient extends EventEmitter {
 
   async getImage(imageHash: string) {
     return getImage(this, imageHash);
+  }
+
+  updateImage(payload: UpdateImagePayload | UpdateImagePayload[]) {
+    return updateImage(this, payload);
   }
 
   async upload(payload: string | string[] | Payload | Payload[]) {

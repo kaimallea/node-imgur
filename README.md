@@ -137,3 +137,40 @@ const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
 
 client.delete('someImageHash');
 ```
+
+### Update image information
+
+Update the title and/or description of an image
+
+```ts
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
+
+client.updateImage({
+  imageHash: 'someImageHash',
+  title: 'A new title',
+  description: 'A new description',
+});
+```
+
+Update multiple images at once:
+
+```ts
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
+
+client.updateImage([
+  {
+    imageHash: 'someImageHash',
+    title: 'A new title',
+    description: 'A new description',
+  },
+  {
+    imageHash: 'anotherImageHash',
+    title: 'A better title',
+    description: 'A better description',
+  },
+]);
+```
