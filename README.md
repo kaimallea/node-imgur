@@ -1,3 +1,19 @@
+<h1 align="center" style="border-bottom: none;">imgur</h1>
+<h3 align="center">Unofficial JavaScript library</h3>
+<p align="center">
+  <a href="https://www.npmjs.com/package/imgur/v/next">
+    <img alt="npm next version" src="https://img.shields.io/npm/v/imgur/next.svg">
+  </a>
+  <a href="https://github.com/kaimallea/node-imgur/actions?query=workflow%3ATests+branch%3Anext">
+    <img alt="Build states" src="https://github.com/kaimallea/node-imgur/workflows/Tests/badge.svg">
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/kaimallea/node-imgur/discussions">
+    <img alt="Join the community on GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue">
+  </a>
+</p>
+
 🚨 This is the active development branch for v2. It is continuously deployed and available via `npm install imgur@next`.
 
 ## Installation
@@ -5,6 +21,8 @@
 ```shell
 npm install imgur@next
 ```
+
+Or find a specific versions to pin on [our npm page](https://www.npmjs.com/package/imgur/v/next?activeTab=versions).
 
 ## Usage
 
