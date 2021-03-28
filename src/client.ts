@@ -3,6 +3,7 @@ import got, { ExtendOptions, Got } from 'got';
 import { getAuthorizationHeader, Credentials } from './helpers';
 import {
   deleteImage,
+  favoriteImage,
   getImage,
   upload,
   updateImage,
@@ -52,6 +53,10 @@ export class ImgurClient extends EventEmitter {
 
   async deleteImage(imageHash: string) {
     return deleteImage(this, imageHash);
+  }
+
+  favoriteImage(imageHash: string) {
+    return favoriteImage(this, imageHash);
   }
 
   async getImage(imageHash: string) {

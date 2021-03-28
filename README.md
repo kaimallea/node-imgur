@@ -174,3 +174,13 @@ client.updateImage([
   },
 ]);
 ```
+
+Favorite an image:
+
+```ts
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
+
+client.favoriteImage('someImageHash');
+```
