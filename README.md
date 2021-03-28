@@ -38,6 +38,8 @@ If you don't have any credentials, you'll need to:
 1. [Create an Imgur account](https://imgur.com/register)
 1. [Register an application](https://api.imgur.com/#registerapp)
 
+### **⚠️ For brevity, the rest of the examples will leave out the import and/or instantiation step.**
+
 ### Upload one or more images and videos
 
 You can upload one or more files by simply passing a path to a file or array of paths to multiple files.
@@ -100,8 +102,6 @@ Acceptable key/values match what [the Imgur API expects](https://apidocs.imgur.c
 Instances of `ImgurClient` emit `uploadProgress` events so that you can track progress with event listeners.
 
 ```ts
-import { ImgurClient } from 'imgur';
-
 const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
 
 client.on('uploadProgress', (progress) => console.log(progress));
@@ -131,10 +131,6 @@ The progress object looks like the following:
 Requires an image hash or delete hash, which are obtained in an image upload response
 
 ```ts
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
-
 client.delete('someImageHash');
 ```
 
@@ -143,10 +139,6 @@ client.delete('someImageHash');
 Update the title and/or description of an image
 
 ```ts
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
-
 client.updateImage({
   imageHash: 'someImageHash',
   title: 'A new title',
@@ -157,10 +149,6 @@ client.updateImage({
 Update multiple images at once:
 
 ```ts
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
-
 client.updateImage([
   {
     imageHash: 'someImageHash',
@@ -178,9 +166,5 @@ client.updateImage([
 Favorite an image:
 
 ```ts
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ accessToken: process.env.ACCESS_TOKEN });
-
 client.favoriteImage('someImageHash');
 ```
