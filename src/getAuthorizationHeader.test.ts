@@ -1,4 +1,4 @@
-import { ImgurClient } from '../client';
+import { ImgurClient } from './client';
 import { getAuthorizationHeader } from './getAuthorizationHeader';
 
 test('returns provided access code in bearer header', async () => {

@@ -1,14 +1,16 @@
 import { EventEmitter } from 'events';
 import got, { ExtendOptions, Got } from 'got';
-import { getAuthorizationHeader, Credentials } from './helpers';
-import { getImage, upload, Payload } from './image';
-import { IMGUR_API_PREFIX } from './helpers';
-
-type ImgurApiResponse = {
-  data: Record<string, unknown>;
-  status: number;
-  success: boolean;
-};
+import { getAuthorizationHeader } from './getAuthorizationHeader';
+import {
+  deleteImage,
+  favoriteImage,
+  getImage,
+  upload,
+  updateImage,
+  UpdateImagePayload,
+} from './image';
+import { IMGUR_API_PREFIX } from './common/endpoints';
+import { Credentials, Payload } from './common/types';
 
 const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 
@@ -44,11 +46,23 @@ export class ImgurClient extends EventEmitter {
     return this.gotExtended.extend(options)(url);
   }
 
-  async getImage(imageHash: string) {
+  deleteImage(imageHash: string) {
+    return deleteImage(this, imageHash);
+  }
+
+  favoriteImage(imageHash: string) {
+    return favoriteImage(this, imageHash);
+  }
+
+  getImage(imageHash: string) {
     return getImage(this, imageHash);
   }
 
-  async upload(payload: string | string[] | Payload | Payload[]) {
+  updateImage(payload: UpdateImagePayload | UpdateImagePayload[]) {
+    return updateImage(this, payload);
+  }
+
+  upload(payload: string | string[] | Payload | Payload[]) {
     return upload(this, payload);
   }
 }

@@ -153,7 +153,7 @@ describe('test file uploads', () => {
     const eventHandler = jest.fn();
     client.on('uploadProgress', eventHandler);
 
-    const response = await upload(client, {
+    await upload(client, {
       video,
       title: 'trailer for my new stream',
       description: 'yolo',
