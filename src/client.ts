@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import got, { ExtendOptions, Got } from 'got';
-import { getAuthorizationHeader, Credentials } from './helpers';
+import { getAuthorizationHeader } from './getAuthorizationHeader';
 import {
   deleteImage,
   favoriteImage,
@@ -9,13 +9,8 @@ import {
   updateImage,
   UpdateImagePayload,
 } from './image';
-import { IMGUR_API_PREFIX, Payload } from './helpers';
-
-type ImgurApiResponse = {
-  data: Record<string, unknown>;
-  status: number;
-  success: boolean;
-};
+import { IMGUR_API_PREFIX } from './common/endpoints';
+import { Credentials, Payload } from './common/types';
 
 const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 

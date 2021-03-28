@@ -1,10 +1,12 @@
 import { ImgurClient } from '../client';
-import { createForm, IMAGE_ENDPOINT, Payload } from '../helpers';
+import { IMAGE_ENDPOINT } from '../common/endpoints';
+import { createForm } from '../common/utils';
+import { Payload } from '../common/types';
 
-export type UpdateImagePayload = { imageHash: string } & Pick<
-  Payload,
-  'title' | 'description'
->;
+export interface UpdateImagePayload
+  extends Pick<Payload, 'title' | 'description'> {
+  imageHash: string;
+}
 
 function isValidUpdatePayload(p: UpdateImagePayload) {
   return typeof p.title === 'string' || typeof p.description === 'string';

@@ -1,16 +1,6 @@
 import { createReadStream } from 'fs';
 import FormData from 'form-data';
-
-export interface Payload {
-  image?: string;
-  video?: string;
-  type?: 'file' | 'url' | 'base64';
-  name?: string;
-  title?: string;
-  description?: string;
-  album?: string;
-  disable_audio?: '1' | '0';
-}
+import { Payload } from './types';
 
 export function isVideo(payload: string | Payload) {
   if (typeof payload === 'string') {

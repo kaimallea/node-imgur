@@ -1,11 +1,11 @@
 import { ImgurClient } from '../client';
-import { IMAGE_ENDPOINT } from '../helpers';
+import { IMAGE_ENDPOINT } from '../common/endpoints';
 
-type DeleteResponse = {
+export interface DeleteResponse {
   data: true;
   success: true;
   status: 200;
-};
+}
 
 export async function deleteImage(client: ImgurClient, imageHash: string) {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;

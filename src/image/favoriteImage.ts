@@ -1,5 +1,5 @@
 import { ImgurClient } from '../client';
-import { IMAGE_ENDPOINT } from '../helpers';
+import { IMAGE_ENDPOINT } from '../common/endpoints';
 
 type FavoriteResponse = {
   data: 'favorited';

@@ -1,5 +1,8 @@
 import { ImgurClient } from '../client';
-import { createForm, getSource, Payload, UPLOAD_ENDPOINT } from '../helpers';
+import { createForm, getSource } from '../common/utils';
+import { Payload } from '../common/types';
+import { UPLOAD_ENDPOINT } from '../common/endpoints';
+
 import { Progress } from 'got';
 
 export async function upload(

@@ -1,7 +1,7 @@
 import { ImgurClient } from '../client';
-import { IMAGE_ENDPOINT } from '../helpers';
+import { IMAGE_ENDPOINT } from '../common/endpoints';
 
-type ImageResponse = {
+export interface ImageResponse {
   data?: {
     id?: string;
     title?: string | null;
@@ -39,7 +39,7 @@ type ImageResponse = {
   };
   success?: boolean;
   status?: number;
-};
+}
 
 export async function getImage(
   client: ImgurClient,

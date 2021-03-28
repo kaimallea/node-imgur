@@ -1,6 +1,6 @@
-import { isAccessToken, isClientId, isLogin } from './credentials';
-import { ImgurClient } from '../client';
-import { IMGUR_API_PREFIX, AUTHORIZE_ENDPOINT } from '../helpers';
+import { isAccessToken, isClientId, isLogin } from './common/types';
+import { ImgurClient } from './client';
+import { IMGUR_API_PREFIX, AUTHORIZE_ENDPOINT } from './common/endpoints';
 
 export async function getAuthorizationHeader(client: ImgurClient) {
   if (isAccessToken(client.credentials)) {
