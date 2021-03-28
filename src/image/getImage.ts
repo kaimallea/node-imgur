@@ -41,10 +41,7 @@ export interface ImageResponse {
   status?: number;
 }
 
-export async function getImage(
-  client: ImgurClient,
-  imageHash: string
-): Promise<ImageResponse> {
+export async function getImage(client: ImgurClient, imageHash: string) {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;
   return (await client.request(url).json()) as ImageResponse;
 }

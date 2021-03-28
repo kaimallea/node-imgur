@@ -46,7 +46,7 @@ export class ImgurClient extends EventEmitter {
     return this.gotExtended.extend(options)(url);
   }
 
-  async deleteImage(imageHash: string) {
+  deleteImage(imageHash: string) {
     return deleteImage(this, imageHash);
   }
 
@@ -54,7 +54,7 @@ export class ImgurClient extends EventEmitter {
     return favoriteImage(this, imageHash);
   }
 
-  async getImage(imageHash: string) {
+  getImage(imageHash: string) {
     return getImage(this, imageHash);
   }
 
@@ -62,7 +62,7 @@ export class ImgurClient extends EventEmitter {
     return updateImage(this, payload);
   }
 
-  async upload(payload: string | string[] | Payload | Payload[]) {
+  upload(payload: string | string[] | Payload | Payload[]) {
     return upload(this, payload);
   }
 }
