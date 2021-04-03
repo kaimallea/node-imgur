@@ -208,3 +208,21 @@ client.getGallery({
 | `showViral`      | optional | `true` \| `false` - Show or hide viral images from the `user` section. Defaults to `true`                                                                                                                                |
 | `mature`         | optional | `true` \| `false` - Show or hide mature (nsfw) images in the response section. Defaults to `false`. NOTE: This parameter is only required if un-authed. The response for authed users will respect their account setting |
 | `album_previews` | optional | `true` \| `false` - Include image metadata for gallery posts which are albums                                                                                                                                            |
+
+### Get subreddit gallery images
+
+```ts
+client.getSubredditGallery({
+  subreddit: 'wallstreetbets',
+  sort: 'time',
+});
+```
+
+`getSubredditGallery()` accepts an object of type `SubredditGalleryOptions`. The follow options are available:
+
+| Key         | Required | Description                                                                                                                                         |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `subreddit` | required | A valid subreddit name                                                                                                                              |
+| `sort`      | optional | `time` \| `top` - defaults to time                                                                                                                  |
+| `page`      | optional | `number` - the data paging number                                                                                                                   |
+| `window`    | optional | Change the date range of the request if the section is `top`. Accepted values are `day` \| `week` \| `month` \| `year` \| `all`. Defaults to `week` |
