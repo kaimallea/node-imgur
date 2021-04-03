@@ -13,19 +13,19 @@ export interface Login extends ClientId {
 
 export type Credentials = AccessToken | ClientId | Login;
 
-export function isAccessToken(arg: any): arg is AccessToken {
-  return arg.accessToken !== undefined;
+export function isAccessToken(arg: unknown): arg is AccessToken {
+  return (arg as AccessToken).accessToken !== undefined;
 }
 
-export function isClientId(arg: any): arg is ClientId {
-  return arg.clientId !== undefined;
+export function isClientId(arg: unknown): arg is ClientId {
+  return (arg as ClientId).clientId !== undefined;
 }
 
-export function isLogin(arg: any): arg is Login {
+export function isLogin(arg: unknown): arg is Login {
   return (
-    arg.clientId !== undefined &&
-    arg.username !== undefined &&
-    arg.password !== undefined
+    (arg as Login).clientId !== undefined &&
+    (arg as Login).username !== undefined &&
+    (arg as Login).password !== undefined
   );
 }
 
@@ -79,7 +79,7 @@ interface CommonData {
     description: string;
     logo_hash: string | null;
     logo_destination_url: string | null;
-    description_annotations: Object;
+    description_annotations: Record<string, unknown>;
   }>;
   topic: string | null;
   topic_id: string | null;
@@ -98,6 +98,7 @@ export interface ImageData extends CommonData {
   width: number;
   height: number;
   size: number;
+  deletehash?: string;
   bandwidth: number;
   animated: boolean;
   has_sound: boolean;
@@ -123,7 +124,7 @@ export interface AlbumData extends CommonData {
   images_count: number;
 }
 
-export interface GalleryData extends Array<ImageData | AlbumData> {}
+export type GalleryData = Array<ImageData | AlbumData>;
 export interface Payload {
   image?: string;
   video?: string;

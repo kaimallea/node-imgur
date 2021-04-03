@@ -36,7 +36,7 @@ const defaultOptions: GalleryOptions = {
   sort: 'viral',
 };
 
-export function constructGalleryUrl(options: GalleryOptions) {
+export function constructGalleryUrl(options: GalleryOptions): URL {
   const mergedOptions = Object.assign({}, defaultOptions, options);
 
   let uri = `${mergedOptions.section}`;
@@ -76,7 +76,7 @@ export function constructGalleryUrl(options: GalleryOptions) {
 export async function getGallery(
   client: ImgurClient,
   options: GalleryOptions = defaultOptions
-) {
+): Promise<ImgurApiResponse<GalleryData>> {
   const { pathname } = constructGalleryUrl(options);
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);

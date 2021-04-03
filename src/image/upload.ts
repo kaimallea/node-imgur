@@ -1,14 +1,13 @@
 import { ImgurClient } from '../client';
 import { createForm, getSource } from '../common/utils';
-import { Payload } from '../common/types';
+import { Payload, ImgurApiResponse, ImageData } from '../common/types';
 import { UPLOAD_ENDPOINT } from '../common/endpoints';
-
 import { Progress } from 'got';
 
 export async function upload(
   client: ImgurClient,
   payload: string | string[] | Payload | Payload[]
-) {
+): Promise<ImgurApiResponse<ImageData> | ImgurApiResponse<ImageData>[]> {
   if (Array.isArray(payload)) {
     const promises = payload.map((p: string | Payload) => {
       const form = createForm(p);
@@ -23,7 +22,7 @@ export async function upload(
         client.emit('uploadProgress', { ...progress, id });
       });
 
-      return req;
+      return (req as unknown) as Promise<ImgurApiResponse<ImageData>>;
     });
     return await Promise.all(promises);
   }
@@ -40,5 +39,5 @@ export async function upload(
     client.emit('uploadProgress', { ...progress, id });
   });
 
-  return await req;
+  return ((await req) as unknown) as ImgurApiResponse<ImageData>;
 }

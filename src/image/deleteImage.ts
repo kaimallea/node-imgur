@@ -1,15 +1,13 @@
 import { ImgurClient } from '../client';
 import { IMAGE_ENDPOINT } from '../common/endpoints';
+import { ImgurApiResponse } from '../common/types';
 
-export interface DeleteResponse {
-  data: true;
-  success: true;
-  status: 200;
-}
-
-export async function deleteImage(client: ImgurClient, imageHash: string) {
+export async function deleteImage(
+  client: ImgurClient,
+  imageHash: string
+): Promise<ImgurApiResponse<boolean>> {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;
   return (await client
     .request(url, { method: 'DELETE' })
-    .json()) as DeleteResponse;
+    .json()) as ImgurApiResponse<boolean>;
 }
