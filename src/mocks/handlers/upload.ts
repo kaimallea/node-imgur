@@ -1,3 +1,5 @@
+import { Handler } from './';
+
 const BadRequestErrorResponse = {
   status: 400,
   success: false,
@@ -8,12 +10,19 @@ const BadRequestErrorResponse = {
   },
 };
 
+type CreateResponseOptions = {
+  id?: string;
+  type?: string | null;
+  title?: string | null;
+  description?: string | null;
+};
+
 function createResponse({
   id = 'JK9ybyj',
   type = null,
   title = null,
   description = null,
-}) {
+}: CreateResponseOptions) {
   return {
     data: {
       id,
@@ -27,14 +36,14 @@ function createResponse({
   };
 }
 
-export function postHandler(req, res, ctx) {
+export const postHandler: Handler = (req, res, ctx) => {
   const {
     image = null,
     video = null,
     type = null,
     title = null,
     description = null,
-  } = req.body;
+  } = req.body as Record<string, string>;
 
   // image or video field is always required
   if (image !== null && video !== null) {
@@ -45,7 +54,7 @@ export function postHandler(req, res, ctx) {
   // for any other type
   if (type !== null) {
     // only these types are allowed
-    if (!['file', 'url', 'base64'].includes(type)) {
+    if (!['file', 'url', 'base64'].includes(type as string)) {
       return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
     }
     // if type is not specified we assume we're uploading a file.
@@ -54,5 +63,5 @@ export function postHandler(req, res, ctx) {
     return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
   }
 
-  return res(ctx.json(createResponse({ image, video, title, description })));
-}
+  return res(ctx.json(createResponse({ title, description })));
+};

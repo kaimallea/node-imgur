@@ -1,7 +1,7 @@
 import { ImgurClient } from '../client';
 import { IMAGE_ENDPOINT } from '../common/endpoints';
 import { createForm } from '../common/utils';
-import { Payload } from '../common/types';
+import { Payload, ImgurApiResponse } from '../common/types';
 
 export interface UpdateImagePayload
   extends Pick<Payload, 'title' | 'description'> {
@@ -15,7 +15,7 @@ function isValidUpdatePayload(p: UpdateImagePayload) {
 export async function updateImage(
   client: ImgurClient,
   payload: UpdateImagePayload | UpdateImagePayload[]
-) {
+): Promise<ImgurApiResponse<boolean> | ImgurApiResponse<boolean>[]> {
   if (Array.isArray(payload)) {
     const promises = payload.map((p: UpdateImagePayload) => {
       if (!isValidUpdatePayload(p)) {
@@ -24,11 +24,11 @@ export async function updateImage(
 
       const url = `${IMAGE_ENDPOINT}/${p.imageHash}`;
       const form = createForm(p);
-      return client.request(url, {
+      return (client.request(url, {
         method: 'POST',
         body: form,
         resolveBodyOnly: true,
-      });
+      }) as unknown) as Promise<ImgurApiResponse<boolean>>;
     });
 
     return await Promise.all(promises);
@@ -40,9 +40,9 @@ export async function updateImage(
 
   const url = `${IMAGE_ENDPOINT}/${payload.imageHash}`;
   const form = createForm(payload);
-  return await client.request(url, {
+  return ((await client.request(url, {
     method: 'POST',
     body: form,
     resolveBodyOnly: true,
-  });
+  })) as unknown) as ImgurApiResponse<boolean>;
 }

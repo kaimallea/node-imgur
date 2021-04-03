@@ -1,4 +1,4 @@
-import { server } from './src/__tests__/mocks/server.js';
+import { server } from './server';
 import mockfs from 'mock-fs';
 
 // Establish API mocking before all tests.

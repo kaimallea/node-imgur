@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import got, { ExtendOptions, Got } from 'got';
+import got, { CancelableRequest, ExtendOptions, Response, Got } from 'got';
 import { getAuthorizationHeader } from './getAuthorizationHeader';
 import {
   deleteImage,
@@ -9,8 +9,20 @@ import {
   updateImage,
   UpdateImagePayload,
 } from './image';
+import {
+  GalleryOptions,
+  getGallery,
+  getSubredditGallery,
+  SubredditGalleryOptions,
+} from './gallery';
 import { IMGUR_API_PREFIX } from './common/endpoints';
-import { Credentials, Payload } from './common/types';
+import {
+  Credentials,
+  GalleryData,
+  ImageData,
+  ImgurApiResponse,
+  Payload,
+} from './common/types';
 
 const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 
@@ -38,31 +50,51 @@ export class ImgurClient extends EventEmitter {
     });
   }
 
-  plainRequest(url: string, options: ExtendOptions = {}) {
+  plainRequest(
+    url: string,
+    options: ExtendOptions = {}
+  ): CancelableRequest<Response<unknown>> {
     return this.got.extend(options)(url);
   }
 
-  request(url: string, options: ExtendOptions = {}) {
+  request(
+    url: string,
+    options: ExtendOptions = {}
+  ): CancelableRequest<Response<string>> {
     return this.gotExtended.extend(options)(url);
   }
 
-  deleteImage(imageHash: string) {
+  deleteImage(imageHash: string): Promise<ImgurApiResponse<boolean>> {
     return deleteImage(this, imageHash);
   }
 
-  favoriteImage(imageHash: string) {
+  favoriteImage(imageHash: string): Promise<ImgurApiResponse<string>> {
     return favoriteImage(this, imageHash);
   }
 
-  getImage(imageHash: string) {
+  getGallery(options: GalleryOptions): Promise<ImgurApiResponse<GalleryData>> {
+    return getGallery(this, options);
+  }
+
+  getSubredditGallery(
+    options: SubredditGalleryOptions
+  ): Promise<ImgurApiResponse<GalleryData>> {
+    return getSubredditGallery(this, options);
+  }
+
+  getImage(imageHash: string): Promise<ImgurApiResponse<ImageData>> {
     return getImage(this, imageHash);
   }
 
-  updateImage(payload: UpdateImagePayload | UpdateImagePayload[]) {
+  updateImage(
+    payload: UpdateImagePayload | UpdateImagePayload[]
+  ): Promise<ImgurApiResponse<boolean> | ImgurApiResponse<boolean>[]> {
     return updateImage(this, payload);
   }
 
-  upload(payload: string | string[] | Payload | Payload[]) {
+  upload(
+    payload: string | string[] | Payload | Payload[]
+  ): Promise<ImgurApiResponse<ImageData> | ImgurApiResponse<ImageData>[]> {
     return upload(this, payload);
   }
 }

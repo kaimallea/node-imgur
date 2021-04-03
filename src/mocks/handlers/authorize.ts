@@ -1,4 +1,6 @@
-const RequiredFieldErrorResponse = (method) => {
+import { Handler } from './';
+
+const RequiredFieldErrorResponse = (method: string) => {
   return {
     data: {
       error: 'client_id and response_type are required',
@@ -20,11 +22,11 @@ const UnauthorizedErrorResponse = {
   status: 403,
 };
 
-function createRedirectUrl(username) {
+function createRedirectUrl(username: string) {
   return `https://somedomain.com#access_token=123accesstoken456&expires_in=315360000&token_type=bearer&refresh_token=123refrestoken456&account_username=${username}&account_id=123456`;
 }
 
-export function postHandler(req, res, ctx) {
+export const postHandler: Handler = (req, res, ctx) => {
   const clientId = req.url.searchParams.get('client_id');
   const responseType = req.url.searchParams.get('response_type');
 
@@ -33,7 +35,7 @@ export function postHandler(req, res, ctx) {
   }
 
   const { username, password, allow } = Object.fromEntries(
-    new URLSearchParams(req.body)
+    new URLSearchParams(req.body as string)
   );
 
   if (!(username && password && allow)) {
@@ -45,9 +47,9 @@ export function postHandler(req, res, ctx) {
     ctx.set('Location', createRedirectUrl(username)),
     ctx.cookie('authorize_token', allow)
   );
-}
+};
 
-export function getHandler(req, res, ctx) {
+export const getHandler: Handler = (req, res, ctx) => {
   const clientId = req.url.searchParams.get('client_id');
   const responseType = req.url.searchParams.get('response_type');
 
@@ -75,4 +77,4 @@ export function getHandler(req, res, ctx) {
     ctx.status(200),
     ctx.body(html)
   );
-}
+};
