@@ -1,3 +1,5 @@
+import { Handler } from './';
+
 const BadRequestErrorResponse = {
   status: 400,
   success: false,
@@ -27,14 +29,14 @@ function createResponse({
   };
 }
 
-export function postHandler(req, res, ctx) {
+export const postHandler: Handler = (req, res, ctx) => {
   const {
     image = null,
     video = null,
     type = null,
     title = null,
     description = null,
-  } = req.body;
+  } = req.body as any;
 
   // image or video field is always required
   if (image !== null && video !== null) {
@@ -54,5 +56,5 @@ export function postHandler(req, res, ctx) {
     return res(ctx.status(400), ctx.json(BadRequestErrorResponse));
   }
 
-  return res(ctx.json(createResponse({ image, video, title, description })));
-}
+  return res(ctx.json(createResponse({ title, description })));
+};
