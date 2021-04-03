@@ -186,3 +186,25 @@ Favorite an image:
 ```ts
 client.favoriteImage('someImageHash');
 ```
+
+### Get gallery images
+
+```ts
+client.getGallery({
+  section: 'hot',
+  sort: 'viral',
+  mature: false,
+});
+```
+
+`getGallery()` accepts an object of type `GalleryOptions`. The follow options are available:
+
+| Key              | Required | Description                                                                                                                                                                                                              |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `section`        | required | `hot` \| `top` \| `user`                                                                                                                                                                                                 |
+| `sort`           | optional | `viral` \| `top` \| `time` \| `rising` (only available with user section). Defaults to viral                                                                                                                             |
+| `page`           | optional | `number` - the data paging number                                                                                                                                                                                        |
+| `window`         | optional | Change the date range of the request if the section is `top`. Accepted values are `day` \| `week` \| `month` \| `year` \| `all`. Defaults to `day`                                                                       |
+| `showViral`      | optional | `true` \| `false` - Show or hide viral images from the `user` section. Defaults to `true`                                                                                                                                |
+| `mature`         | optional | `true` \| `false` - Show or hide mature (nsfw) images in the response section. Defaults to `false`. NOTE: This parameter is only required if un-authed. The response for authed users will respect their account setting |
+| `album_previews` | optional | `true` \| `false` - Include image metadata for gallery posts which are albums                                                                                                                                            |

@@ -7,3 +7,5 @@ export const AUTHORIZE_ENDPOINT = 'oauth2/authorize';
 export const IMAGE_ENDPOINT = `${API_VERSION}/image`;
 
 export const UPLOAD_ENDPOINT = `${API_VERSION}/upload`;
+
+export const GALLERY_ENDPOINT = `${API_VERSION}/gallery`;

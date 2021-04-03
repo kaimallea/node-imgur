@@ -9,6 +9,7 @@ import {
   updateImage,
   UpdateImagePayload,
 } from './image';
+import { GalleryOptions, getGallery } from './gallery';
 import { IMGUR_API_PREFIX } from './common/endpoints';
 import { Credentials, Payload } from './common/types';
 
@@ -52,6 +53,10 @@ export class ImgurClient extends EventEmitter {
 
   favoriteImage(imageHash: string) {
     return favoriteImage(this, imageHash);
+  }
+
+  getGallery(options: GalleryOptions) {
+    return getGallery(this, options);
   }
 
   getImage(imageHash: string) {

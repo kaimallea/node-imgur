@@ -28,9 +28,68 @@ export function isLogin(arg: any): arg is Login {
     arg.password !== undefined
   );
 }
+interface CommonData {
+  id: string;
+  title: string | null;
+  description: string | null;
+  datetime: number;
+  link: string;
+
+  ad_type: number;
+  ad_url: string;
+  account_url: string | null;
+  account_id: string | null;
+  favorite: boolean;
+  is_ad: boolean;
+  in_gallery: boolean;
+  in_most_viral: boolean;
+  nsfw: boolean | null;
+  points: number | null;
+  section: string | null;
+  tags: string[];
+  vote: null;
+
+  comment_count: number | null;
+  favorite_count: number | null;
+  ups: number | null;
+  downs: number | null;
+  score: number | null;
+  views: number;
+}
+export interface ImageData extends CommonData {
+  type: string;
+  width: number;
+  height: number;
+  size: number;
+  bandwidth: number;
+  animated: boolean;
+  has_sound: boolean;
+  edited: string;
+}
+
+export interface GalleryData extends CommonData {
+  cover: string | null;
+  cover_width: number | null;
+  cover_height: number | null;
+  layout: string;
+  privacy: string;
+  is_album: boolean;
+  topic: string | null;
+  topic_id: string | null;
+  include_album_ads: boolean;
+  images: ImageData[];
+  images_count: number;
+  ad_config: {
+    safeFlags: string[];
+    highRiskFlags: string[];
+    unsafeFlags: string[];
+    wallUnsafeFlags: string[];
+    showsAds: boolean;
+  };
+}
 
 export interface ImgurApiResponse {
-  data: Record<string, unknown> | string | boolean;
+  data: Record<string, unknown> | Record<string, unknown>[] | string | boolean;
   status: number;
   success: boolean;
 }

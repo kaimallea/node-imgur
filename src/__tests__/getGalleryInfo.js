@@ -2,7 +2,7 @@ import imgur from '../imgur.js';
 
 beforeAll(() => imgur.setClientId('abc123'));
 
-describe('getGalleryInfo()', () => {
+describe.skip('getGalleryInfo()', () => {
   describe('get gallery info response', () => {
     test('should fail when id is not passed', () => {
       const errMsg = 'Invalid gallery ID';
