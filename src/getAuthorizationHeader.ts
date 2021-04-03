@@ -1,8 +1,15 @@
-import { isAccessToken, isClientId, isLogin } from './common/types';
+import {
+  AccessToken,
+  isAccessToken,
+  isClientId,
+  isLogin,
+} from './common/types';
 import { ImgurClient } from './client';
 import { IMGUR_API_PREFIX, AUTHORIZE_ENDPOINT } from './common/endpoints';
 
-export async function getAuthorizationHeader(client: ImgurClient) {
+export async function getAuthorizationHeader(
+  client: ImgurClient
+): Promise<string> {
   if (isAccessToken(client.credentials)) {
     return `Bearer ${client.credentials.accessToken}`;
   }
@@ -13,7 +20,7 @@ export async function getAuthorizationHeader(client: ImgurClient) {
 
   const { clientId, username, password } = client.credentials;
 
-  const options: Record<string, any> = {
+  const options: Record<string, unknown> = {
     prefixUrl: IMGUR_API_PREFIX,
     searchParams: {
       client_id: clientId,
@@ -67,6 +74,6 @@ export async function getAuthorizationHeader(client: ImgurClient) {
   );
 
   const accessToken = token.access_token;
-  (client.credentials as any).accessToken = accessToken;
+  ((client.credentials as unknown) as AccessToken).accessToken = accessToken;
   return `Bearer ${accessToken}`;
 }

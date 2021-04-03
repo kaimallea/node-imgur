@@ -1,10 +1,14 @@
 import { rest } from 'msw';
+import { RestRequest, ResponseResolver, RestContext } from 'msw';
+
 import * as upload from './upload';
 import * as authorize from './authorize';
 import * as image from './image';
 import * as gallery from './gallery';
 import * as credits from './credits';
 import * as album from './album';
+
+export type Handler = ResponseResolver<RestRequest, RestContext>;
 
 export const handlers = [
   //upload

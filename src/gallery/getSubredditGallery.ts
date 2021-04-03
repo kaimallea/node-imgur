@@ -18,7 +18,9 @@ export type TopOptions = Omit<TimeOptions, 'sort'> & {
 
 export type SubredditGalleryOptions = TimeOptions | TopOptions;
 
-export function constructSubredditGalleryUrl(options: SubredditGalleryOptions) {
+export function constructSubredditGalleryUrl(
+  options: SubredditGalleryOptions
+): URL {
   let uri = `${options.subreddit}`;
 
   if (options.sort) {
@@ -43,7 +45,7 @@ export function constructSubredditGalleryUrl(options: SubredditGalleryOptions) {
 export async function getSubredditGallery(
   client: ImgurClient,
   options: SubredditGalleryOptions
-) {
+): Promise<ImgurApiResponse<GalleryData>> {
   const { pathname } = constructSubredditGalleryUrl(options);
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);

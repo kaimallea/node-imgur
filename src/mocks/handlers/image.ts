@@ -1,3 +1,5 @@
+import { Handler } from './';
+
 const SuccessResponse = {
   data: true,
   success: true,
@@ -10,7 +12,7 @@ const FavoriteSuccessResponse = {
   status: 200,
 };
 
-export function getHandler(req, res, ctx) {
+export const getHandler: Handler = (req, res, ctx) => {
   const { id } = req.params;
   const response = {
     data: {
@@ -22,16 +24,16 @@ export function getHandler(req, res, ctx) {
     status: 200,
   };
   return res(ctx.json(response));
-}
+};
 
-export function postHandler(_req, res, ctx) {
+export const postHandler: Handler = (_req, res, ctx) => {
   return res(ctx.json(SuccessResponse));
-}
+};
 
-export function deleteHandler(req, res, ctx) {
+export const deleteHandler: Handler = (_req, res, ctx) => {
   return res(ctx.json(SuccessResponse));
-}
+};
 
-export function postFavoriteHandler(req, res, ctx) {
+export const postFavoriteHandler: Handler = (_req, res, ctx) => {
   return res(ctx.json(FavoriteSuccessResponse));
-}
+};

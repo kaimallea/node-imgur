@@ -1,4 +1,6 @@
-export function getHandler(req, res, ctx) {
+import { Handler } from './';
+
+export const getHandler: Handler = (_req, res, ctx) => {
   // const { section, sort, window, page } = req.params;
   const response = {
     data: [
@@ -21,4 +23,4 @@ export function getHandler(req, res, ctx) {
     status: 200,
   };
   return res(ctx.json(response));
-}
+};
