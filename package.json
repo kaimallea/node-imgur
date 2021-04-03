@@ -22,6 +22,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
+    "test:ci": "jest --ci --coverage --runInBand",
     "build": "babel --extensions '.ts' src --out-dir lib && npm run types",
     "types": "tsc --build tsconfig.json",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
