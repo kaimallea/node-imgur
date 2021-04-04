@@ -1,6 +1,7 @@
 import { ImgurClient } from '../client';
 import { GALLERY_ENDPOINT, IMGUR_API_PREFIX } from '../common/endpoints';
 import { ImgurApiResponse, GalleryData } from '../common/types';
+import { URL } from 'url';
 
 export type CommonSectionProps = {
   sort?: 'viral' | 'top' | 'time';

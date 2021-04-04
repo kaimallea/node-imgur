@@ -6,7 +6,6 @@
 .github
 
 jest.*.js
-babel.config.json
 tsconfig.json
 
 src

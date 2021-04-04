@@ -4,6 +4,7 @@ import {
   IMGUR_API_PREFIX,
 } from '../common/endpoints';
 import { ImgurApiResponse, GalleryData } from '../common/types';
+import { URL } from 'url';
 
 export type TimeOptions = {
   subreddit: string;

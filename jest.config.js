@@ -1,7 +1,8 @@
 module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
   rootDir: './src',
   setupFilesAfterEnv: ['<rootDir>/mocks/jest.setup.ts'],
-  testMatch: ['<rootDir>/**/*.test.ts'],
   coveragePathIgnorePatterns: ['<rootDir>/mocks'],
   coverageDirectory: '<rootDir>/coverage/',
   coverageThreshold: {
