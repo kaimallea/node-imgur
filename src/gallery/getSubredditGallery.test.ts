@@ -38,7 +38,7 @@ test('constructGalleryUrl', () => {
   );
 });
 
-test('returns an image response', async () => {
+test('returns a gallery response', async () => {
   const accessToken = 'abc123';
   const client = new ImgurClient({ accessToken });
   const response = await getSubredditGallery(client, {
