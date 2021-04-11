@@ -6,10 +6,11 @@
 .github
 
 jest.*.js
-babel.config.json
 tsconfig.json
 
 src
 
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+
+*.code-workspace

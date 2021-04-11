@@ -1,3 +1,11 @@
+/**
+ * @jest-environment jsdom
+ *
+ * msw's parseMultipartData method calls `new File(..)` which breaks when jest-environment is set to `node`,
+ * because `File` is only available in browsers. The current workaround is to set these upload tests to
+ * run in the `jsdom` environment so that `File` is available.
+ */
+
 import { ImgurClient } from '../client';
 import { upload } from './upload';
 

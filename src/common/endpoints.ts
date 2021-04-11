@@ -11,3 +11,5 @@ export const UPLOAD_ENDPOINT = `${API_VERSION}/upload`;
 export const GALLERY_ENDPOINT = `${API_VERSION}/gallery`;
 
 export const SUBREDDIT_GALLERY_ENDPOINT = `${API_VERSION}/gallery/r`;
+
+export const SEARCH_GALLERY_ENDPOINT = `${API_VERSION}/gallery/search`;
