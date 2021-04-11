@@ -14,6 +14,8 @@ import {
   getGallery,
   getSubredditGallery,
   SubredditGalleryOptions,
+  searchGallery,
+  SearchGalleryOptions,
 } from './gallery';
 import { IMGUR_API_PREFIX } from './common/endpoints';
 import {
@@ -80,6 +82,12 @@ export class ImgurClient extends EventEmitter {
     options: SubredditGalleryOptions
   ): Promise<ImgurApiResponse<GalleryData>> {
     return getSubredditGallery(this, options);
+  }
+
+  searchGallery(
+    options: SearchGalleryOptions
+  ): Promise<ImgurApiResponse<GalleryData>> {
+    return searchGallery(this, options);
   }
 
   getImage(imageHash: string): Promise<ImgurApiResponse<ImageData>> {
