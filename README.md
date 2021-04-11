@@ -226,3 +226,31 @@ client.getSubredditGallery({
 | `sort`      | optional | `time` \| `top` - defaults to time                                                                                                                  |
 | `page`      | optional | `number` - the data paging number                                                                                                                   |
 | `window`    | optional | Change the date range of the request if the section is `top`. Accepted values are `day` \| `week` \| `month` \| `year` \| `all`. Defaults to `week` |
+
+### Search the gallery
+
+```ts
+client.searchGallery({
+  query: 'title: memes',
+});
+```
+
+`searchGallery()` accepts an object of type `SearchGalleryOptions`. The follow options are available:
+
+| Key            | Required | Description                                                           |
+| -------------- | -------- | --------------------------------------------------------------------- | ------ | ------- | ------ | ------------------------- |
+| `query` or `q` | required | Query string                                                          |
+| `sort`         | optional | `time` \| `viral` \| `top` - defaults to time                         |
+| `page`         | optional | `number` - the data paging number                                     |
+| `window`       | optional | Change the date range of the request if the sort is `top` -- to `day` | `week` | `month` | `year` | `all`, defaults to `all`. |
+
+Additionally, the following advanced search query options can be set (NOTE: if any of the below are set in the options, the `query` option is ignored and these will take precedent):
+
+| Key         | Required | Description                                                                                                                                                                                                        |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `q_all`     | optional | Search for all of these words (and)                                                                                                                                                                                |
+| `q_any`     | optional | Search for any of these words (or)                                                                                                                                                                                 |
+| `q_exactly` | optional | Search for exactly this word or phrase                                                                                                                                                                             |
+| `q_not`     | optional | Exclude results matching this string                                                                                                                                                                               |
+| `q_type`    | optional | Show results for any file type, `jpg` \| `png` \| `gif` \| `anigif` (animated gif) \| `album`                                                                                                                      |
+| `q_size_px` | optional | Size ranges, `small` (500 pixels square or less) \| `med` (500 to 2,000 pixels square) \| `big` (2,000 to 5,000 pixels square) \| `lrg` (5,000 to 10,000 pixels square) \| `huge` (10,000 square pixels and above) |
