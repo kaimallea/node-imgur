@@ -254,3 +254,9 @@ Additionally, the following advanced search query options can be set (NOTE: if a
 | `q_not`     | optional | Exclude results matching this string                                                                                                                                                                               |
 | `q_type`    | optional | Show results for any file type, `jpg` \| `png` \| `gif` \| `anigif` (animated gif) \| `album`                                                                                                                      |
 | `q_size_px` | optional | Size ranges, `small` (500 pixels square or less) \| `med` (500 to 2,000 pixels square) \| `big` (2,000 to 5,000 pixels square) \| `lrg` (5,000 to 10,000 pixels square) \| `huge` (10,000 square pixels and above) |
+
+### Get album info
+
+```ts
+const album = await client.getAlbum('XtMnA');
+```
