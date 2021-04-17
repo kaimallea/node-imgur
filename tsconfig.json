@@ -1,0 +1,23 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["src/coverage/", "src/mocks/", "src/**/*.test.ts"],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "rootDir": "./src",
+    "outDir": "lib",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
