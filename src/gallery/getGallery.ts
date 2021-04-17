@@ -2,6 +2,7 @@ import { ImgurClient } from '../client';
 import { GALLERY_ENDPOINT, IMGUR_API_PREFIX } from '../common/endpoints';
 import { ImgurApiResponse, GalleryData } from '../common/types';
 import { URL } from 'url';
+import { getImgurApiResponseFromResponse } from '../common/utils';
 
 export type CommonSectionProps = {
   sort?: 'viral' | 'top' | 'time';
@@ -82,7 +83,5 @@ export async function getGallery(
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);
 
-  return (await client
-    .request(finalPathname)
-    .json()) as ImgurApiResponse<GalleryData>;
+  return getImgurApiResponseFromResponse(await client.request({ url: finalPathname })) as ImgurApiResponse<GalleryData>;
 }

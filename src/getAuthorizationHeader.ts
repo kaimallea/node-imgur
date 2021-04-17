@@ -21,14 +21,15 @@ export async function getAuthorizationHeader(
   const { clientId, username, password } = client.credentials;
 
   const options: Record<string, unknown> = {
-    prefixUrl: IMGUR_API_PREFIX,
-    searchParams: {
+    url: AUTHORIZE_ENDPOINT,
+    baseURL: IMGUR_API_PREFIX,
+    params: {
       client_id: clientId,
       response_type: 'token',
     },
   };
 
-  let response = await client.plainRequest(AUTHORIZE_ENDPOINT, options);
+  let response = await client.plainRequest(options);
 
   const cookies = Array.isArray(response.headers['set-cookie'])
     ? response.headers['set-cookie'][0]
@@ -47,7 +48,7 @@ export async function getAuthorizationHeader(
   const authorizeToken = matches[2];
 
   options.method = 'POST';
-  options.form = {
+  options.data = {
     username,
     password,
     allow: authorizeToken,
@@ -58,7 +59,7 @@ export async function getAuthorizationHeader(
     cookie: `authorize_token=${authorizeToken}`,
   };
 
-  response = await client.plainRequest(AUTHORIZE_ENDPOINT, options);
+  response = await client.plainRequest(options);
   const location = response.headers.location;
   if (!location) {
     throw new Error('Unable to parse location');
@@ -75,5 +76,6 @@ export async function getAuthorizationHeader(
 
   const accessToken = token.access_token;
   ((client.credentials as unknown) as AccessToken).accessToken = accessToken;
+  
   return `Bearer ${accessToken}`;
 }

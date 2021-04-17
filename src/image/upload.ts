@@ -1,8 +1,11 @@
 import { ImgurClient } from '../client';
-import { createForm, getSource } from '../common/utils';
+import {
+  createForm,
+  getImgurApiResponseFromResponse,
+  // getSource,
+} from '../common/utils';
 import { Payload, ImgurApiResponse, ImageData } from '../common/types';
 import { UPLOAD_ENDPOINT } from '../common/endpoints';
-import { Progress } from 'got';
 
 export async function upload(
   client: ImgurClient,
@@ -11,33 +14,38 @@ export async function upload(
   if (Array.isArray(payload)) {
     const promises = payload.map((p: string | Payload) => {
       const form = createForm(p);
-      const req = client.request(UPLOAD_ENDPOINT, {
-        method: 'POST',
-        body: form,
-        resolveBodyOnly: true,
-      });
 
-      const id = getSource(p);
-      req.on('uploadProgress', (progress: Progress) => {
-        client.emit('uploadProgress', { ...progress, id });
-      });
-
-      return (req as unknown) as Promise<ImgurApiResponse<ImageData>>;
+      /* eslint no-async-promise-executor: 0 */
+      return new Promise(async (resolve) => {
+        resolve(getImgurApiResponseFromResponse(
+            await client.request({
+              url: UPLOAD_ENDPOINT,
+              method: 'POST',
+              data: form,
+              onUploadProgress: (progressEvent) => {
+                console.log({ progressEvent });
+                client.emit('uploadProgress', { ...progressEvent });
+              },
+            })
+          ) as ImgurApiResponse<ImageData>);
+      }) as Promise<ImgurApiResponse<ImageData>>;
     });
     return await Promise.all(promises);
   }
 
   const form = createForm(payload);
-  const req = client.request(UPLOAD_ENDPOINT, {
+  // const id = Date.now.toString();
+  const request = await client.request({
+    url: UPLOAD_ENDPOINT,
     method: 'POST',
-    body: form,
-    resolveBodyOnly: true,
+    data: form,
+    onUploadProgress: (progressEvent) => {
+      console.log({ progressEvent });
+      client.emit('uploadProgress', { ...progressEvent });
+    },
   });
 
-  const id = getSource(payload);
-  req.on('uploadProgress', (progress) => {
-    client.emit('uploadProgress', { ...progress, id });
-  });
-
-  return ((await req) as unknown) as ImgurApiResponse<ImageData>;
+  return Promise.resolve(
+    getImgurApiResponseFromResponse(request) as ImgurApiResponse<ImageData>
+  );
 }

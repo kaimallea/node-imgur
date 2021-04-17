@@ -1,6 +1,6 @@
 import { ImgurClient } from '../client';
 import { IMAGE_ENDPOINT } from '../common/endpoints';
-import { createForm } from '../common/utils';
+import { createForm, getImgurApiResponseFromResponse } from '../common/utils';
 import { Payload, ImgurApiResponse } from '../common/types';
 
 export interface UpdateImagePayload
@@ -24,11 +24,15 @@ export async function updateImage(
 
       const url = `${IMAGE_ENDPOINT}/${p.imageHash}`;
       const form = createForm(p);
-      return (client.request(url, {
-        method: 'POST',
-        body: form,
-        resolveBodyOnly: true,
-      }) as unknown) as Promise<ImgurApiResponse<boolean>>;
+      /* eslint no-async-promise-executor: 0 */
+      return new Promise(async function(resolve) {
+          return resolve(getImgurApiResponseFromResponse(await client.request({
+            url,
+            method: 'POST',
+            data: form,
+            // resolveBodyOnly: true,
+          })) as ImgurApiResponse<boolean>)
+        }) as Promise<ImgurApiResponse<boolean>>;
     });
 
     return await Promise.all(promises);
@@ -40,9 +44,10 @@ export async function updateImage(
 
   const url = `${IMAGE_ENDPOINT}/${payload.imageHash}`;
   const form = createForm(payload);
-  return ((await client.request(url, {
+  return getImgurApiResponseFromResponse(await client.request({
+    url,
     method: 'POST',
-    body: form,
-    resolveBodyOnly: true,
-  })) as unknown) as ImgurApiResponse<boolean>;
+    data: form,
+    // resolveBodyOnly: true,
+  })) as ImgurApiResponse<boolean>
 }

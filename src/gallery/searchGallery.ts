@@ -1,6 +1,7 @@
 import { ImgurClient } from '../client';
 import { SEARCH_GALLERY_ENDPOINT, IMGUR_API_PREFIX } from '../common/endpoints';
 import { ImgurApiResponse, GalleryData } from '../common/types';
+import { getImgurApiResponseFromResponse } from '../common/utils';
 import { URL } from 'url';
 
 export type SearchOptions = {
@@ -79,7 +80,5 @@ export async function searchGallery(
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);
 
-  return (await client
-    .request(finalPathname)
-    .json()) as ImgurApiResponse<GalleryData>;
+  return getImgurApiResponseFromResponse(await client.request({ url: finalPathname })) as ImgurApiResponse<GalleryData>;
 }

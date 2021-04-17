@@ -22,7 +22,5 @@ test('retrieves access token from imgur via provided username/password/clientid'
     clientId: 'fakeclientd',
   });
   const authorizationHeader = await getAuthorizationHeader(client);
-  expect(authorizationHeader).toMatchInlineSnapshot(
-    `"Bearer 123accesstoken456"`
-  );
+  expect(authorizationHeader).toMatchInlineSnapshot(`"Bearer 123accesstoken456"`);
 });

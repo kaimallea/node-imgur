@@ -5,6 +5,7 @@ import {
 } from '../common/endpoints';
 import { ImgurApiResponse, GalleryData } from '../common/types';
 import { URL } from 'url';
+import { getImgurApiResponseFromResponse } from '../common/utils';
 
 export type TimeOptions = {
   subreddit: string;
@@ -51,7 +52,5 @@ export async function getSubredditGallery(
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);
 
-  return (await client
-    .request(finalPathname)
-    .json()) as ImgurApiResponse<GalleryData>;
+  return getImgurApiResponseFromResponse(await client.request({ url: finalPathname })) as ImgurApiResponse<GalleryData>;
 }

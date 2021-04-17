@@ -1,3 +1,5 @@
+import { Readable } from "stream";
+
 export interface AccessToken {
   accessToken: string;
 }
@@ -27,14 +29,6 @@ export function isLogin(arg: unknown): arg is Login {
     (arg as Login).username !== undefined &&
     (arg as Login).password !== undefined
   );
-}
-
-export interface ImgurApiResponse<
-  T = Record<string, unknown> | Record<string, unknown>[] | string | boolean
-> {
-  data: T;
-  status: number;
-  success: boolean;
 }
 
 interface CommonData {
@@ -127,11 +121,19 @@ export interface AlbumData extends CommonData {
 export type GalleryData = Array<ImageData | AlbumData>;
 export interface Payload {
   image?: string;
-  video?: string;
-  type?: 'file' | 'url' | 'base64';
+  base64?: string;
+  type?: 'stream' | 'url' | 'base64';
   name?: string;
   title?: string;
   description?: string;
   album?: string;
+  stream?: Readable;
   disable_audio?: '1' | '0';
+}
+export interface ImgurApiResponse<
+  T = Record<string, unknown> | Record<string, unknown>[] | string | boolean | ImageData | GalleryData | AlbumData
+> {
+  data: T;
+  status: number;
+  success: boolean;
 }

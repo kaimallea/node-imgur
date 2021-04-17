@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events';
-import got, { CancelableRequest, ExtendOptions, Response, Got } from 'got';
 import { getAuthorizationHeader } from './getAuthorizationHeader';
 import {
   deleteImage,
@@ -17,8 +16,10 @@ import {
   searchGallery,
   SearchGalleryOptions,
 } from './gallery';
+import { getAlbum } from './album';
 import { IMGUR_API_PREFIX } from './common/endpoints';
 import {
+  AlbumData,
   Credentials,
   GalleryData,
   ImageData,
@@ -28,42 +29,45 @@ import {
 
 const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+
 export class ImgurClient extends EventEmitter {
-  private got: Got;
-  private gotExtended: Got;
+  private plainFetcher: AxiosInstance;
+  private fetcher: AxiosInstance;
+
   constructor(readonly credentials: Credentials) {
     super();
-    this.got = got.extend();
-    this.gotExtended = this.got.extend({
-      prefixUrl: IMGUR_API_PREFIX,
+
+    this.plainFetcher = axios.create({
+      baseURL: IMGUR_API_PREFIX,
       headers: {
         'user-agent': USERAGENT,
       },
       responseType: 'json',
-      hooks: {
-        beforeRequest: [
-          async (options) => {
-            options.headers['authorization'] = await getAuthorizationHeader(
-              this
-            );
-          },
-        ],
-      },
     });
+    this.fetcher = axios.create({
+      baseURL: IMGUR_API_PREFIX,
+      headers: {
+        'user-agent': USERAGENT,
+      },
+      responseType: 'json',
+    });
+    this.fetcher.interceptors.request.use(
+      async (config: AxiosRequestConfig) => {
+        config.headers = config.headers ? config.headers : {};
+        config.headers.authorization = await getAuthorizationHeader(this);
+        return config;
+      },
+      (e: Error) => Promise.reject(e)
+    );
   }
 
-  plainRequest(
-    url: string,
-    options: ExtendOptions = {}
-  ): CancelableRequest<Response<unknown>> {
-    return this.got.extend(options)(url);
+  plainRequest(options: AxiosRequestConfig): Promise<AxiosResponse<unknown>> {
+    return this.plainFetcher(options);
   }
 
-  request(
-    url: string,
-    options: ExtendOptions = {}
-  ): CancelableRequest<Response<string>> {
-    return this.gotExtended.extend(options)(url);
+  request(options: AxiosRequestConfig = {}): Promise<AxiosResponse<unknown>> {
+    return this.fetcher(options);
   }
 
   deleteImage(imageHash: string): Promise<ImgurApiResponse<boolean>> {
@@ -72,6 +76,10 @@ export class ImgurClient extends EventEmitter {
 
   favoriteImage(imageHash: string): Promise<ImgurApiResponse<string>> {
     return favoriteImage(this, imageHash);
+  }
+
+  getAlbum(albumHash: string): Promise<ImgurApiResponse<AlbumData>> {
+    return getAlbum(this, albumHash);
   }
 
   getGallery(options: GalleryOptions): Promise<ImgurApiResponse<GalleryData>> {

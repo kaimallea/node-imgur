@@ -65,6 +65,7 @@ You can upload one or more files by simply passing a path to a file or array of 
 ```ts
 // a single image via an absolute path
 const response = await client.upload('/home/kai/dank-meme.jpg');
+const { createReadStream } = require('fs');
 console.log(response.link);
 
 // multiple images via an array of absolute paths
@@ -78,9 +79,9 @@ responses.forEach((r) => console.log(r.link));
 If you want to provide metadata, such as a title, description, etc., then pass an object instead of a string:
 
 ```ts
-// a single image via an absolute path
+// a single image via a readable stream
 const response = await client.upload({
-  image: '/home/kai/dank-meme.jpg',
+  stream: createReadStream('/home/kai/dank-meme.jpg'),
   title: 'Meme',
   description: 'Dank Meme',
 });
@@ -89,12 +90,12 @@ console.log(response.link);
 // multiple images via an array of absolute paths
 const responses = await client.upload([
   {
-    image: '/home/kai/dank-meme.jpg',
+    stream: createReadStream('/home/kai/dank-meme.jpg'),
     title: 'Meme',
     description: 'Dank Meme',
   },
   {
-    video: '/home/kai/cat.mp4',
+    stream: createReadStream('/home/kai/cat.mp4'),
     title: 'A Cat Movie',
     description: 'Caturday',
   },
@@ -106,10 +107,11 @@ Acceptable key/values match what [the Imgur API expects](https://apidocs.imgur.c
 
 | Key             | Description                                                                                                                         |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `image`         | A string that is either a path binary file, a base64 string, or a URL pointing to a remote image (up to 10MB)                       |
-| `video`         | A string that is a path to binary file (up to 200MB)                                                                                |
+| `image`         | A string that is a URL pointing to a remote image (up to 10MB)                                                                      |
+| `stream`        | A readable stream that is to be piped to the upload method                                                                          |
+| `base64`        | A base 64 object that is to be placed in the the upload form                                                                        |
 | `album`         | The id of the album you want to add the media to. For anonymous albums, album should be the deletehash that is returned at creation |
-| `type`          | The type of the media that's being transmitted; `file`, `base64` or `url`                                                           |
+| `type`          | The type of the media that's being transmitted; `stream`, `base64` or `url`                                                         |
 | `name`          | The name of the media. This is automatically detected, but you can override                                                         |
 | `title`         | The title of the media                                                                                                              |
 | `description`   | The description of the media                                                                                                        |
@@ -254,3 +256,9 @@ Additionally, the following advanced search query options can be set (NOTE: if a
 | `q_not`     | optional | Exclude results matching this string                                                                                                                                                                               |
 | `q_type`    | optional | Show results for any file type, `jpg` \| `png` \| `gif` \| `anigif` (animated gif) \| `album`                                                                                                                      |
 | `q_size_px` | optional | Size ranges, `small` (500 pixels square or less) \| `med` (500 to 2,000 pixels square) \| `big` (2,000 to 5,000 pixels square) \| `lrg` (5,000 to 10,000 pixels square) \| `huge` (10,000 square pixels and above) |
+
+### Get album info
+
+```ts
+const album = await client.getAlbum('XtMnA');
+```

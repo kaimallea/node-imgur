@@ -8,9 +8,20 @@ import * as gallery from './gallery';
 import * as credits from './credits';
 import * as album from './album';
 
+// import axios from 'axios';
+// import MockAdapter from 'axios-mock-adapter';
+// const mock = new MockAdapter(axios);
+
 export type Handler = ResponseResolver<RestRequest, RestContext>;
 
 export const handlers = [
+
+  // authorize
+  rest.get('https://api.imgur.com/oauth2/authorize', authorize.getHandler),
+  rest.post('https://api.imgur.com/oauth2/authorize', authorize.postHandler),
+
+
+
   //upload
   rest.post('https://api.imgur.com/3/upload', upload.postHandler),
 
@@ -26,13 +37,9 @@ export const handlers = [
   ),
   rest.delete('https://api.imgur.com/3/image/:id', image.deleteHandler),
 
-  // authorize
-  rest.get('https://api.imgur.com/oauth2/authorize', authorize.getHandler),
-  rest.post('https://api.imgur.com/oauth2/authorize', authorize.postHandler),
-
   // credits
   rest.get('https://api.imgur.com/3/credits', credits.getHandler),
 
   // album
-  rest.post('https://api.imgur.com/3/album', album.postHandler),
+  rest.get('https://api.imgur.com/3/album/:id', album.getHandler),
 ];

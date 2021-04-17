@@ -1,22 +1,42 @@
-import { createReadStream } from 'fs';
+import { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import { Payload } from './types';
+import { ImgurApiResponse, Payload } from './types';
+import { Readable } from 'stream';
 
-export function isVideo(payload: string | Payload): boolean {
+export function isBase64(payload: string | Payload): boolean {
   if (typeof payload === 'string') {
     return false;
   }
 
-  return typeof payload.video === 'string';
+  return typeof payload.base64 !== 'undefined' && payload.type === 'base64';
 }
 
-export function getSource(payload: string | Payload): string {
+export function isImageUrl(payload: string | Payload): boolean {
+  if (typeof payload === 'string') {
+    return true;
+  }
+
+  return typeof payload.image !== 'undefined' && payload.type === 'url';
+}
+
+export function isStream(payload: string | Payload): boolean {
+  if (typeof payload === 'string') {
+    return false;
+  }
+
+  return typeof payload.stream !== 'undefined';
+}
+
+// TODO: Refactor this to be a unique name of some kind (a hash?)
+export function getSource(payload: string | Payload): string | Readable {
   if (typeof payload === 'string') {
     return payload;
   }
 
-  if (isVideo(payload)) {
-    return payload.video as string;
+  if (isBase64(payload)) {
+    return "payload.base64" as string;
+  } else if (isStream(payload)) {
+    return "payload.stream" as string;
   } else {
     return payload.image as string;
   }
@@ -26,17 +46,34 @@ export function createForm(payload: string | Payload): FormData {
   const form = new FormData();
 
   if (typeof payload === 'string') {
-    form.append('image', createReadStream(payload));
+    form.append('image', payload);
     return form;
   }
 
   for (const [key, value] of Object.entries(payload)) {
-    if (key === 'image' || key === 'video') {
-      if (!payload.type || payload.type === 'file')
-        form.append(key, createReadStream(value));
+    const supportedUploadObjectTypes = ['base64', 'stream']
+    if (supportedUploadObjectTypes.indexOf(key) !== -1) {
+      if (supportedUploadObjectTypes.indexOf(payload.type as string) !== -1) {
+        form.append(key, payload);
+      }
     } else {
       form.append(key, value);
     }
   }
   return form;
+}
+
+export function getImgurApiResponseFromResponse(
+  response: AxiosResponse
+): ImgurApiResponse {
+  if (typeof response.data?.status !== 'undefined' && typeof response.data?.success !== 'undefined') {
+    return response.data
+  }
+
+  return {
+    data: response.data,
+    status: response.status,
+    // TODO: determine the success of the call?
+    success: true,
+  }
 }
