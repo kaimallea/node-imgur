@@ -99,16 +99,21 @@ const imgur = require('imgur');
 #### Dealing with client IDs:
 
 ```javascript
+// Change this cliend id to your own.
+const clientId = 'aCs53GSs4tga0ikp';
+
 // Setting
-imgur.setClientId('aCs53GSs4tga0ikp');
+imgur.setClientId(clientId);
 
 // Getting
 imgur.getClientId();
 
+// You can specify path or keep it null. Defaults to ~/.imgur
+const path = null;
+
 // Saving to disk. Returns a promise.
-// NOTE: path is optional. Defaults to ~/.imgur
 imgur
-  .saveClientId(path)
+  .saveClientId(clientId, path)
   .then(() => {
     console.log('Saved.');
   })
@@ -117,7 +122,6 @@ imgur
   });
 
 // Loading from disk
-// NOTE: path is optional. Defaults to ~/.imgur
 imgur.loadClientId(path).then(imgur.setClientId);
 ```
 
