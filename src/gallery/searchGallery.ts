@@ -80,5 +80,7 @@ export async function searchGallery(
   // since we're using prefixUrl with got, we have to remove the starting slash or it'll throw
   const finalPathname = pathname.slice(1);
 
-  return getImgurApiResponseFromResponse(await client.request({ url: finalPathname })) as ImgurApiResponse<GalleryData>;
+  return getImgurApiResponseFromResponse(
+    await client.request({ url: finalPathname })
+  ) as ImgurApiResponse<GalleryData>;
 }

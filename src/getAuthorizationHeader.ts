@@ -76,6 +76,6 @@ export async function getAuthorizationHeader(
 
   const accessToken = token.access_token;
   ((client.credentials as unknown) as AccessToken).accessToken = accessToken;
-  
+
   return `Bearer ${accessToken}`;
 }

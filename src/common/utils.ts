@@ -34,9 +34,9 @@ export function getSource(payload: string | Payload): string | Readable {
   }
 
   if (isBase64(payload)) {
-    return "payload.base64" as string;
+    return 'payload.base64' as string;
   } else if (isStream(payload)) {
-    return "payload.stream" as string;
+    return 'payload.stream' as string;
   } else {
     return payload.image as string;
   }
@@ -51,7 +51,7 @@ export function createForm(payload: string | Payload): FormData {
   }
 
   for (const [key, value] of Object.entries(payload)) {
-    const supportedUploadObjectTypes = ['base64', 'stream']
+    const supportedUploadObjectTypes = ['base64', 'stream'];
     if (supportedUploadObjectTypes.indexOf(key) !== -1) {
       if (supportedUploadObjectTypes.indexOf(payload.type as string) !== -1) {
         form.append(key, payload);
@@ -66,8 +66,11 @@ export function createForm(payload: string | Payload): FormData {
 export function getImgurApiResponseFromResponse(
   response: AxiosResponse
 ): ImgurApiResponse {
-  if (typeof response.data?.status !== 'undefined' && typeof response.data?.success !== 'undefined') {
-    return response.data
+  if (
+    typeof response.data?.status !== 'undefined' &&
+    typeof response.data?.success !== 'undefined'
+  ) {
+    return response.data;
   }
 
   return {
@@ -75,5 +78,5 @@ export function getImgurApiResponseFromResponse(
     status: response.status,
     // TODO: determine the success of the call?
     success: true,
-  }
+  };
 }

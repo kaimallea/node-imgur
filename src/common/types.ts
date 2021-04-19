@@ -1,4 +1,4 @@
-import { Readable } from "stream";
+import { Readable } from 'stream';
 
 export interface AccessToken {
   accessToken: string;
@@ -131,7 +131,14 @@ export interface Payload {
   disable_audio?: '1' | '0';
 }
 export interface ImgurApiResponse<
-  T = Record<string, unknown> | Record<string, unknown>[] | string | boolean | ImageData | GalleryData | AlbumData
+  T =
+    | Record<string, unknown>
+    | Record<string, unknown>[]
+    | string
+    | boolean
+    | ImageData
+    | GalleryData
+    | AlbumData
 > {
   data: T;
   status: number;

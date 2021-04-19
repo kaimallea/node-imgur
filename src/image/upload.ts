@@ -17,7 +17,8 @@ export async function upload(
 
       /* eslint no-async-promise-executor: 0 */
       return new Promise(async (resolve) => {
-        resolve(getImgurApiResponseFromResponse(
+        resolve(
+          getImgurApiResponseFromResponse(
             await client.request({
               url: UPLOAD_ENDPOINT,
               method: 'POST',
@@ -27,7 +28,8 @@ export async function upload(
                 client.emit('uploadProgress', { ...progressEvent });
               },
             })
-          ) as ImgurApiResponse<ImageData>);
+          ) as ImgurApiResponse<ImageData>
+        );
       }) as Promise<ImgurApiResponse<ImageData>>;
     });
     return await Promise.all(promises);

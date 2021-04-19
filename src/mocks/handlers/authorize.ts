@@ -35,13 +35,13 @@ export const postHandler: Handler = (req, res, ctx) => {
   }
 
   /* eslint @typescript-eslint/no-explicit-any: 0 */
-  const { username, password, allow } = req.body as any
+  const { username, password, allow } = req.body as any;
 
   if (!(username && password && allow)) {
     return res(ctx.status(403), ctx.json(UnauthorizedErrorResponse));
   }
 
-  const redirectUrl = createRedirectUrl(username)
+  const redirectUrl = createRedirectUrl(username);
   return res(
     ctx.status(200),
     ctx.set('Location', redirectUrl),

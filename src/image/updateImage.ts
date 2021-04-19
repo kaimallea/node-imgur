@@ -25,14 +25,18 @@ export async function updateImage(
       const url = `${IMAGE_ENDPOINT}/${p.imageHash}`;
       const form = createForm(p);
       /* eslint no-async-promise-executor: 0 */
-      return new Promise(async function(resolve) {
-          return resolve(getImgurApiResponseFromResponse(await client.request({
-            url,
-            method: 'POST',
-            data: form,
-            // resolveBodyOnly: true,
-          })) as ImgurApiResponse<boolean>)
-        }) as Promise<ImgurApiResponse<boolean>>;
+      return new Promise(async function (resolve) {
+        return resolve(
+          getImgurApiResponseFromResponse(
+            await client.request({
+              url,
+              method: 'POST',
+              data: form,
+              // resolveBodyOnly: true,
+            })
+          ) as ImgurApiResponse<boolean>
+        );
+      }) as Promise<ImgurApiResponse<boolean>>;
     });
 
     return await Promise.all(promises);
@@ -44,10 +48,12 @@ export async function updateImage(
 
   const url = `${IMAGE_ENDPOINT}/${payload.imageHash}`;
   const form = createForm(payload);
-  return getImgurApiResponseFromResponse(await client.request({
-    url,
-    method: 'POST',
-    data: form,
-    // resolveBodyOnly: true,
-  })) as ImgurApiResponse<boolean>
+  return getImgurApiResponseFromResponse(
+    await client.request({
+      url,
+      method: 'POST',
+      data: form,
+      // resolveBodyOnly: true,
+    })
+  ) as ImgurApiResponse<boolean>;
 }

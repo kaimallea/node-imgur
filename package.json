@@ -26,9 +26,12 @@
     "build": "npx tsc",
     "compile": "npx webpack",
     "typecheck": "npx tsc --noEmit",
+    "eslint": "npx eslint . ",
+    "pretty": "npx prettier . --check ",
+    "pretty:write": "npx prettier .  --write ",
     "clean": "rm -rf lib",
     "prepare": "npx husky install",
-    "lint": "npx eslint . && prettier --check . && npm run typecheck",
+    "lint": "npm run eslint && npm run pretty && npm run typecheck",
     "commit": "npx cz"
   },
   "devDependencies": {

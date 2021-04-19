@@ -15,12 +15,9 @@ import * as album from './album';
 export type Handler = ResponseResolver<RestRequest, RestContext>;
 
 export const handlers = [
-
   // authorize
   rest.get('https://api.imgur.com/oauth2/authorize', authorize.getHandler),
   rest.post('https://api.imgur.com/oauth2/authorize', authorize.postHandler),
-
-
 
   //upload
   rest.post('https://api.imgur.com/3/upload', upload.postHandler),
