@@ -1,1 +1,1 @@
-export { ImgurClient } from './client';
+export { ImgurClient, ImgurCredentials } from './client';

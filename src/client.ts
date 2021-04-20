@@ -31,6 +31,7 @@ const USERAGENT = 'imgur/next (https://github.com/kaimallea/node-imgur)';
 
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 
+export type { Credentials as ImgurCredentials };
 export class ImgurClient extends EventEmitter {
   private plainFetcher: AxiosInstance;
   private fetcher: AxiosInstance;
