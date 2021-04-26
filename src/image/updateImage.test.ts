@@ -10,12 +10,12 @@ test('update one image with all props', async () => {
     description: 'description',
   });
   expect(response).toMatchInlineSnapshot(`
-      Object {
-        "data": true,
-        "status": 200,
-        "success": true,
-      }
-    `);
+    Object {
+      "data": true,
+      "status": 200,
+      "success": true,
+    }
+  `);
 });
 
 test('update one image with title only', async () => {
@@ -26,12 +26,12 @@ test('update one image with title only', async () => {
     title: 'new title',
   });
   expect(response).toMatchInlineSnapshot(`
-      Object {
-        "data": true,
-        "status": 200,
-        "success": true,
-      }
-    `);
+    Object {
+      "data": true,
+      "status": 200,
+      "success": true,
+    }
+  `);
 });
 
 test('update one image without title or description', async () => {
@@ -61,17 +61,17 @@ test('update multiple images, receive multiple response', async () => {
     },
   ]);
   expect(response).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "data": true,
-          "status": 200,
-          "success": true,
-        },
-        Object {
-          "data": true,
-          "status": 200,
-          "success": true,
-        },
-      ]
-    `);
+    Array [
+      Object {
+        "data": true,
+        "status": 200,
+        "success": true,
+      },
+      Object {
+        "data": true,
+        "status": 200,
+        "success": true,
+      },
+    ]
+  `);
 });

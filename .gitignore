@@ -2,3 +2,4 @@ node_modules
 lib
 src/coverage
 *.code-workspace
+dist
