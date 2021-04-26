@@ -34,5 +34,5 @@ export const handlers = [
   rest.get('https://api.imgur.com/3/credits', credits.getHandler),
 
   // album
-  rest.post('https://api.imgur.com/3/album', album.postHandler),
+  rest.get('https://api.imgur.com/3/album/:id', album.getHandler),
 ];

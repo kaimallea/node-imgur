@@ -17,8 +17,10 @@ import {
   searchGallery,
   SearchGalleryOptions,
 } from './gallery';
+import { getAlbum } from './album';
 import { IMGUR_API_PREFIX } from './common/endpoints';
 import {
+  AlbumData,
   Credentials,
   GalleryData,
   ImageData,
@@ -72,6 +74,10 @@ export class ImgurClient extends EventEmitter {
 
   favoriteImage(imageHash: string): Promise<ImgurApiResponse<string>> {
     return favoriteImage(this, imageHash);
+  }
+
+  getAlbum(albumHash: string): Promise<ImgurApiResponse<AlbumData>> {
+    return getAlbum(this, albumHash);
   }
 
   getGallery(options: GalleryOptions): Promise<ImgurApiResponse<GalleryData>> {
