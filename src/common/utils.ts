@@ -34,6 +34,9 @@ export function createForm(payload: string | Payload): FormData {
     if (key === 'image' || key === 'video') {
       if (!payload.type || payload.type === 'file')
         form.append(key, createReadStream(value));
+      else if (payload.type === "url") {
+        form.append(key, value)
+      }
     } else {
       form.append(key, value);
     }
