@@ -4,7 +4,7 @@ import { UpdateImagePayload } from './image';
 import { GalleryOptions, SubredditGalleryOptions, SearchGalleryOptions } from './gallery';
 import { AlbumData, Credentials, GalleryData, ImageData, ImgurApiResponse, Payload } from './common/types';
 import { AxiosResponse, AxiosRequestConfig } from 'axios';
-export type { Credentials as ImgurCredentials };
+export type { Credentials as ImgurCredentials, ImgurApiResponse, };
 export declare class ImgurClient extends EventEmitter {
     readonly credentials: Credentials;
     private plainFetcher;
