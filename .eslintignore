@@ -2,3 +2,5 @@ lib/
 src/coverage/
 dist/
 webpack.config.js
+./imgur.js
+./imgur.node.js
