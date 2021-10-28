@@ -24,7 +24,8 @@
     "test": "npx jest",
     "test:ci": "npx jest --ci --coverage --runInBand",
     "build": "npx tsc",
-    "compile": "npx webpack",
+    "compile": "webpack --mode development",
+    "compile:prod": "webpack --mode production && npm run expose",
     "typecheck": "npx tsc --noEmit",
     "eslint": "npx eslint . ",
     "pretty": "npx prettier . --check ",
@@ -42,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
     "axios-mock-adapter": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0",
     "commitizen": "^4.2.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.20.0",
@@ -58,7 +60,8 @@
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3",
     "webpack": "^5.33.2",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "lint-staged": {
     "*.ts": [
