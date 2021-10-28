@@ -32,6 +32,7 @@
     "pretty:write": "npx prettier .  --write ",
     "clean": "rm -rf lib",
     "prepare": "npx husky install",
+    "expose": "mv -v dist/* ./",
     "lint": "npm run eslint && npm run pretty && npm run typecheck",
     "commit": "npx cz"
   },
