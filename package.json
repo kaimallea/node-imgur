@@ -21,6 +21,12 @@
   "main": "./imgur.node.js",
   "browser": "./imgur.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "imgur.js",
+    "imgur.node.js",
+    "imgur.js.LICENSE.txt",
+    "package.json"
+  ],
   "scripts": {
     "test": "npx jest",
     "test:ci": "npx jest --ci --coverage --runInBand",
