@@ -22,6 +22,7 @@
   "browser": "imgur.js",
   "types": "lib/index.d.ts",
   "files": [
+    "lib/**/*",
     "imgur.js",
     "imgur.js.map",
     "imgur.node.js",
