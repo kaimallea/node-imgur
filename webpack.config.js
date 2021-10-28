@@ -49,7 +49,7 @@ const browserConfig = {
     path: path.resolve(__dirname, './dist'),
     filename: 'imgur.js',
     libraryTarget: 'umd',
-    // globalObject: 'this',
+    globalObject: 'this',
     libraryExport: 'default',
     umdNamedDefine: true,
     library: 'imgur',

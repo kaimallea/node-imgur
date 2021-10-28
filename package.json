@@ -25,7 +25,8 @@
     "imgur.js",
     "imgur.node.js",
     "imgur.js.LICENSE.txt",
-    "package.json"
+    "package.json",
+    "README.md"
   ],
   "scripts": {
     "test": "npx jest",
