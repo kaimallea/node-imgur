@@ -18,12 +18,14 @@
     "axios": "^0.21.1",
     "form-data": "^4.0.0"
   },
-  "main": "./imgur.node.js",
-  "browser": "./imgur.js",
+  "main": "imgur.node.js",
+  "browser": "imgur.js",
   "types": "lib/index.d.ts",
   "files": [
     "imgur.js",
+    "imgur.js.map",
     "imgur.node.js",
+    "imgur.node.js.map",
     "imgur.js.LICENSE.txt",
     "package.json",
     "README.md"

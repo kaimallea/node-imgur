@@ -1,0 +1,1 @@
+{"version":3,"file":"favoriteImage.js","sourceRoot":"","sources":["../../src/image/favoriteImage.ts"],"names":[],"mappings":";;;AACA,mDAAqD;AAErD,2CAAkE;AAE3D,KAAK,UAAU,aAAa,CACjC,MAAmB,EACnB,SAAiB;IAEjB,MAAM,GAAG,GAAG,GAAG,0BAAc,IAAI,SAAS,WAAW,CAAC;IACtD,OAAO,uCAA+B,CACpC,MAAM,MAAM,CAAC,OAAO,CAAC,EAAE,GAAG,EAAE,MAAM,EAAE,MAAM,EAAE,CAAC,CACb,CAAC;AACrC,CAAC;AARD,sCAQC"}
