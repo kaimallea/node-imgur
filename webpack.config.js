@@ -35,9 +35,7 @@ const nodeConfig = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'imgur.node.js',
-    globalObject: 'this',
     libraryTarget: 'umd',
-    libraryExport: 'default',
   },
 };
 
