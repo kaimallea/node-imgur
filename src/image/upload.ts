@@ -23,6 +23,7 @@ export async function upload(
               url: UPLOAD_ENDPOINT,
               method: 'POST',
               data: form,
+              headers: form.getHeaders(),
               onUploadProgress: (progressEvent) => {
                 console.log({ progressEvent });
                 client.emit('uploadProgress', { ...progressEvent });
@@ -41,6 +42,7 @@ export async function upload(
     url: UPLOAD_ENDPOINT,
     method: 'POST',
     data: form,
+    headers: form.getHeaders(),
     onUploadProgress: (progressEvent) => {
       console.log({ progressEvent });
       client.emit('uploadProgress', { ...progressEvent });
