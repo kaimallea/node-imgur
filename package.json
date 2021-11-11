@@ -32,20 +32,20 @@
     "README.md"
   ],
   "scripts": {
-    "test": "npx jest",
-    "test:ci": "npx jest --ci --coverage --runInBand",
-    "build": "npx tsc",
+    "test": "jest",
+    "test:ci": "jest --ci --coverage --runInBand",
+    "build": "tsc",
     "compile": "webpack --mode development",
     "compile:prod": "webpack --mode production && npm run expose",
-    "typecheck": "npx tsc --noEmit",
-    "eslint": "npx eslint . ",
-    "pretty": "npx prettier . --check ",
-    "pretty:write": "npx prettier .  --write ",
+    "typecheck": "tsc --noEmit",
+    "eslint": "eslint . ",
+    "pretty": "prettier . --check ",
+    "pretty:write": "prettier .  --write ",
     "clean": "rm -rf lib",
-    "prepare": "npx husky install",
+    "prepare": "husky install",
     "expose": "mv -v dist/* ./",
     "lint": "npm run eslint && npm run pretty && npm run typecheck",
-    "commit": "npx cz"
+    "commit": "cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
