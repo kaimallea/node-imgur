@@ -28,7 +28,6 @@ const generalConfig = {
 };
 
 const nodeConfig = {
-  devtool: 'inline-source-map',
   entry: './src/index.ts',
   target: 'node',
   externals: [nodeExternals()],
@@ -40,7 +39,6 @@ const nodeConfig = {
 };
 
 const browserConfig = {
-  devtool: 'inline-source-map',
   entry: './src/index.ts',
   target: 'web',
   output: {

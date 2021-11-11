@@ -32,7 +32,7 @@ export async function updateImage(
               url,
               method: 'POST',
               data: form,
-              // resolveBodyOnly: true,
+              headers: form.getHeaders(),
             })
           ) as ImgurApiResponse<boolean>
         );
@@ -53,7 +53,7 @@ export async function updateImage(
       url,
       method: 'POST',
       data: form,
-      // resolveBodyOnly: true,
+      headers: form.getHeaders(),
     })
   ) as ImgurApiResponse<boolean>;
 }
