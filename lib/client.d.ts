@@ -15,6 +15,8 @@ export declare class ImgurClient extends EventEmitter {
     deleteImage(imageHash: string): Promise<ImgurApiResponse<boolean>>;
     favoriteImage(imageHash: string): Promise<ImgurApiResponse<string>>;
     getAlbum(albumHash: string): Promise<ImgurApiResponse<AlbumData>>;
+    getAlbums(account: string, page?: number): Promise<ImgurApiResponse<AlbumData[]>>;
+    getAlbumsIds(account: string, page?: number): Promise<ImgurApiResponse<string[]>>;
     getGallery(options: GalleryOptions): Promise<ImgurApiResponse<GalleryData>>;
     getSubredditGallery(options: SubredditGalleryOptions): Promise<ImgurApiResponse<GalleryData>>;
     searchGallery(options: SearchGalleryOptions): Promise<ImgurApiResponse<GalleryData>>;

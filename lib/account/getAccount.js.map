@@ -1,0 +1,1 @@
+{"version":3,"file":"getAccount.js","sourceRoot":"","sources":["../../src/account/getAccount.ts"],"names":[],"mappings":";;;AACA,mDAAuD;AAEvD,2CAAkE;AAE3D,KAAK,UAAU,UAAU,CAC9B,MAAmB,EACnB,OAAe;IAEf,MAAM,GAAG,GAAG,GAAG,4BAAgB,IAAI,OAAO,EAAE,CAAC;IAC7C,OAAO,uCAA+B,CACpC,MAAM,MAAM,CAAC,YAAY,CAAC,EAAE,GAAG,EAAE,CAAC,CACF,CAAC;AACrC,CAAC;AARD,gCAQC"}

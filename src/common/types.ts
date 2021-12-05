@@ -118,6 +118,20 @@ export interface AlbumData extends CommonData {
   images_count: number;
 }
 
+export interface AccountData {
+  id: number
+  url: string
+  bio: string
+  avatar: string
+  reputation: number
+  reputation_name: string
+  created: number
+  pro_expiration: boolean
+  user_follow: {
+    status: boolean
+  }
+}
+
 export type GalleryData = Array<ImageData | AlbumData>;
 export interface Payload {
   image?: string;
@@ -135,10 +149,12 @@ export interface ImgurApiResponse<
     | Record<string, unknown>
     | Record<string, unknown>[]
     | string
+    | string[]
     | boolean
     | ImageData
     | GalleryData
     | AlbumData
+    | AccountData
 > {
   data: T;
   status: number;
