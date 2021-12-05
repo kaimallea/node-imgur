@@ -41,19 +41,18 @@ export class ImgurClient extends EventEmitter {
 
   constructor(readonly credentials: Credentials) {
     super();
+    const headers = typeof window !== 'undefined' ? {} : {
+      'user-agent': USERAGENT,
+    }
 
     this.plainFetcher = axios.create({
       baseURL: IMGUR_API_PREFIX,
-      headers: {
-        'user-agent': USERAGENT,
-      },
+      headers,
       responseType: 'json',
     });
     this.fetcher = axios.create({
       baseURL: IMGUR_API_PREFIX,
-      headers: {
-        'user-agent': USERAGENT,
-      },
+      headers, 
       responseType: 'json',
     });
     this.fetcher.interceptors.request.use(
