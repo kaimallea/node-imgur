@@ -8,7 +8,7 @@ export async function getAlbumsIds(
   account: string,
   page?: number
 ): Promise<ImgurApiResponse<string[]>> {
-  const url = `${ACCOUNT_ENDPOINT}/${account}/albums/ids/${page}`;
+  const url = `${ACCOUNT_ENDPOINT}/${account}/albums/ids/${page ?? ''}`;
   return getImgurApiResponseFromResponse(
     await client.request({ url })
   ) as ImgurApiResponse<string[]>;

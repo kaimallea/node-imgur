@@ -119,17 +119,17 @@ export interface AlbumData extends CommonData {
 }
 
 export interface AccountData {
-  id: number
-  url: string
-  bio: string
-  avatar: string
-  reputation: number
-  reputation_name: string
-  created: number
-  pro_expiration: boolean
+  id: number;
+  url: string;
+  bio: string;
+  avatar: string;
+  reputation: number;
+  reputation_name: string;
+  created: number;
+  pro_expiration: boolean;
   user_follow: {
-    status: boolean
-  }
+    status: boolean;
+  };
 }
 
 export type GalleryData = Array<ImageData | AlbumData>;
