@@ -7,6 +7,8 @@ import * as image from './image';
 import * as gallery from './gallery';
 import * as credits from './credits';
 import * as album from './album';
+import * as albums from './albums';
+import * as account from './account';
 
 // import axios from 'axios';
 // import MockAdapter from 'axios-mock-adapter';
@@ -39,4 +41,8 @@ export const handlers = [
 
   // album
   rest.get('https://api.imgur.com/3/album/:id', album.getHandler),
+
+  // account
+  rest.get('https://api.imgur.com/3/account/:username', account.getHandler),
+  rest.get('https://api.imgur.com/3/account/albums/:page', albums.getHandler),
 ];

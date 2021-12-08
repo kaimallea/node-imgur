@@ -2,7 +2,7 @@
   "author": "Ken Eucker <keneucker@gmail.com>",
   "name": "imanagur",
   "description": "Helps you manage your imgur album images",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "homepage": "https://github.com/keneucker/imanagur-core",
   "license": "MIT",
   "keywords": [
@@ -21,6 +21,16 @@
   "main": "imgur.node.js",
   "browser": "imgur.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "imgur.js",
+    "imgur.js.map",
+    "imgur.node.js",
+    "imgur.node.js.map",
+    "imgur.js.LICENSE.txt",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "test": "jest --verbose",
     "test:dev": "jest --silent=false",
