@@ -2,7 +2,7 @@
   "author": "Ken Eucker <keneucker@gmail.com>",
   "name": "imanagur",
   "description": "Helps you manage your imgur album images",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "homepage": "https://github.com/keneucker/imanagur-core",
   "license": "MIT",
   "keywords": [
