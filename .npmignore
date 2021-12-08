@@ -1,0 +1,16 @@
+.prettierignore
+.eslintrc.js
+.prettierrc.json
+.releaserc.json
+.husky
+.github
+
+jest.*.js
+tsconfig.json
+
+src
+
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+
+*.code-workspace

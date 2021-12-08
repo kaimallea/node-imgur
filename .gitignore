@@ -1,1 +1,8 @@
 node_modules
+lib
+src/coverage
+*.code-workspace
+dist
+.DS_Store
+imgur.js*
+imgur.node.js*

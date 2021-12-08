@@ -1,52 +1,77 @@
 {
-  "author": "Kai Mallea <kmallea@gmail.com>",
-  "name": "imgur",
-  "description": "Upload images to imgur.com",
-  "version": "0.3.2",
-  "homepage": "https://github.com/kaimallea/node-imgur",
+  "author": "Ken Eucker <keneucker@gmail.com>",
+  "name": "imanagur",
+  "description": "Helps you manage your imgur album images",
+  "version": "1.0.0",
+  "homepage": "https://github.com/keneucker/imanagur-core",
   "license": "MIT",
   "keywords": [
     "imgur",
-    "upload",
+    "edit",
     "images"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaimallea/node-imgur.git"
+    "url": "git://github.com/keneucker/imanagur-core.git"
   },
   "dependencies": {
-    "commander": "^2.3.0",
-    "form-data": "^4.0.0",
-    "got": "^11.8.1"
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0"
   },
-  "main": "lib/imgur.js",
-  "bin": {
-    "imgur": "./cli.js"
-  },
+  "main": "imgur.node.js",
+  "browser": "imgur.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
+    "test:dev": "jest --silent=false",
+    "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "build": "tsc",
+    "build:prod": "echo 'webpack handles the compilation process ✅'",
+    "compile": "webpack --mode development",
+    "compile:prod": "npm run remove-gun-log && webpack --mode production && npm run expose",
+    "analyse": "webpack --mode production --json | npx webpack-bundle-size-analyzer",
+    "expose": "cp -v dist/* ./",
+    "watch": "webpack --mode=development --watch --progress",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf lib dist _site biketag.js* biketag.node* test/src/**/*.js test/src/**/*.d.ts",
     "prepare": "husky install",
-    "lint": "eslint . && prettier --check .",
+    "lint": "npm run eslint && npm run pretty && npm run typecheck",
+    "lint:check": "eslint .",
+    "lint:write": "prettier . --write && eslint . --fix",
+    "lint:staged": "npx --no-install lint-staged",
     "commit": "cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@types/jest": "^26.0.22",
+    "@types/mock-fs": "^4.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "axios-mock-adapter": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0",
     "commitizen": "^4.2.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.1.0",
-    "husky": "^5.1.3",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "mock-fs": "^4.13.0",
-    "msw": "^0.27.0",
+    "msw": "^0.28.1",
+    "node-polyfill-webpack-plugin": "^1.1.0",
     "prettier": "^2.2.1",
-    "semantic-release": "^17.4.1"
+    "semantic-release": "^17.4.1",
+    "ts-jest": "^26.5.4",
+    "ts-loader": "^8.1.0",
+    "typescript": "^4.2.3",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
+    "*.ts": [
+      "eslint . --fix",
       "jest --bail --findRelatedTests"
     ],
     "*.{js,css,md,yml,yaml,json}": "prettier --write"
