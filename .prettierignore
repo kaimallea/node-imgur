@@ -3,4 +3,5 @@ lib/
 package-lock.json
 .github
 src/coverage/
-dist/
+imgur.js
+imgur.node.js

@@ -17,6 +17,7 @@ import {
   SearchGalleryOptions,
 } from './gallery';
 import { getAlbum } from './album';
+import { getAlbums, getAlbumsIds } from './account';
 import { IMGUR_API_PREFIX } from './common/endpoints';
 import {
   AlbumData,
@@ -38,19 +39,21 @@ export class ImgurClient extends EventEmitter {
 
   constructor(readonly credentials: Credentials) {
     super();
+    const headers =
+      typeof window !== 'undefined'
+        ? {}
+        : {
+            'user-agent': USERAGENT,
+          };
 
     this.plainFetcher = axios.create({
       baseURL: IMGUR_API_PREFIX,
-      headers: {
-        'user-agent': USERAGENT,
-      },
+      headers,
       responseType: 'json',
     });
     this.fetcher = axios.create({
       baseURL: IMGUR_API_PREFIX,
-      headers: {
-        'user-agent': USERAGENT,
-      },
+      headers,
       responseType: 'json',
     });
     this.fetcher.interceptors.request.use(
@@ -81,6 +84,20 @@ export class ImgurClient extends EventEmitter {
 
   getAlbum(albumHash: string): Promise<ImgurApiResponse<AlbumData>> {
     return getAlbum(this, albumHash);
+  }
+
+  getAlbums(
+    account: string,
+    page?: number
+  ): Promise<ImgurApiResponse<AlbumData[]>> {
+    return getAlbums(this, account, page);
+  }
+
+  getAlbumsIds(
+    account: string,
+    page?: number
+  ): Promise<ImgurApiResponse<string[]>> {
+    return getAlbumsIds(this, account, page);
   }
 
   getGallery(options: GalleryOptions): Promise<ImgurApiResponse<GalleryData>> {

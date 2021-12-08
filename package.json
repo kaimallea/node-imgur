@@ -21,6 +21,16 @@
   "main": "imgur.node.js",
   "browser": "imgur.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*",
+    "imgur.js",
+    "imgur.js.map",
+    "imgur.node.js",
+    "imgur.node.js.map",
+    "imgur.js.LICENSE.txt",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "test": "jest --verbose",
     "test:dev": "jest --silent=false",
