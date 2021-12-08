@@ -1,18 +1,18 @@
 {
-  "author": "Kai Mallea <kmallea@gmail.com>",
-  "name": "imgur",
-  "description": "Upload images to imgur.com",
+  "author": "Ken Eucker <keneucker@gmail.com>",
+  "name": "imanagur",
+  "description": "Helps you manage your imgur album images",
   "version": "1.0.0",
-  "homepage": "https://github.com/kaimallea/node-imgur",
+  "homepage": "https://github.com/keneucker/imanagur-core",
   "license": "MIT",
   "keywords": [
     "imgur",
-    "upload",
+    "edit",
     "images"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kaimallea/node-imgur.git"
+    "url": "git://github.com/keneucker/imanagur-core.git"
   },
   "dependencies": {
     "axios": "^0.21.1",

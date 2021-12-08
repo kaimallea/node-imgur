@@ -1,28 +1,24 @@
-<h1 align="center" style="border-bottom: none;">imgur</h1>
-<h3 align="center">Unofficial JavaScript library</h3>
+<h1 align="center" style="border-bottom: none;">imanagur</h1>
+<h3 align="center">Isomorphic Javascript library for managing Imgur albums</h3>
 <p align="center">
-  <a href="https://www.npmjs.com/package/imgur/v/next">
-    <img alt="npm next version" src="https://img.shields.io/npm/v/imgur/next.svg">
+  <a href="https://www.npmjs.com/package/imanagur">
+    <img alt="npm next version" src="https://img.shields.io/npm/v/imanagur/main.svg">
   </a>
-  <a href="https://github.com/kaimallea/node-imgur/actions?query=workflow%3ATests+branch%3Anext">
-    <img alt="Build states" src="https://github.com/kaimallea/node-imgur/workflows/Tests/badge.svg">
+  <a href="https://github.com/keneucker/imanagur-core/actions?query=workflow%3ATests+branch%3Anext">
+    <img alt="Build states" src="https://github.com/keneucker/imanagur-core/workflows/Tests/badge.svg">
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/kaimallea/node-imgur/discussions">
+  <a href="https://github.com/keneucker/imanagur-core/discussions">
     <img alt="Join the community on GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue">
   </a>
 </p>
 
-🚨 This is the active development branch for v2. It is continuously deployed and available via `npm install imgur@next`.
-
 ## Installation
 
 ```shell
-npm install imgur@next
+npm install imanagur
 ```
-
-Or find a specific versions to pin on [our npm page](https://www.npmjs.com/package/imgur/v/next?activeTab=versions).
 
 ## Usage
 
@@ -60,14 +56,7 @@ If you don't have any credentials, you'll need to:
 
 ### Upload one or more images and videos
 
-You can upload one or more files by simply passing a path to a file or array of paths to multiple files.
-
 ```ts
-// a single image via an absolute path
-const response = await client.upload('/home/kai/dank-meme.jpg');
-const { createReadStream } = require('fs');
-console.log(response.link);
-
 // multiple images via an array of absolute paths
 const responses = await client.upload([
   '/home/kai/dank-meme.jpg',
@@ -79,14 +68,6 @@ responses.forEach((r) => console.log(r.link));
 If you want to provide metadata, such as a title, description, etc., then pass an object instead of a string:
 
 ```ts
-// a single image via a readable stream
-const response = await client.upload({
-  stream: createReadStream('/home/kai/dank-meme.jpg'),
-  title: 'Meme',
-  description: 'Dank Meme',
-});
-console.log(response.link);
-
 // multiple images via an array of absolute paths
 const responses = await client.upload([
   {
