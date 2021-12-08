@@ -26,10 +26,10 @@ npm install imanagur
 
 ```ts
 // ESModule syntax
-import { ImgurClient } from 'imgur';
+import { ImgurClient } from 'imanagur';
 
 // CommonJS syntax
-const { ImgurClient } = require('imgur');
+const { ImgurClient } = require('imanagur');
 
 let client;
 
