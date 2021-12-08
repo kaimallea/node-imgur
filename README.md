@@ -2,7 +2,7 @@
 <h3 align="center">Isomorphic Javascript library for managing Imgur albums</h3>
 <p align="center">
   <a href="https://www.npmjs.com/package/imanagur">
-    <img alt="npm next version" src="https://img.shields.io/npm/v/imanagur/main.svg">
+    <img alt="npm version" src="https://img.shields.io/npm/v/imanagur/main.svg">
   </a>
   <a href="https://github.com/keneucker/imanagur-core/actions?query=workflow%3ATests+branch%3Anext">
     <img alt="Build states" src="https://github.com/keneucker/imanagur-core/workflows/Tests/badge.svg">
