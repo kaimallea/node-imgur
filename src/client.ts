@@ -28,7 +28,7 @@ import {
   Payload,
 } from './common/types';
 
-const USERAGENT = 'imanagur (https://github.com/keneucker/imanagur-core)';
+const USERAGENT = 'imgur (https://github.com/keneucker/imgur)';
 
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 

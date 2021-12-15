@@ -1,15 +1,15 @@
-<h1 align="center" style="border-bottom: none;">imanagur</h1>
-<h3 align="center">Isomorphic Javascript library for managing Imgur albums</h3>
+<h1 align="center" style="border-bottom: none;">imgur</h1>
+<h3 align="center">Unofficial JavaScript library</h3>
 <p align="center">
-  <a href="https://www.npmjs.com/package/imanagur">
-    <img alt="npm version" src="https://img.shields.io/npm/v/imanagur/main.svg">
+  <a href="https://www.npmjs.com/package/imgur">
+    <img alt="npm version" src="https://img.shields.io/npm/v/imgur/main.svg">
   </a>
-  <a href="https://github.com/keneucker/imanagur-core/actions?query=workflow%3ATests+branch%3Anext">
-    <img alt="Build states" src="https://github.com/keneucker/imanagur-core/workflows/Tests/badge.svg">
+  <a href="https://github.com/keneucker/imgur/actions?query=workflow%3ATests+branch%3Amain">
+    <img alt="Build states" src="https://github.com/keneucker/imgur/workflows/Tests/badge.svg">
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/keneucker/imanagur-core/discussions">
+  <a href="https://github.com/keneucker/imgur/discussions">
     <img alt="Join the community on GitHub Discussions" src="https://img.shields.io/badge/Join%20the%20community-on%20GitHub%20Discussions-blue">
   </a>
 </p>
@@ -17,7 +17,7 @@
 ## Installation
 
 ```shell
-npm install imanagur
+npm install imgur
 ```
 
 ## Usage
@@ -26,10 +26,10 @@ npm install imanagur
 
 ```ts
 // ESModule syntax
-import { ImgurClient } from 'imanagur';
+import { ImgurClient } from 'imgur';
 
 // CommonJS syntax
-const { ImgurClient } = require('imanagur');
+const { ImgurClient } = require('imgur');
 
 let client;
 

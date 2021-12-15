@@ -1,9 +1,9 @@
 {
-  "author": "Ken Eucker <keneucker@gmail.com>",
-  "name": "imanagur",
-  "description": "Helps you manage your imgur album images",
-  "version": "1.0.3",
-  "homepage": "https://github.com/keneucker/imanagur-core",
+  "author": "Kai Mallea <kmallea@gmail.com>",
+  "name": "imgur",
+  "description": "Unofficial JavaScript library for Imgur",
+  "version": "2.0.0",
+  "homepage": "https://github.com/keneucker/imgur",
   "license": "MIT",
   "keywords": [
     "imgur",
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/keneucker/imanagur-core.git"
+    "url": "git://github.com/keneucker/imgur.git"
   },
   "dependencies": {
     "axios": "^0.21.1",
