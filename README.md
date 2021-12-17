@@ -1,6 +1,7 @@
-# 🚨 v2 development is in progress within the [`next`](https://github.com/kaimallea/node-imgur/tree/next) branch. [See v2 README](https://github.com/kaimallea/node-imgur/blob/next/README.md).
+## 🚨 This repo is no longer maintained. @KenEucker has graciously offered to continue development on his fork at https://github.com/KenEucker/imgur
+## ➡️ It will continue to be published to npm under the `imgur` package name.
 
-## ⚠️ v1.x is now in maintenance / support mode. No new features will be added.
+---
 
 ## Command-line Usage
 
