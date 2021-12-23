@@ -80,7 +80,9 @@ export function getImgurApiResponseFromResponse(
   ) {
     success = response.data.success;
     status = response.data.status;
-    data = response.data.data?.error ? response.data.data?.error : response.data.data;
+    data = response.data.data?.error
+      ? response.data.data?.error
+      : response.data.data;
   } else {
     status = response.status;
     data = response.data;

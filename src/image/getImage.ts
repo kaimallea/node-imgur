@@ -9,6 +9,6 @@ export async function getImage(
 ): Promise<ImgurApiResponse<ImageData>> {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;
   return getImgurApiResponseFromResponse(
-    await client.request({ url }).catch(e => e.response)
+    await client.request({ url }).catch((e) => e.response)
   ) as ImgurApiResponse<ImageData>;
 }

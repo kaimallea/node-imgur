@@ -9,6 +9,6 @@ export async function favoriteImage(
 ): Promise<ImgurApiResponse<'favorited'>> {
   const url = `${IMAGE_ENDPOINT}/${imageHash}/favorite`;
   return getImgurApiResponseFromResponse(
-    await client.request({ url, method: 'POST' }).catch(e => e.response)
+    await client.request({ url, method: 'POST' }).catch((e) => e.response)
   ) as ImgurApiResponse<'favorited'>;
 }

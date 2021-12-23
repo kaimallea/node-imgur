@@ -49,11 +49,13 @@ export async function updateImage(
   const url = `${IMAGE_ENDPOINT}/${payload.imageHash}`;
   const form = createForm(payload);
   return getImgurApiResponseFromResponse(
-    await client.request({
-      url,
-      method: 'POST',
-      data: form,
-      headers: form.getHeaders(),
-    }).catch(e => e)
+    await client
+      .request({
+        url,
+        method: 'POST',
+        data: form,
+        headers: form.getHeaders(),
+      })
+      .catch((e) => e)
   ) as ImgurApiResponse<boolean>;
 }

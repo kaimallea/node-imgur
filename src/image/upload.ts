@@ -38,16 +38,18 @@ export async function upload(
 
   const form = createForm(payload);
   // const id = Date.now.toString();
-  const request = await client.request({
-    url: UPLOAD_ENDPOINT,
-    method: 'POST',
-    data: form,
-    headers: form.getHeaders(),
-    onUploadProgress: (progressEvent) => {
-      console.log({ progressEvent });
-      client.emit('uploadProgress', { ...progressEvent });
-    },
-  }).catch(e => e.response);
+  const request = await client
+    .request({
+      url: UPLOAD_ENDPOINT,
+      method: 'POST',
+      data: form,
+      headers: form.getHeaders(),
+      onUploadProgress: (progressEvent) => {
+        console.log({ progressEvent });
+        client.emit('uploadProgress', { ...progressEvent });
+      },
+    })
+    .catch((e) => e.response);
 
   return Promise.resolve(
     getImgurApiResponseFromResponse(request) as ImgurApiResponse<ImageData>
