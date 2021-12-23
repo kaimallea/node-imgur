@@ -2,7 +2,7 @@
 <h3 align="center">Unofficial JavaScript library</h3>
 <p align="center">
   <a href="https://www.npmjs.com/package/imgur">
-    <img alt="npm version" src="https://img.shields.io/npm/v/imgur/main.svg">
+    <img alt="npm version" src="https://img.shields.io/npm/v/imgur/latest.svg">
   </a>
   <a href="https://github.com/keneucker/imgur/actions?query=workflow%3ATests+branch%3Amain">
     <img alt="Build states" src="https://github.com/keneucker/imgur/workflows/Tests/badge.svg">

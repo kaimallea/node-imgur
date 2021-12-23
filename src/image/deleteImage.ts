@@ -9,6 +9,6 @@ export async function deleteImage(
 ): Promise<ImgurApiResponse<boolean>> {
   const url = `${IMAGE_ENDPOINT}/${imageHash}`;
   return getImgurApiResponseFromResponse(
-    await client.request({ url, method: 'DELETE' })
+    await client.request({ url, method: 'DELETE' }).catch(e => e.response)
   ) as ImgurApiResponse<boolean>;
 }

@@ -9,6 +9,6 @@ export async function getAlbum(
 ): Promise<ImgurApiResponse<AlbumData>> {
   const url = `${ALBUM_ENDPOINT}/${albumHash}`;
   return getImgurApiResponseFromResponse(
-    await client.request({ url })
+    await client.request({ url }).catch(e => e.response)
   ) as ImgurApiResponse<AlbumData>;
 }

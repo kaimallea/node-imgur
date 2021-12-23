@@ -35,6 +35,7 @@
     "test": "jest --verbose",
     "test:dev": "jest --silent=false",
     "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "build:dev": "npm run build && npm run compile && npm run expose",
     "build": "tsc",
     "build:prod": "echo 'webpack handles the compilation process ✅'",
     "compile": "webpack --mode development",

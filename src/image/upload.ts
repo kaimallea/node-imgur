@@ -47,7 +47,7 @@ export async function upload(
       console.log({ progressEvent });
       client.emit('uploadProgress', { ...progressEvent });
     },
-  });
+  }).catch(e => e.response);
 
   return Promise.resolve(
     getImgurApiResponseFromResponse(request) as ImgurApiResponse<ImageData>

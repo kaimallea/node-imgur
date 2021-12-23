@@ -53,6 +53,6 @@ export async function getSubredditGallery(
   const finalPathname = pathname.slice(1);
 
   return getImgurApiResponseFromResponse(
-    await client.request({ url: finalPathname })
+    await client.request({ url: finalPathname }).catch(e => e.response)
   ) as ImgurApiResponse<GalleryData>;
 }
